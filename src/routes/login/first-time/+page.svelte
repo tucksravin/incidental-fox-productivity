@@ -1,6 +1,6 @@
 <script lang="ts">
     import AuthCheck from "$lib/components/AuthCheck.svelte";
-    import { db, user } from "$lib/firebase";
+    import { db, user, userData } from "$lib/firebase";
     import { doc, getDoc, writeBatch } from "firebase/firestore"
 
     //regex to force alphanumeric options
@@ -67,10 +67,21 @@
     usernameChecked = false;
     }
 
+
 </script>
 
 <AuthCheck>
+
+
+{#if $userData.username}
+    <h2 class="font-bold mx-16">hi, looks like you've been here before!</h2>
+    <h2 class="font-bold mx-16">head over to your dashboard!</h2>
+    <a class="btn" href="/{$userData.username}">{$userData.username}</a>
+
+{:else }
     <h2 class="font-bold mx-16">hi, looks like it's your first time signing in</h2>
+
+
 
     <form class=" h-2/3 mt-8 flex-vertical justify-start" on:submit|preventDefault={createUserAccount}>
         <div class="form-control">
@@ -136,11 +147,17 @@
         <div class="mt-16">
             <h3 class="text-success-content block text-left">everything looks good!</h3>
 
-            <button class="btn btn-success block mt-4" >submit?</button>
+            <button class="btn block mt-4 group hover:btn-success" >
+                <span>Submit</span>
+                <span class="group-hover:hidden">?</span>
+                <span class="hidden group-hover:inline">!</span>
+            </button>
         </div>
            
         {/if}
 
     </form>
+    {/if}
 </AuthCheck>
+
 

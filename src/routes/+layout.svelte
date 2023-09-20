@@ -2,7 +2,7 @@
    import "../app.css"
    import { GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
    import { browser } from '$app/environment';
-   import { auth, user, userData } from "$lib/firebase"
+   import { auth, user, userData } from "$lib/firebase";
 
    $user;
    $userData;

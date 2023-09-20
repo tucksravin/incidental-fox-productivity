@@ -83,7 +83,7 @@ export function docStore<T>(
   }
 
   interface UserData {
-    handle: string,
+    username: string,
     toggltoken: string,
     todotokem:string
   }

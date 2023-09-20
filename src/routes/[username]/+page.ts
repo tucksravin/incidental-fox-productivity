@@ -19,6 +19,9 @@ export const load = (async ({ params }) => {
   if (!exists) {
     throw error(404, "that user does not exist!");
   }
+  
+
+
 
 
   return {

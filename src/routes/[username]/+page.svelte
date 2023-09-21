@@ -1,6 +1,7 @@
 <script lang="ts">
 
     import AuthCheck from "$lib/components/AuthCheck.svelte";
+  import DelayContent from "$lib/components/DelayContent.svelte";
 import type { PageData } from "./$types";
     import { error } from "@sveltejs/kit"
 
@@ -16,14 +17,10 @@ import type { PageData } from "./$types";
     <title>{data.username}'s Dashboard | IFP</title>
 
   </svelte:head>
-  
-  <AuthCheck>
-
-
-    <h1 class="text-7xl text-primary">
-      {data.username}'s dashboard
-    </h1>
-  
-   
-
-</AuthCheck>
+  <DelayContent>
+    <AuthCheck>
+      <h1 class="text-7xl text-primary">
+        {data.username}'s dashboard
+      </h1>
+    </AuthCheck>
+  </DelayContent>

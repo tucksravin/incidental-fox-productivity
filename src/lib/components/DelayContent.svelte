@@ -1,5 +1,6 @@
 <script lang='ts'>
   import { onMount } from "svelte";
+  import { fade } from "svelte/transition";
 
  let showContent = false;
 
@@ -13,5 +14,7 @@
 </script>
 
 {#if showContent}
-    <slot />
+    <div transition:fade={{duration:100}}>
+        <slot />
+    </div>
 {/if}

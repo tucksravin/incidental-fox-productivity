@@ -1,11 +1,12 @@
 <script lang="ts">
    import "../app.css"
-   import { GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
+   import { signOut } from "firebase/auth";
    import { browser } from '$app/environment';
    import { auth, user, userData } from "$lib/firebase";
-   import { onMount } from 'svelte';
-   import {fly, blur} from "svelte/transition"
+   import {fly} from "svelte/transition"
    import { page } from "$app/stores";
+   import NavStepper from "$lib/components/NavStepper.svelte"
+  import DelayContent from "$lib/components/DelayContent.svelte";
 
    $user;
    $userData;
@@ -25,11 +26,10 @@
         out: {y:'100%', duration:200}
     }
 
-    const fromBottom= {
+    const fromBottom = {
         in: {y:'100%', duration:500, delay:200},
         out: {y:'-100%', duration:200}
     }
-
 
     function getDirection(){
         let currentPage = $page.url.toString();
@@ -42,11 +42,41 @@
              return fromTop;
         if(currentPage.includes("fromBottom"))
             return fromBottom;
-        return fromTop;
+        return fromBottom;
     }
+
+
+    const navLinksLogin = [
+        {
+            name:"login",
+            href:"/login/user-auth",
+            direction:"?fromLeft"
+        },
+        {
+            name:"first time",
+            href:"/login/first-time",
+            direction:"?fromRight"
+        },
+    ]
+
+    const navLinksDash = [
+        {
+            name:"login",
+            href:"/login/user-auth",
+            direction:"?fromLeft"
+        },
+        {
+            name:"first time",
+            href:"/login/first-time",
+            direction:"?fromRight"
+        },
+    ]
+
     
    
 </script>
+
+<!-- global styles -->
 
 <style>
     :global(html) {
@@ -70,20 +100,7 @@
 {/if}
 
 <div class="absolute top-0 left-0 w-full flex align-middle pt-8">
-    <ul class="steps mx-auto w-48">
-        <a 
-            href="/login/user-auth/?fromLeft" 
-            class="step"
-            class:step-primary={$page.route.id?.includes("user-auth")}>
-            login
-        </a>
-        <a 
-            href="/login/first-time/?fromRight" 
-            class="step"
-            class:step-primary={$page.route.id?.includes("first-time")}>
-            signup
-        </a>
-    </ul>
+    <NavStepper />
 </div>
 <div class="sticky top-0 left-0 w-screen h-screen">
 
@@ -95,12 +112,14 @@
         class="card mx-auto bg-slate-200 w-4/5 h-4/5 top-32 max-w-7xl"
         in:fly = {getDirection().in}
         out:fly = {getDirection().out}
-
         >
-        <div class="card-body items-center text-center flex align-middle justify-center" >
-            <slot />
-        </div>
         
+            <div class="card-body items-center text-center flex align-middle justify-center" >
+                <DelayContent>
+                 <slot />
+                </DelayContent>
+             </div>
+            
     </div>
 {/key}
 </div>

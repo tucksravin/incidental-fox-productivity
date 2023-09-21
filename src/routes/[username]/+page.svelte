@@ -1,6 +1,7 @@
 <script lang="ts">
 
-    import type { PageData } from "./$types";
+    import AuthCheck from "$lib/components/AuthCheck.svelte";
+import type { PageData } from "./$types";
     import { error } from "@sveltejs/kit"
 
     
@@ -16,13 +17,13 @@
 
   </svelte:head>
   
-  
-  <main class="prose text-center mx-auto mt-8">
+  <AuthCheck>
+
 
     <h1 class="text-7xl text-primary">
       {data.username}'s dashboard
     </h1>
   
-  
-  
-  </main>
+   
+
+</AuthCheck>

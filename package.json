@@ -24,6 +24,9 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"firebase": "^10.4.0"
+		"@doist/todoist-api-typescript": "^2.1.2",
+		"firebase": "^10.4.0",
+		"toggl-client": "^3.5.0",
+		"util.promisify": "^1.1.2"
 	}
 }

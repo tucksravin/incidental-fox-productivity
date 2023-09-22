@@ -3,6 +3,12 @@
     import DelayContent from "$lib/components/DelayContent.svelte";
     import { db, user, userData } from "$lib/firebase";
     import { doc, getDoc, writeBatch } from "firebase/firestore"
+    import { fade } from "svelte/transition"
+    import { TodoistApi } from '@doist/todoist-api-typescript'
+   //import TogglClient from 'toggl-client';
+
+  
+   
 
     //regex to force alphanumeric options
     const alphaNumRegex = /^(?=[a-zA-Z0-9._]{3,16}$)(?!.*[_.]{2})[^_.].*[^_.]$/;
@@ -58,19 +64,26 @@
 
         debounceTimer = setTimeout( async () => {
             
-            console.log("checking togg ltoken ", toggltoken);
+            console.log("checking toggl token ", toggltoken);
             
             //TODO: check if token is valid with toggl api
             isTogglTokenValid = false;
-    
             
-            loadingTogglCheck = false;
-    
+            /*
+            const togglApi = new TogglClient({apiToken: toggltoken})
+            togglApi.workspaces.list(togglApi).then((workspaces) => { 
+                isTogglTokenValid = workspaces.length>0
+                loadingTogglCheck = false;
+            }).catch((error) => {
+                console.log(error)
+                isTogglTokenValid=false;
+                loadingTogglCheck=false;
+            })    */
             }, 750);
-    
+            
             
         togglChecked = toggltoken.length>0;
-         
+        
 
 
     }
@@ -84,14 +97,19 @@
 
         debounceTimer = setTimeout( async () => {
             
-            console.log("checking togg ltoken ", toggltoken);
-            
-            //TODO: check if token is valid with todoist api
+            console.log("checking todoist token ", todotoken);
+                    
             isTodoistTokenValid = false;
-    
-            
-            loadingTodoistCheck = false;
-    
+
+            const todoistApi = new TodoistApi(todotoken);
+            todoistApi.getProjects().then((projects) => { 
+                isTodoistTokenValid = projects.length>0
+                loadingTodoistCheck = false;
+            }).catch((error) => {
+                console.log(error)
+                isTodoistTokenValid=false;
+                loadingTodoistCheck=false;
+            })
             }, 750);
     
             
@@ -251,15 +269,17 @@
             </div>
 
         <div class="py-4 h-24">
-         {#if usernameChecked&&isAvailable}
-        
-            <h3 class="text-success-content block text-left">everything looks good!</h3>
+         {#if (usernameChecked&&isAvailable&&todoistChecked&&isTodoistTokenValid)}
+            <div class="flex align-items-end justify-between w-96 max-w-full">
+            <h3 class="text-success-content my-4 font-semibold" in:fade>everything looks good!</h3>
 
-            <button class="btn block mt-4 group hover:btn-success" >
+            <button class="btn block my-4 group hover:btn-success" in:fade>
                 <span>Submit</span>
                 <span class="group-hover:hidden">?</span>
                 <span class="hidden group-hover:inline">!</span>
             </button>
+
+        </div>
        
            
         {/if}

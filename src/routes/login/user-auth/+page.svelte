@@ -4,6 +4,8 @@
     import DelayContent from "$lib/components/DelayContent.svelte"
     import { GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
 
+    $userData;
+
     async function signInWithGoogle() {
         const provider = new GoogleAuthProvider();
         const user = await signInWithPopup(auth, provider);     
@@ -13,7 +15,7 @@
         else
             goto("/login/first-time/?fromRight");
     }
-    $userData
+    
 </script>
 
 <DelayContent>

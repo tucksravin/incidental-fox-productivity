@@ -61,8 +61,8 @@
 
     const navLinksDash = [
         {
-            name:"login",
-            href:"/login/user-auth",
+            name:"dash",
+            href:"",
             direction:"?fromLeft"
         },
         {
@@ -115,9 +115,7 @@
         >
         
             <div class="card-body items-center text-center flex align-middle justify-center" >
-                <DelayContent>
-                 <slot />
-                </DelayContent>
+                    <slot />
              </div>
             
     </div>

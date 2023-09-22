@@ -5,8 +5,7 @@
     import { doc, getDoc, writeBatch } from "firebase/firestore"
     import { fade } from "svelte/transition"
     import { TodoistApi } from '@doist/todoist-api-typescript'
-   //import TogglClient from 'toggl-client';
-
+    import { getTogglWorkspace, togglWorkspaceId } from "$lib/stores/togglStore";
   
    
 
@@ -66,19 +65,16 @@
             
             console.log("checking toggl token ", toggltoken);
             
-            //TODO: check if token is valid with toggl api
             isTogglTokenValid = false;
-            
-            /*
-            const togglApi = new TogglClient({apiToken: toggltoken})
-            togglApi.workspaces.list(togglApi).then((workspaces) => { 
-                isTogglTokenValid = workspaces.length>0
-                loadingTogglCheck = false;
-            }).catch((error) => {
-                console.log(error)
-                isTogglTokenValid=false;
-                loadingTogglCheck=false;
-            })    */
+
+            await getTogglWorkspace(toggltoken);
+            if(JSON.stringify($togglWorkspaceId)!=="{}"&&$togglWorkspaceId!=null)
+                isTogglTokenValid = true;
+            else
+            isTogglTokenValid = false;
+
+            loadingTogglCheck = false;
+        
             }, 750);
             
             
@@ -122,11 +118,14 @@
     async function createUserAccount(){
 
         console.log("creating acct for: ", username)
+
+        const togglworkspaceid = $togglWorkspaceId;
         const batch = writeBatch(db);
         batch.set(doc(db, "handles", username), { uid: $user?.uid })
         batch.set(doc(db, "users", $user!.uid),{
             username,
             toggltoken,
+            togglworkspaceid,
             todotoken
         })
 
@@ -134,6 +133,12 @@
     username = '';
     isAvailable = false;
     usernameChecked = false;
+    toggltoken='';
+    isTogglTokenValid = false;
+    togglChecked = false;
+    todotoken = '';
+    isTodoistTokenValid = false;
+    todoistChecked = false;
     }
 
 
@@ -269,7 +274,7 @@
             </div>
 
         <div class="py-4 h-24">
-         {#if (usernameChecked&&isAvailable&&todoistChecked&&isTodoistTokenValid)}
+         {#if (usernameChecked&&isAvailable&&todoistChecked&&isTodoistTokenValid&&isTogglTokenValid&&togglChecked)}
             <div class="flex align-items-end justify-between w-96 max-w-full">
             <h3 class="text-success-content my-4 font-semibold" in:fade>everything looks good!</h3>
 

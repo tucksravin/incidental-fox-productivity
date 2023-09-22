@@ -1,2 +1,19 @@
-<h1 class="text-center w-full text-red-700 mt-4">Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documetation</p>
+<script lang='ts'>
+  import { togglWorkspaceId, getTogglWorkspace, fetchTogglProjects, togglProjects } from '$lib/stores/togglStore';
+
+  $togglProjects;
+  $togglWorkspaceId;
+
+  function fireWorkspace(){
+    getTogglWorkspace('eb5f0f751ab4079e0f7de08feab2d2a8')
+  }
+
+</script>
+
+<button class="btn mt-16" on:click={fireWorkspace}>Fetch Toggl Workspace</button>
+  
+ <p>{JSON.stringify($togglWorkspaceId)!=="{}"&&$togglWorkspaceId!=null}</p>
+
+<button class="btn mt-16" on:click={fetchTogglProjects}>Fetch Toggl Projects</button>
+
+<p>{JSON.stringify($togglProjects)!=="{}"&&$togglProjects!=null}</p>

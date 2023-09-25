@@ -10,6 +10,7 @@ async function getTogglWorkspace(apitoken:string ) {
     
     let customHeaders = new Headers()
     customHeaders.append('apitoken', apitoken);
+    customHeaders.append('Access-Control-Allow-Origin', 'https://incidental-fox-productivity.netlify.app');
 
     try{
         //const authResponse = await fetch('http://localhost:'+SERVER_PORT+'/api/toggl-auth',  { headers : customHeaders } );

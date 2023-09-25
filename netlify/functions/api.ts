@@ -11,16 +11,6 @@ const app = express();
 //const PORT = process.env.SERVER_PORT || 3001;
 let apiToken = "";
 
-function tokenExists(req, res) {
-    if(req.headers.apitoken)
-        apiToken = req.headers.apitoken.toString();
-    else{
-        res.status(500).json({ error: 'Unable to fetch Toggl data' })
-        return;
-    }
-
-}
-
 app.use(cors());
 
 const router = Router();

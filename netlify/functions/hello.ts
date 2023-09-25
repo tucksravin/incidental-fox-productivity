@@ -1,10 +1,13 @@
-import type { Handler, HandlerEvent, HandlerContext } from "@netlify/functions";
+// YOUR_BASE_DIRECTORY/netlify/functions/api.ts
 
-const handler: Handler = async (event: HandlerEvent, context: HandlerContext) => {
-  return {
-    statusCode: 200,
-    body: JSON.stringify({ event }),
-  };
-};
+import express, { Router } from 'express';
+import serverless from 'serverless-http';
 
-export { handler };
+const api = express();
+
+const router = Router();
+router.get('/hello', (req, res) => res.send('Hello World!'));
+
+api.use('/api/', router);
+
+export const handler = serverless(api);

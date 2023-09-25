@@ -1,5 +1,5 @@
 
-import express, { Router } from 'express';
+import express from 'express';
 import serverless from 'serverless-http';
 import axios from 'axios';
 import cors from 'cors';
@@ -13,7 +13,7 @@ let apiToken = "";
 
 app.use(cors());
 
-const router = Router();
+const router = express.Router();
 
 router.get('/toggl-auth', async (req, res) => {
 

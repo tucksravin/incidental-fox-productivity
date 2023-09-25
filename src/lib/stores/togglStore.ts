@@ -10,11 +10,10 @@ async function getTogglWorkspace(apitoken:string ) {
     
     let customHeaders = new Headers()
     customHeaders.append('apitoken', apitoken);
-    customHeaders.append('Access-Control-Allow-Origin', 'https://incidental-fox-productivity.netlify.app');
 
     try{
         //const authResponse = await fetch('http://localhost:'+SERVER_PORT+'/api/toggl-auth',  { headers : customHeaders } );
-        const authResponse = await fetch('https://incidental-fox-productivity.netlify.app'+'/api/toggl-auth',  { headers : customHeaders } );
+        const authResponse = await fetch('https://incidental-fox-productivity.netlify.app'+'/.netlify/functions/api/api/toggl-auth/',  { headers : customHeaders } );
         const authData = await authResponse.json();
         console.log('Auth Data:', authData);
         togglWorkspaceId.set(authData.default_workspace_id);

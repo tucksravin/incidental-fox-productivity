@@ -1,4 +1,4 @@
-$GREETING = "hi there! the toml is being read!"
+GREETING = "hi there! the toml is being read!"
 
 [functions]
   external_node_modules = ["express"]

@@ -83,7 +83,7 @@ router.use('*', (_req, res) => {
 });
 */
 
-app.use('/togglServer', router);
+app.use('', router);
 
 export const handler = serverless(app);
 export default app;

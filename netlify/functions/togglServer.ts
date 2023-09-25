@@ -83,7 +83,6 @@ router.use('*', (_req, res) => {
 });
 */
 
-app.use('', router);
+app.use('/api/', router);
 
 export const handler = serverless(app);
-export default app;

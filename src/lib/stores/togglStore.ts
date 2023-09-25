@@ -1,4 +1,7 @@
 import { writable } from 'svelte/store';
+import base64 from 'base-64';
+
+
 
 
 // Initialize the store with an empty object
@@ -10,6 +13,7 @@ async function getTogglWorkspace(apitoken:string ) {
     
     let customHeaders = new Headers()
     customHeaders.append('apitoken', apitoken);
+    //customHeaders.append('auth', `Basic ${base64.encode(`${apitoken}:"api_token"`)}`);
 
     try{
         //const authResponse = await fetch('http://localhost:'+SERVER_PORT+'/api/toggl-auth',  { headers : customHeaders } );

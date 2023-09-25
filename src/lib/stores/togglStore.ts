@@ -12,12 +12,13 @@ const SERVER_PORT =  '3001';
 async function getTogglWorkspace(apitoken:string ) {
     
     let customHeaders = new Headers()
-    customHeaders.append('apitoken', apitoken);
-    //customHeaders.append('auth', `Basic ${base64.encode(`${apitoken}:"api_token"`)}`);
+    customHeaders.append('Content-Type', "application/json");
+    customHeaders.append('Authorization', `Basic ${base64.encode(`${apitoken}:"api_token"`)}`);
 
     try{
         //const authResponse = await fetch('http://localhost:'+SERVER_PORT+'/api/toggl-auth',  { headers : customHeaders } );
-        const authResponse = await fetch('https://incidental-fox-productivity.netlify.app'+'/togglServer/toggl-auth/',  { headers : customHeaders } );
+        //const authResponse = await fetch('https://incidental-fox-productivity.netlify.app'+'/togglServer/toggl-auth/',  { headers : customHeaders } );
+        const authResponse = await fetch('https://api.track.toggl.com/api/v9/me',  {method:":GET", headers : customHeaders } );
         const authData = await authResponse.json();
         console.log('Auth Data:', authData);
         togglWorkspaceId.set(authData.default_workspace_id);

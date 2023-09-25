@@ -41,7 +41,7 @@ async function fetchTogglProjects() {
     togglProjects.set(data);
   } catch (error) {
     console.error(error);
-    // Handle the error
+    // Handle the erro
   }
 }
 

@@ -1,37 +1,28 @@
-import express from 'express';
-import serverless from 'serverless-http';
 import axios from 'axios';
 import cors from 'cors';
-import dotenv from 'dotenv';
+import express from 'express';
+import serverless from 'serverless-http';
 
 
+// Create a router to handle routes
 const app = express();
-app.use(cors());
-
-app.get('/toggl-auth', async (req, res) => {
-
-    if(!req.headers.apitoken)
-    {res.status(500).json({ error: 'Unable to fetch Toggl data' })
-    return;}
 
 
+const router = express.Router();
 
-
-    try {
-      const response = await axios.get('https://api.track.toggl.com/api/v9/me', {
-        auth: {
-          username:  req.headers.apitoken.toString(),
-          password: 'api_token',
-        },
-      });
-  
-      res.json(response.data);
-    } catch (error) {
-      console.log("call failed from server," + req.headers.apitoken.toString())
-      //console.error(error);
-      res.status(500).json({ error: 'Unable to fetch Toggl data' });
-    }
+// Define a route that responds with a JSON object when a GET request is made to the root path
+router.get("/", (req, res) => {
+  res.json({
+    hello: "hi!"
   });
+});
 
-export const handler = serverless(app);
-export default app;
+// Use the router to handle requests to the `/.netlify/functions/api` path
+app.use(`/.netlify/functions/api`, router);
+
+// Export the app and the serverless function
+module.exports = app;
+module.exports.handler = serverless(app);
+
+
+

@@ -14,7 +14,7 @@ async function getTogglWorkspace(apitoken:string ) {
     let customHeaders = new Headers()
     customHeaders.append('Content-Type', "application/json");
     customHeaders.append('Authorization', `Basic ${base64.encode(`${apitoken}:"api_token"`)}`);
-    customHeaders.append('Access-Control-Allow-Origin', '*');
+
 
     try{
         //const authResponse = await fetch('http://localhost:'+SERVER_PORT+'/api/toggl-auth',  { headers : customHeaders } );

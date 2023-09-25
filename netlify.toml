@@ -1,3 +1,5 @@
+$GREETING = "hi there! the toml is being read!"
+
 [functions]
   external_node_modules = ["express"]
   node_bundler = "esbuild"

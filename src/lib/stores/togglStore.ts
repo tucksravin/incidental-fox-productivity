@@ -13,7 +13,7 @@ async function getTogglWorkspace(apitoken:string ) {
 
     try{
         //const authResponse = await fetch('http://localhost:'+SERVER_PORT+'/api/toggl-auth',  { headers : customHeaders } );
-        const authResponse = await fetch('https://incidental-fox-productivity.netlify.app/'+'/api/toggl-auth',  { headers : customHeaders } );
+        const authResponse = await fetch('https://incidental-fox-productivity.netlify.app'+'/api/toggl-auth',  { headers : customHeaders } );
         const authData = await authResponse.json();
         console.log('Auth Data:', authData);
         togglWorkspaceId.set(authData.default_workspace_id);
@@ -33,7 +33,7 @@ async function fetchTogglProjects() {
     customHeaders.append('apitoken', 'eb5f0f751ab4079e0f7de08feab2d2a8');
     customHeaders.append('workspaceid', '1955294');
     //const dataResponse = await fetch('http://localhost:'+SERVER_PORT+'/api/toggl/projects', { headers : customHeaders });
-    const dataResponse = await fetch('https://incidental-fox-productivity.netlify.app/'+'/api/toggl/projects', { headers : customHeaders });
+    const dataResponse = await fetch('https://incidental-fox-productivity.netlify.app'+'/api/toggl/projects', { headers : customHeaders });
     
     const data = await dataResponse.json();
     console.log('Response Text:', data);

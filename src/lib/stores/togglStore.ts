@@ -13,7 +13,7 @@ async function getTogglWorkspace(apitoken:string ) {
 
     try{
         //const authResponse = await fetch('http://localhost:'+SERVER_PORT+'/api/toggl-auth',  { headers : customHeaders } );
-        const authResponse = await fetch('https://incidental-fox-productivity.netlify.app'+'/.netlify/functions/api/api/toggl-auth/',  { headers : customHeaders } );
+        const authResponse = await fetch('https://incidental-fox-productivity.netlify.app'+'/togglServer/toggl-auth/',  { headers : customHeaders } );
         const authData = await authResponse.json();
         console.log('Auth Data:', authData);
         togglWorkspaceId.set(authData.default_workspace_id);

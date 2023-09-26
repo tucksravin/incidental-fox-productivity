@@ -1,7 +1,6 @@
 import { writable } from 'svelte/store';
 import { Base64 } from 'js-base64';
-
-
+import { db, user, userData } from "$lib/firebase";
 
 
 
@@ -36,14 +35,15 @@ async function getTogglWorkspace(apitoken:string ) {
 }
 
 // Fetch Toggl data from the Express API
-async function fetchTogglProjects() {
-  try {
+async function fetchTogglProjects(apitoken:string, workspaceid:string) {
+
+try {
 
     let customHeaders = new Headers()
-    customHeaders.append('apitoken', 'eb5f0f751ab4079e0f7de08feab2d2a8');
-    customHeaders.append('workspaceid', '1955294');
+    customHeaders.append('apitoken', apitoken);
+    customHeaders.append('workspaceid', workspaceid);
     //const dataResponse = await fetch('http://localhost:'+SERVER_PORT+'/api/toggl/projects', { headers : customHeaders });
-    const dataResponse = await fetch('https://incidental-fox-productivity.netlify.app'+'/api/toggl/projects', { headers : customHeaders });
+    const dataResponse = await fetch('https://incidental-fox-productivity.netlify.app/.netlify/functions/togglServer/toggl-auth/toggl/projects', { headers : customHeaders });
     
     const data = await dataResponse.json();
     console.log('Response Text:', data);

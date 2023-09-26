@@ -1,11 +1,16 @@
 <script lang='ts'>
   import { togglWorkspaceId, getTogglWorkspace, fetchTogglProjects, togglProjects } from '$lib/stores/togglStore';
+  import { user, userData } from '$lib/firebase'
 
   $togglProjects;
   $togglWorkspaceId;
 
   function fireWorkspace(){
-    getTogglWorkspace('eb5f0f751ab4079e0f7de08feab2d2a8')
+    getTogglWorkspace($userData.toggltoken)
+  }
+
+  function fireProjects(){
+    fetchTogglProjects($userData.toggltoken, $userData.togglworkspaceid);
   }
 
 </script>
@@ -14,6 +19,6 @@
   
  <p>{JSON.stringify($togglWorkspaceId)!=="{}"&&$togglWorkspaceId!=null}</p>
 
-<button class="btn mt-16" on:click={fetchTogglProjects}>Fetch Toggl Projects</button>
+<button class="btn mt-16" on:click={fireProjects}>Fetch Toggl Projects</button>
 
 <p>{JSON.stringify($togglProjects)!=="{}"&&$togglProjects!=null}</p>

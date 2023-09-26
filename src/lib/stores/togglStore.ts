@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store';
-import base64 from 'js-base64';
+import { Base64 } from 'js-base64';
 
 
 
@@ -15,7 +15,7 @@ async function getTogglWorkspace(apitoken:string ) {
     
     let customHeaders = new Headers()
     customHeaders.append('Content-Type', "application/json");
-    customHeaders.append('Authorization', `Basic ${base64.encode(`${apitoken}:"api_token"`)}`);
+    customHeaders.append('Authorization', `Basic ${Base64.encode(`${apitoken}:"api_token"`)}`);
 
 
     try{

@@ -19,19 +19,17 @@ const router = express.Router();
 router.get('/toggl-auth', async (req, res) => {
 
   console.log("server ran ran")
-/*
+
   if (!req || !req.headers || !req.headers.apitoken) {
     res.status(500).json({ error: 'Unable to fetch Toggl data' });
     return;
   }
-    
-*/
 
   
   try {
     const response = await axios.get('https://api.track.toggl.com/api/v9/me', {
       auth: {
-        username:  'eb5f0f751ab4079e0f7de08feab2d2a8',
+        username:  req.headers.apitoken.toString(),
         password: 'api_token',
       },
     });

@@ -21,7 +21,7 @@ router.get('/toggl-auth', async (req, res) => {
   console.log("server ran ran")
 
   if (!req || !req.headers || !req.headers.apitoken) {
-    res.status(500).json({ error: 'Unable to fetch Toggl data' });
+    res.status(500).json({ error: 'Unable to fetch Toggl data, missing headers or api token' });
     return;
   }
 

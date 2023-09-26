@@ -16,6 +16,8 @@ async function getTogglWorkspace(apitoken:string ) {
     let customHeaders = new Headers()
     customHeaders.append('Content-Type', "application/json");
     customHeaders.append('Authorization', `Basic ${Base64.encode(`${apitoken}:"api_token"`)}`);
+    customHeaders.append('apitoken', apitoken);
+
 
 
     try{

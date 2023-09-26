@@ -86,6 +86,6 @@ router.use('*', (_req, res) => {
 });
 */
 
-app.use('/togglServer', router);
+app.use('/.netlify/functions/togglServer', router);
 
 export const handler = serverless(app);

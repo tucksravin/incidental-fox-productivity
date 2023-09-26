@@ -31,7 +31,7 @@ router.get('/toggl-auth', async (req, res) => {
   try {
     const response = await axios.get('https://api.track.toggl.com/api/v9/me', {
       auth: {
-        username:  req.headers.apitoken.toString(),
+        username:  'eb5f0f751ab4079e0f7de08feab2d2a8',
         password: 'api_token',
       },
     });
@@ -86,6 +86,6 @@ router.use('*', (_req, res) => {
 });
 */
 
-app.use('/togglServer/', router);
+app.use('/togglServer', router);
 
 export const handler = serverless(app);

@@ -3,6 +3,7 @@
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
+		"build:functions": "tsc --p tsconfig.functions.json",
 		"dev": "vite dev",
 		"toggl-server": "tsx ./src/server/togglServer.ts",
 		"build": "vite build",

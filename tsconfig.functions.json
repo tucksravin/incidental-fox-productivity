@@ -1,0 +1,12 @@
+// tsconfig.functions.json
+{
+    "compilerOptions": {
+      "target": "ES6",
+      "module": "CommonJS",
+      "esModuleInterop": true,
+    },
+    "include": [
+      "netlify/functions/togglServer.ts"
+    ]
+  }
+  

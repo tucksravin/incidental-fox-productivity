@@ -82,5 +82,5 @@ router.use('*', (_req, res) => {
     });
 });
 */
-app.use('/togglServer', router);
+app.use('/.netlify/functions/togglServer', router);
 exports.handler = (0, serverless_http_1.default)(app);

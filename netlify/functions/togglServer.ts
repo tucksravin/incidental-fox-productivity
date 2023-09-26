@@ -20,9 +20,10 @@ router.get('/toggl-auth', async (req, res) => {
 
   console.log("server ran ran")
 
-    if(!req.headers.apitoken)
-        {res.status(500).json({ error: 'Unable to fetch Toggl data' })
-        return;}
+  if (!req || !req.headers || !req.headers.apitoken) {
+    res.status(500).json({ error: 'Unable to fetch Toggl data' });
+    return;
+  }
     
 
 
@@ -46,9 +47,9 @@ router.get('/toggl-auth', async (req, res) => {
 router.get('/toggl/projects', async (req, res) => {
     console.log(req.headers)
 
-    if(!req.headers.apitoken||!req.headers.workspaceid){
-        res.status(500).json({ error: 'Unable to fetch Toggl data' })
-        return;
+    if (!req || !req.headers || !req.headers.apitoken || !req.headers.workspaceid) {
+      res.status(500).json({ error: 'Unable to fetch Toggl data' });
+      return;
     }
 
 

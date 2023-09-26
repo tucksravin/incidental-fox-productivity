@@ -16,7 +16,7 @@ app.use(cors());
 
 const router = express.Router();
 
-router.get('/toggl-auth', async (req, res) => {
+router.get('/auth', async (req, res) => {
 
   console.log("server ran ran")
 
@@ -42,7 +42,7 @@ router.get('/toggl-auth', async (req, res) => {
   }
 });
 
-router.get('/toggl/projects', async (req, res) => {
+router.get('/projects', async (req, res) => {
     console.log(req.headers)
 
     if (!req || !req.headers || !req.headers.apitoken || !req.headers.workspaceid) {

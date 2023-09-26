@@ -25,7 +25,7 @@ const app = (0, express_1.default)();
 let apiToken = "";
 app.use((0, cors_1.default)());
 const router = express_1.default.Router();
-router.get('/toggl-auth', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.get('/auth', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log("server ran ran");
     if (!req || !req.headers || !req.headers.apitoken) {
         res.status(500).json({ error: 'Unable to fetch Toggl data, missing headers or api token' });
@@ -46,7 +46,7 @@ router.get('/toggl-auth', (req, res) => __awaiter(void 0, void 0, void 0, functi
         res.status(500).json({ error: 'Unable to fetch Toggl data' });
     }
 }));
-router.get('/toggl/projects', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.get('/projects', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(req.headers);
     if (!req || !req.headers || !req.headers.apitoken || !req.headers.workspaceid) {
         res.status(500).json({ error: 'Unable to fetch Toggl data' });

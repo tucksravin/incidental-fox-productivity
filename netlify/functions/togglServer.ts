@@ -38,7 +38,7 @@ router.get('/toggl-auth', async (req, res) => {
 
     res.json(response.data);
   } catch (error) {
-    console.log("call failed from server," + req.headers.apitoken.toString())
+    //console.log("call failed from server," + req.headers.apitoken.toString())
     //console.error(error);
     res.status(500).json({ error: 'Unable to fetch Toggl data' });
   }

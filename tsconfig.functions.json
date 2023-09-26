@@ -6,7 +6,9 @@
       "esModuleInterop": true,
     },
     "include": [
-      "netlify/functions/togglServer.ts"
+      "netlify/functions/togglServer.ts",
+      "netlify/functions/hello.ts"
+
     ]
   }
   

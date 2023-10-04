@@ -5,13 +5,23 @@
   import TimeBar from "$lib/components/TimeBar.svelte";
   import TimelineLabels from "$lib/components/TimelineLabels.svelte"
   import type { PageData } from "./$types";
+  import { TodoistApi } from "@doist/todoist-api-typescript";
+
 
   const months = [ "January", "February", "March", "April", "May", "June", 
            "July", "August", "September", "October", "November", "December" ];
     
   export let data: PageData;
-    
 
+  const todoistApi = new TodoistApi(data.todotoken);
+  let tasksAPIResponse = [];
+  
+  todoistApi.getTasks({filter: "due on "+data.month+"/"+data.day+"/"+data.year})
+    .then((tasks) => {
+     tasksAPIResponse =  tasks;
+      console.log(tasks)
+    })
+    .catch((error) => console.log(error))
     
   
 </script>
@@ -26,10 +36,11 @@
       <div class="w-full h-full flex justify-between">
         <div class="w-2/5 bg-red-200">
           <h1>Todoist Stuff</h1>
-
-          <!--TODO: call the todoist api and list all the tasks overdue/due/completed on this day-->
+            {#each tasksAPIResponse as task}
+              <div>{task.content}</div>
+            {/each}
         </div>
-        <div class="w-1/5 bg-green-200 flex justify-between py-4">
+        <div class="w-1/5 bg-slate-200 flex justify-between py-4">
           <div class="w-8 h-full mx-2"><TimeBar /></div>
           <TimelineLabels />
           <div class="w-8 h-full mx-2"><TimeBar /></div>

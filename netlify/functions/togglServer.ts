@@ -1,5 +1,6 @@
+//togglServer.ts
 
-import express, { Router } from 'express';
+import express from 'express';
 import serverless from 'serverless-http';
 import axios from 'axios';
 import cors from 'cors';
@@ -11,27 +12,16 @@ const app = express();
 //const PORT = process.env.SERVER_PORT || 3001;
 let apiToken = "";
 
-function tokenExists(req, res) {
-    if(req.headers.apitoken)
-        apiToken = req.headers.apitoken.toString();
-    else{
-        res.status(500).json({ error: 'Unable to fetch Toggl data' })
-        return;
-    }
-
-}
-
 app.use(cors());
 
-const router = Router();
+const router = express.Router();
 
-router.get('/toggl-auth', async (req, res) => {
+router.get('/auth', async (req, res) => {
 
-    if(!req.headers.apitoken)
-        {res.status(500).json({ error: 'Unable to fetch Toggl data' })
-        return;}
-    
-
+  if (!req || !req.headers || !req.headers.apitoken) {
+    res.status(500).json({ error: 'Unable to fetch Toggl data, missing headers or api token' });
+    return;
+  }
 
   
   try {
@@ -44,18 +34,18 @@ router.get('/toggl-auth', async (req, res) => {
 
     res.json(response.data);
   } catch (error) {
-    console.log("call failed from server," + req.headers.apitoken.toString())
+    //console.log("call failed from server," + req.headers.apitoken.toString())
     //console.error(error);
     res.status(500).json({ error: 'Unable to fetch Toggl data' });
   }
 });
 
-router.get('/toggl/projects', async (req, res) => {
+router.get('/projects', async (req, res) => {
     console.log(req.headers)
 
-    if(!req.headers.apitoken||!req.headers.workspaceid){
-        res.status(500).json({ error: 'Unable to fetch Toggl data' })
-        return;
+    if (!req || !req.headers || !req.headers.apitoken || !req.headers.workspaceid) {
+      res.status(500).json({ error: 'Unable to fetch Toggl data' });
+      return;
     }
 
 
@@ -92,7 +82,6 @@ router.use('*', (_req, res) => {
 });
 */
 
-app.use('/api/', router);
+app.use('/.netlify/functions/togglServer', router);
 
 export const handler = serverless(app);
-export default app;

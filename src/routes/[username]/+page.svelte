@@ -8,6 +8,9 @@ import type { PageData } from "./$types";
     
     export let data: PageData;
 
+    const today = new Date();
+    const todaysUrl = "/"+data.username+"/"+(today.getMonth()+1)+"-"+(today.getDay()+1)+"-"+today.getFullYear();
+
     
     
   
@@ -22,5 +25,7 @@ import type { PageData } from "./$types";
       <h1 class="text-7xl text-primary">
         {data.username}'s dashboard
       </h1>
+
+      <a href={todaysUrl}>go to today's date</a>
     </AuthCheck>
   </DelayContent>

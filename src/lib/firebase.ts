@@ -85,7 +85,9 @@ export function docStore<T>(
   interface UserData {
     username: string,
     toggltoken: string,
-    todotokem:string
+    todotoken:string,
+    togglworkspaceid: string,
+  
   }
   
   export const userData: Readable<UserData | null> = derived(user, ($user, set) => { 

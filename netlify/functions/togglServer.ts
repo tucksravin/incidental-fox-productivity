@@ -20,7 +20,7 @@ const router = express.Router();
 router.get('/auth', async (req, res) => {
 
   if (!req || !req.headers || !req.headers.apitoken) {
-    res.status(500).json({ error: 'Unable to fetch Toggl data, missing headers or api token' });
+    res.status(500).json({ error: 'Unable to fetch Toggl data, missing headers or api token, auth' });
     return;
   }
 
@@ -45,7 +45,7 @@ router.get('/projects', async (req, res) => {
     console.log(req.headers)
 
     if (!req || !req.headers || !req.headers.apitoken || !req.headers.workspaceid) {
-      res.status(500).json({ error: 'Unable to fetch Toggl data' });
+      res.status(500).json({ error: 'Unable to fetch Toggl data, check headers, projects' });
       return;
     }
 

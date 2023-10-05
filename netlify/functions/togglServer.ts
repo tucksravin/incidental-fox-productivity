@@ -1,4 +1,5 @@
 //togglServer.ts
+//on changes run npm build functions to compile
 
 import express from 'express';
 import serverless from 'serverless-http';
@@ -66,21 +67,30 @@ router.get('/projects', async (req, res) => {
   }
 });
 
-/*
 
-router.use('*', (_req, res) => {
-  const svelteKitAppURL = 'http://localhost:5173'; 
-  axios
-    .get(`${svelteKitAppURL}${_req.url}`)
-    .then((response) => {
-      res.status(response.status).send(response.data);
-    })
-    .catch((error) => {
-      console.error(error);
-      res.status(500).json({ error: 'Unable to proxy request to SvelteKit app' });
+router.get('/time-entries', async (req, res) => {
+
+  if (!req || !req.headers || !req.headers.apitoken) {
+    res.status(500).json({ error: 'Unable to fetch Toggl data, missing headers or api token' });
+    return;
+  }
+
+  
+  try {
+    const response = await axios.get('https://api.track.toggl.com/api/v9/me/time_entries/?start_date='+req.headers.date, {
+      auth: {
+        username:  req.headers.apitoken.toString(),
+        password: 'api_token',
+      },
     });
+
+    res.json(response.data);
+  } catch (error) {
+    //console.log("call failed from server," + req.headers.apitoken.toString())
+    //console.error(error);
+    res.status(500).json({ error: 'Unable to fetch Toggl data' });
+  }
 });
-*/
 
 app.use('/.netlify/functions/togglServer', router);
 

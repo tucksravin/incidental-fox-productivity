@@ -26,7 +26,6 @@ let apiToken = "";
 app.use((0, cors_1.default)());
 const router = express_1.default.Router();
 router.get('/auth', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log("server ran ran");
     if (!req || !req.headers || !req.headers.apitoken) {
         res.status(500).json({ error: 'Unable to fetch Toggl data, missing headers or api token' });
         return;
@@ -67,20 +66,25 @@ router.get('/projects', (req, res) => __awaiter(void 0, void 0, void 0, function
         res.status(500).json({ error: 'Unable to fetch Toggl data' });
     }
 }));
-/*
-
-router.use('*', (_req, res) => {
-  const svelteKitAppURL = 'http://localhost:5173';
-  axios
-    .get(`${svelteKitAppURL}${_req.url}`)
-    .then((response) => {
-      res.status(response.status).send(response.data);
-    })
-    .catch((error) => {
-      console.error(error);
-      res.status(500).json({ error: 'Unable to proxy request to SvelteKit app' });
-    });
-});
-*/
+router.get('/time-entries', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    if (!req || !req.headers || !req.headers.apitoken) {
+        res.status(500).json({ error: 'Unable to fetch Toggl data, missing headers or api token' });
+        return;
+    }
+    try {
+        const response = yield axios_1.default.get('https://api.track.toggl.com/api/v9/me/time_entries/?start_date=' + req.headers.date, {
+            auth: {
+                username: req.headers.apitoken.toString(),
+                password: 'api_token',
+            },
+        });
+        res.json(response.data);
+    }
+    catch (error) {
+        //console.log("call failed from server," + req.headers.apitoken.toString())
+        //console.error(error);
+        res.status(500).json({ error: 'Unable to fetch Toggl data' });
+    }
+}));
 app.use('/.netlify/functions/togglServer', router);
 exports.handler = (0, serverless_http_1.default)(app);

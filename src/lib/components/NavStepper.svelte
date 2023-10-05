@@ -1,6 +1,6 @@
 <script lang='ts'>
    import { page } from "$app/stores" 
-   export let propLinks = [
+   export let navLinks = [
         {
             name:"login",
             href:"/login/user-auth",
@@ -12,8 +12,6 @@
             direction:"?fromRight"
         },
     ]
-
-    let navLinks = propLinks;
 
 
 

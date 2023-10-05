@@ -1,11 +1,14 @@
 <script lang="ts">
 
   import AuthCheck from "$lib/components/AuthCheck.svelte";
+  import DateNavigator from "$lib/components/DateNavigator.svelte";
   import DelayContent from "$lib/components/DelayContent.svelte";
   import TimeBar from "$lib/components/TimeBar.svelte";
   import TimelineLabels from "$lib/components/TimelineLabels.svelte"
   import type { PageData } from "./$types";
   import { TodoistApi } from "@doist/todoist-api-typescript";
+  import { fetchDailyTimeEntries, togglTimeEntries, togglLoading } from '$lib/stores/togglStore';
+  import { onMount } from "svelte";
 
 
   const months = [ "January", "February", "March", "April", "May", "June", 
@@ -13,15 +16,29 @@
     
   export let data: PageData;
 
+  onMount(()=>{
+
+
+
+  fetchDailyTimeEntries(data.toggltoken, data.date);
+}
+  );
+
   const todoistApi = new TodoistApi(data.todotoken);
   let tasksAPIResponse = [];
+  let todoistLoading = true;
   
   todoistApi.getTasks({filter: "due on "+data.month+"/"+data.day+"/"+data.year})
     .then((tasks) => {
      tasksAPIResponse =  tasks;
       console.log(tasks)
+      todoistLoading=false;
     })
     .catch((error) => console.log(error))
+
+    
+
+  
     
   
 </script>
@@ -36,6 +53,9 @@
       <div class="w-full h-full flex justify-between">
         <div class="w-2/5 bg-red-200">
           <h1>Todoist Stuff</h1>
+            {#if todoistLoading}
+              <div class="loading loading-spinner loading-m text-warning"></div>
+            {/if}
             {#each tasksAPIResponse as task}
               <div>{task.content}</div>
             {/each}
@@ -48,11 +68,26 @@
         </div>
         <div class="w-2/5 bg-blue-200">
           <h1>Toggl Stuff</h1>
+          {#if $togglLoading}
+            <div class="loading loading-spinner loading-m text-warning"></div>
+          {:else }
+            {#each $togglTimeEntries as entry}
+              <div>
+                {entry.description} in {entry.project_id}
+              </div>
+              
+            {/each}
+          
+          {/if}
+          
+     
           <!--TODO: call the toggl api and list all the entries of the day-->
         </div>
       </div>
 
-      <!--TODO: tomorrow, yesterday, next day, previous day, today, and date picker-->
+      <div class="min-w-[30rem] w-3/5 ">
+        <DateNavigator {data}/>
+      </div>
     </AuthCheck>
   </DelayContent>
 

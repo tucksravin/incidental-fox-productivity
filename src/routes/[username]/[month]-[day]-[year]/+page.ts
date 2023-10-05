@@ -1,6 +1,6 @@
 import { collection, getDocs, limit, query, where } from "firebase/firestore";
 import type { PageLoad } from "./$types";
-import { db, userData } from "$lib/firebase";
+import { db } from "$lib/firebase";
 import { error } from "@sveltejs/kit";
 
 export const load = (async ({ params }) => {
@@ -32,8 +32,10 @@ export const load = (async ({ params }) => {
   return {
     username: data.username,
     todotoken: data.todotoken,
+    toggltoken: data.toggltoken,
     year: yr,
     day: dy,
     month: mo,
+    date: new Date(yr, mo - 1, dy)
   };
 }) satisfies PageLoad;

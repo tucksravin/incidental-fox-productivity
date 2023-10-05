@@ -5,6 +5,8 @@
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 
+//TODO: make a project store that is ground truth to relate project ids from toggl and todoist and integrates their colors
+
 import { initializeApp } from "firebase/app";
 import { doc, getFirestore, onSnapshot } from "firebase/firestore";
 import { getAuth, onAuthStateChanged, type User } from "firebase/auth";

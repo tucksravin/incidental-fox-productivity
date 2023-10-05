@@ -92,7 +92,7 @@ router.get('/time-entries', async (req, res) => {
 
   
   try {
-    const response = await axios.get('https://api.track.toggl.com/api/v9/me/time_entries?start_date='+req.headers.requested_date, {
+    const response = await axios.get('https://api.track.toggl.com/api/v9/me/time_entries?start_date='+req.headers.requested_date+'&end_date='+req.headers.requested_date, {
       auth: {
         username:  req.headers.apitoken.toString(),
         password: 'api_token',

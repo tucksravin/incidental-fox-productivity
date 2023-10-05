@@ -103,7 +103,7 @@ router.get('/time-entries', async (req, res) => {
 
   nextDay.setDate(givenDate.getDate()+1);
 
-  let nextDateString = givenDate.toISOString().slice(0,10);
+  let nextDateString = nextDay.toISOString().slice(0,10);
 
   console.log('https://api.track.toggl.com/api/v9/me/time_entries?start_date='+givenDateString+'&end_date='+nextDateString)
 

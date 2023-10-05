@@ -94,7 +94,7 @@ router.get('/time-entries', (req, res) => __awaiter(void 0, void 0, void 0, func
     let nextDay = new Date();
     let givenDate = new Date(Date.parse(givenDateString));
     nextDay.setDate(givenDate.getDate() + 1);
-    let nextDateString = givenDate.toISOString().slice(0, 10);
+    let nextDateString = nextDay.toISOString().slice(0, 10);
     console.log('https://api.track.toggl.com/api/v9/me/time_entries?start_date=' + givenDateString + '&end_date=' + nextDateString);
     try {
         const response = yield axios_1.default.get('https://api.track.toggl.com/api/v9/me/time_entries?start_date=' + givenDateString + '&end_date=' + nextDateString, {

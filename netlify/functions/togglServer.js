@@ -28,7 +28,7 @@ app.use((0, cors_1.default)());
 const router = express_1.default.Router();
 router.get('/auth', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     if (!req || !req.headers || !req.headers.apitoken) {
-        res.status(500).json({ error: 'Unable to fetch Toggl data, missing headers or api token' });
+        res.status(500).json({ error: 'Unable to fetch Toggl data, missing headers or api token, auth' });
         return;
     }
     try {
@@ -49,7 +49,7 @@ router.get('/auth', (req, res) => __awaiter(void 0, void 0, void 0, function* ()
 router.get('/projects', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(req.headers);
     if (!req || !req.headers || !req.headers.apitoken || !req.headers.workspaceid) {
-        res.status(500).json({ error: 'Unable to fetch Toggl data' });
+        res.status(500).json({ error: 'Unable to fetch Toggl data, check headers, projects' });
         return;
     }
     console.log('https://api.track.toggl.com/api/v9/workspaces/' + req.headers.workspaceid.toString() + '/projects');
@@ -68,12 +68,24 @@ router.get('/projects', (req, res) => __awaiter(void 0, void 0, void 0, function
     }
 }));
 router.get('/time-entries', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    if (!req || !req.headers || !req.headers.apitoken || !req.headers.date) {
-        res.status(500).json({ error: 'Unable to fetch Toggl data, missing headers or api token' });
+    if (!req) {
+        res.status(500).json({ error: 'Unable to fetch Toggl data, missing request' });
+        return;
+    }
+    if (!req.headers) {
+        res.status(500).json({ error: 'Unable to fetch Toggl data, missing headers object,' });
+        return;
+    }
+    if (!req.headers.apitoken) {
+        res.status(500).json({ error: 'Unable to fetch Toggl data, missing api token,' });
+        return;
+    }
+    if (!req.headers.requested_date) {
+        res.status(500).json({ error: 'Unable to fetch Toggl data, missing requested_date header,' });
         return;
     }
     try {
-        const response = yield axios_1.default.get('https://api.track.toggl.com/api/v9/me/time_entries/?start_date=' + req.headers.date, {
+        const response = yield axios_1.default.get('https://api.track.toggl.com/api/v9/me/time_entries/?start_date=' + req.headers.requested_date, {
             auth: {
                 username: req.headers.apitoken.toString(),
                 password: 'api_token',
@@ -82,8 +94,7 @@ router.get('/time-entries', (req, res) => __awaiter(void 0, void 0, void 0, func
         res.json(response.data);
     }
     catch (error) {
-        //console.log("call failed from server," + req.headers.apitoken.toString())
-        //console.error(error);
+        console.error(error);
         res.status(500).json({ error: 'Unable to fetch Toggl data' });
     }
 }));

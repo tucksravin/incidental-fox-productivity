@@ -1,5 +1,6 @@
 "use strict";
 //togglServer.ts
+//on changes run npm run build:functions to compile
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -67,7 +68,7 @@ router.get('/projects', (req, res) => __awaiter(void 0, void 0, void 0, function
     }
 }));
 router.get('/time-entries', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    if (!req || !req.headers || !req.headers.apitoken) {
+    if (!req || !req.headers || !req.headers.apitoken || !req.headers.date) {
         res.status(500).json({ error: 'Unable to fetch Toggl data, missing headers or api token' });
         return;
     }

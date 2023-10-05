@@ -16,13 +16,10 @@
     
   export let data: PageData;
 
-  onMount(()=>{
-
-
 
   fetchDailyTimeEntries(data.toggltoken, data.date);
-}
-  );
+
+  console.log(togglTimeEntries);
 
   const todoistApi = new TodoistApi(data.todotoken);
   let tasksAPIResponse = [];
@@ -70,13 +67,13 @@
           <h1>Toggl Stuff</h1>
           {#if $togglLoading}
             <div class="loading loading-spinner loading-m text-warning"></div>
-          {:else }
+          <!--{:else }
             {#each $togglTimeEntries as entry}
               <div>
                 {entry.description} in {entry.project_id}
               </div>
               
-            {/each}
+            {/each} -->
           
           {/if}
           

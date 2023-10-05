@@ -1,5 +1,5 @@
 //togglServer.ts
-//on changes run npm build functions to compile
+//on changes run npm run build:functions to compile
 
 import express from 'express';
 import serverless from 'serverless-http';
@@ -70,7 +70,7 @@ router.get('/projects', async (req, res) => {
 
 router.get('/time-entries', async (req, res) => {
 
-  if (!req || !req.headers || !req.headers.apitoken) {
+  if (!req || !req.headers || !req.headers.apitoken || !req.headers.date) {
     res.status(500).json({ error: 'Unable to fetch Toggl data, missing headers or api token' });
     return;
   }
@@ -87,7 +87,7 @@ router.get('/time-entries', async (req, res) => {
     res.json(response.data);
   } catch (error) {
     //console.log("call failed from server," + req.headers.apitoken.toString())
-    //console.error(error);
+    console.error(error);
     res.status(500).json({ error: 'Unable to fetch Toggl data' });
   }
 });

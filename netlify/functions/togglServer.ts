@@ -70,8 +70,23 @@ router.get('/projects', async (req, res) => {
 
 router.get('/time-entries', async (req, res) => {
 
-  if (!req || !req.headers || !req.headers.apitoken) {
-    res.status(500).json({ error: 'Unable to fetch Toggl data, missing headers or api token' });
+  if (!req) {
+    res.status(500).json({ error: 'Unable to fetch Toggl data, missing request' });
+    return;
+  }
+
+  if (!req.headers ) {
+    res.status(500).json({ error: 'Unable to fetch Toggl data, missing headers object,' });
+    return;
+  }
+
+  if ( !req.headers.apitoken) {
+    res.status(500).json({ error: 'Unable to fetch Toggl data, missing api token,' });
+    return;
+  }
+  
+  if (!req.headers.requested_date) {
+    res.status(500).json({ error: 'Unable to fetch Toggl data, missing requested_date header,' });
     return;
   }
 
@@ -86,7 +101,6 @@ router.get('/time-entries', async (req, res) => {
 
     res.json(response.data);
   } catch (error) {
-    //console.log("call failed from server," + req.headers.apitoken.toString())
     console.error(error);
     res.status(500).json({ error: 'Unable to fetch Toggl data' });
   }

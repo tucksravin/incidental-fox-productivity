@@ -8,7 +8,7 @@
   import type { PageData } from "./$types";
   import { TodoistApi } from "@doist/todoist-api-typescript";
   import { fetchDailyTimeEntries, togglTimeEntries, togglLoading } from '$lib/stores/togglStore';
-  import { onMount } from "svelte";
+
 
 
   const months = [ "January", "February", "March", "April", "May", "June", 
@@ -19,7 +19,7 @@
 
   fetchDailyTimeEntries(data.toggltoken, data.date);
 
-  console.log(togglTimeEntries);
+  //console.log(togglTimeEntries);
 
   const todoistApi = new TodoistApi(data.todotoken);
   let tasksAPIResponse = [];
@@ -67,18 +67,15 @@
           <h1>Toggl Stuff</h1>
           {#if $togglLoading}
             <div class="loading loading-spinner loading-m text-warning"></div>
-          <!--{:else }
+          {:else }
             {#each $togglTimeEntries as entry}
               <div>
                 {entry.description} in {entry.project_id}
               </div>
               
-            {/each} -->
+            {/each}
           
           {/if}
-          
-     
-          <!--TODO: call the toggl api and list all the entries of the day-->
         </div>
       </div>
 

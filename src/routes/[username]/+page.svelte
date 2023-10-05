@@ -26,6 +26,6 @@ import type { PageData } from "./$types";
         {data.username}'s dashboard
       </h1>
 
-      <a href={todaysUrl}>go to today's date</a>
+      <a href={todaysUrl} class="link mt-8 hover:opacity-70">go to today's date</a>
     </AuthCheck>
   </DelayContent>

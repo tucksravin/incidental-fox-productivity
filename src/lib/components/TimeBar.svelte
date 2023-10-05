@@ -39,13 +39,13 @@
             project: 'climbing',
             color: 'blue',
             start: 30,
-            end: 36
+            end: 31
         },
         {
             name: 'a',
             project: 'climbing',
             color: 'green',
-            start: 36,
+            start: 31,
             end: 50
         },
 

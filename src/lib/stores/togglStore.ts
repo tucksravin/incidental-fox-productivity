@@ -65,7 +65,8 @@ async function fetchDailyTimeEntries(apitoken:string, date:Date ) {
 
         let customHeaders = new Headers()
         customHeaders.append('apitoken', apitoken);
-        customHeaders.append('date', date.toISOString().slice(0,10));
+        customHeaders.append('requested_date', date.toISOString().slice(0,10));
+        console.log(date.toISOString().slice(0,10));
         const dataResponse = await fetch('https://incidental-fox-productivity.netlify.app/.netlify/functions/togglServer/time-entries', { headers : customHeaders });
         
         const data = await dataResponse.json();

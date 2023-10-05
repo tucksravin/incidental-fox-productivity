@@ -70,7 +70,7 @@ router.get('/projects', async (req, res) => {
 
 router.get('/time-entries', async (req, res) => {
 
-  if (!req || !req.headers || !req.headers.apitoken || !req.headers.date) {
+  if (!req || !req.headers || !req.headers.apitoken || !req.headers.requested_date) {
     res.status(500).json({ error: 'Unable to fetch Toggl data, missing headers or api token' });
     return;
   }

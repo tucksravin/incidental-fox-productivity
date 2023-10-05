@@ -105,6 +105,8 @@ router.get('/time-entries', async (req, res) => {
 
   let nextDateString = givenDate.toISOString().slice(0,10);
 
+  console.log('https://api.track.toggl.com/api/v9/me/time_entries?start_date='+givenDateString+'&end_date='+nextDateString)
+
   
   try {
     const response = await axios.get('https://api.track.toggl.com/api/v9/me/time_entries?start_date='+givenDateString+'&end_date='+nextDateString, {
@@ -113,6 +115,8 @@ router.get('/time-entries', async (req, res) => {
         password: 'api_token',
       },
     });
+
+    console.log(response.data);
 
     res.json(response.data);
   } catch (error) {

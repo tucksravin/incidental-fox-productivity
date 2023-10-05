@@ -9,7 +9,7 @@ import { Base64 } from 'js-base64';
 // Initialize the store with an empty object
 const togglProjects = writable<any>({});
 const togglWorkspaceId =  writable<any>({});
-const togglTimeEntries = writable<any>({});
+const togglTimeEntries = writable<any[]>([{}]);
 const togglLoading = writable<boolean>(false);
 
 async function getTogglWorkspace(apitoken:string ) {
@@ -75,6 +75,7 @@ async function fetchDailyTimeEntries(apitoken:string, date:Date ) {
         togglLoading.set(false);
       } catch (error) {
         console.error(error);
+        togglLoading.set(false);
       }
 }
 

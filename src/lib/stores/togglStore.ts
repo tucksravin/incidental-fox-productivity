@@ -1,7 +1,7 @@
 import { writable } from 'svelte/store';
 import { Base64 } from 'js-base64';
 
-//TODO: add a store that relates propject ids to project title and color and relates to firebase groundtruth.
+//TODO: move functions from here to togglfunctions
 
 
 

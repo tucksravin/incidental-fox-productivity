@@ -1,6 +1,6 @@
 import { collection, getDocs, limit, query, where } from "firebase/firestore";
 import type { PageLoad } from "./$types";
-import { db } from "$lib/firebase";
+import { db } from "$lib/stores/firebaseStore";
 import { error } from "@sveltejs/kit";
 
 export const load = (async ({ params }) => {

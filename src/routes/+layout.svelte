@@ -2,7 +2,7 @@
    import "../app.css"
    import { signOut } from "firebase/auth";
    import { browser } from '$app/environment';
-   import { auth, user, userData } from "$lib/firebase";
+   import { auth, user, userData } from "$lib/stores/firebaseStore";
    import {fly} from "svelte/transition"
    import { page } from "$app/stores";
    import NavStepper from "$lib/components/NavStepper.svelte"

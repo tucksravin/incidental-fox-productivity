@@ -70,13 +70,13 @@
   
   </script>
   
-<div class="w-full h-full relative rounded-full overflow-hidden border-slate-600 border-2">
+<div class="w-full h-full relative rounded-full overflow-hidden border-slate-600 border-2 bg-slate-400">
     {#each timeChunks as chunk}
         <!--white backing element so hover doesn't show overlap with otther entries-->
         <div 
             class= "w-full absolute rounded-full"
             style= "
-                height: {((chunk.end-chunk.start+2)*2)}%;
+                height: {((chunk.end-chunk.start+2.1)*2)}%;
                 background-color: white;
                 top: {(chunk.start-2)*2}%;
                 "
@@ -87,7 +87,7 @@
             class= "w-full absolute rounded-full hover:opacity-70 cursor-pointer"
             data-tip="{chunk.name}, {chunk.project}"
             style= "
-                height: {((chunk.end-chunk.start+2)*2)}%;
+                height: {((chunk.end-chunk.start+2.1)*2)}%;
                 background-color: {chunk.color};
                 top: {(chunk.start-2)*2}%;
                 "

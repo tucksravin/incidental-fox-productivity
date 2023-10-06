@@ -8,10 +8,11 @@
 //TODO: make a project store that is ground truth to relate project ids from toggl and todoist and integrates their colors
 
 import { initializeApp } from "firebase/app";
-import { doc, getFirestore, onSnapshot } from "firebase/firestore";
+import { doc, getFirestore, onSnapshot, getDoc } from "firebase/firestore";
 import { getAuth, onAuthStateChanged, type User } from "firebase/auth";
 import { getStorage } from "firebase/storage";
 import { writable, type Readable, derived } from "svelte/store";
+import type { FirebaseProject } from "../types/firebase_types";
 
 const firebaseConfig = {
     apiKey: "AIzaSyCoBBpuTvTst-S1teDIJHmRYYAVzXIA8wc",
@@ -27,6 +28,11 @@ export const app = initializeApp(firebaseConfig);
 export const db = getFirestore();
 export const auth = getAuth();
 export const storage = getStorage();
+export const firebaseLoading = writable<boolean>(false);
+
+
+
+
 
 
 /**
@@ -89,6 +95,7 @@ export function docStore<T>(
     toggltoken: string,
     todotoken:string,
     togglworkspaceid: string,
+    projects: FirebaseProject[]
   
   }
   
@@ -98,4 +105,5 @@ export function docStore<T>(
     } else {
       set(null); 
     }
-  });  
+  });
+  

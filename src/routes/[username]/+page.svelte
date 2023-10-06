@@ -1,9 +1,9 @@
 <script lang="ts">
 
     import AuthCheck from "$lib/components/AuthCheck.svelte";
-  import DelayContent from "$lib/components/DelayContent.svelte";
-import type { PageData } from "./$types";
-    import { error } from "@sveltejs/kit"
+    import DelayContent from "$lib/components/DelayContent.svelte";
+    import type { PageData } from "./$types";
+
 
     
     export let data: PageData;

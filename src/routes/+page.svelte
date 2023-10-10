@@ -1,5 +1,6 @@
 <script lang='ts'>
-  import { togglWorkspaceId, getTogglWorkspace, fetchTogglProjects, togglProjects } from '$lib/stores/togglStore';
+  import { togglWorkspaceId, togglProjects } from '$lib/stores/togglStore';
+  import { getTogglWorkspace, fetchTogglProjects } from '$lib/functions/togglFunctions';
   import { userData } from '$lib/stores/firebaseStore'
 
   $togglProjects;

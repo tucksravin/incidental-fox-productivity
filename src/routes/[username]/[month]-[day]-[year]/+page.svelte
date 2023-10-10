@@ -7,7 +7,8 @@
   import TimelineLabels from "$lib/components/TimelineLabels.svelte"
   import type { PageData } from "./$types";
   import { TodoistApi } from "@doist/todoist-api-typescript";
-  import { fetchDailyTimeEntries, togglTimeEntries, togglLoading } from '$lib/stores/togglStore';
+  import { togglTimeEntries, togglLoading } from '$lib/stores/togglStore';
+  import { fetchDailyTimeEntries } from "$lib/functions/togglFunctions";
 
 
 

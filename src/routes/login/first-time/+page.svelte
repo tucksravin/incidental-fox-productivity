@@ -3,9 +3,11 @@
     import DelayContent from "$lib/components/DelayContent.svelte";
     import { db, user, userData } from "$lib/stores/firebaseStore";
     import { doc, getDoc, writeBatch } from "firebase/firestore"
+    import { createUserAccount } from "$lib/functions/firebaseFunctions";
     import { fade } from "svelte/transition"
     import { TodoistApi } from '@doist/todoist-api-typescript'
-    import { getTogglWorkspace, togglWorkspaceId } from "$lib/stores/togglStore";
+    import { togglWorkspaceId } from "$lib/stores/togglStore";
+    import { getTogglWorkspace } from "$lib/functions/togglFunctions";
   
    
 
@@ -115,30 +117,19 @@
 
     }
 
-    async function createUserAccount(){
 
-        console.log("creating acct for: ", username)
 
-        const togglworkspaceid = $togglWorkspaceId;
-        const batch = writeBatch(db);
-        batch.set(doc(db, "handles", username), { uid: $user?.uid })
-        batch.set(doc(db, "users", $user!.uid),{
-            username,
-            toggltoken,
-            togglworkspaceid,
-            todotoken
-        })
-
-    await batch.commit();
-    username = '';
-    isAvailable = false;
-    usernameChecked = false;
-    toggltoken='';
-    isTogglTokenValid = false;
-    togglChecked = false;
-    todotoken = '';
-    isTodoistTokenValid = false;
-    todoistChecked = false;
+    let handleFormSubmit = () => {
+        createUserAccount(username, toggltoken, todotoken)
+        username = '';
+        isAvailable = false;
+        usernameChecked = false;
+        toggltoken='';
+        isTogglTokenValid = false;
+        togglChecked = false;
+        todotoken = '';
+        isTodoistTokenValid = false;
+        todoistChecked = false;
     }
 
 
@@ -157,7 +148,7 @@
 
 
 
-    <form class=" h-2/3 w-3/4 mt-8 flex-vertical justify-start align-top" on:submit|preventDefault={createUserAccount}>
+    <form class=" h-2/3 w-3/4 mt-8 flex-vertical justify-start align-top" on:submit|preventDefault={handleFormSubmit}>
         <div class="form-control">
       
             <label for="usernameInput" class="label">

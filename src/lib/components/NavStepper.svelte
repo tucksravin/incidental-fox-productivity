@@ -1,5 +1,8 @@
 <script lang='ts'>
    import { page } from "$app/stores" 
+
+   //TODO: when more user-level pages are added add a different type of navLinkes
+   
    export let navLinks = [
         {
             name:"login",

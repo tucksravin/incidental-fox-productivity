@@ -3,6 +3,7 @@
 
     import type { PageData } from "./../../routes/[username]/[month]-[day]-[year]/$types";
     import Icon from "@iconify/svelte"
+    import { getCurrentPageDate } from "./../functions/navigationFunctions"
 
     export let data: PageData;
 
@@ -10,20 +11,27 @@
     let nextButtonText = "next day"
     const today = new Date();
     const isToday = data.date.toDateString()==today.toDateString();
+
     if(isToday){
         backButtonText = "yesterday"
         nextButtonText = "tomorrow"
     }
 
-    const nextDay = new Date()
-    nextDay.setDate(data.date.getDate()+1);
-    const nextDayUrl = "/"+data.username+"/"+(nextDay.getMonth()+1)+"-"+(nextDay.getDay()+1)+"-"+nextDay.getFullYear()+"/?fromRight";
+    let nextDayUrl = "";
+    let prevDayUrl = "";
+
+    
+    const nextDay = new Date();
+    nextDay.setDate(getCurrentPageDate().getDate()+1);
+    console.log("next date: "+nextDay.toString())
+    nextDayUrl = `/${data.username}/${nextDay.getMonth() + 1}-${nextDay.getDate()}-${nextDay.getFullYear()}?fromRight`;
+
 
     const prevDay = new Date()
-    prevDay.setDate(data.date.getDate()-1)
-    const prevDayUrl = "/"+data.username+"/"+(prevDay.getMonth()+1)+"-"+(prevDay.getDay()+1)+"-"+prevDay.getFullYear()+"/?fromLeft";
-
-    //TODO: Add date picker
+    prevDay.setDate(getCurrentPageDate().getDate()-1)
+    console.log("prev date: "+prevDay.toString())
+    prevDayUrl = `/${data.username}/${prevDay.getMonth() + 1}-${prevDay.getDate()}-${prevDay.getFullYear()}?fromLeft`;
+    
     //TODO: fix weird behaviors on setting links, seems to have a weird loop confined to a week?
 
 </script>

@@ -7,10 +7,11 @@
 
     
     export let data: PageData;
-
-    const today = new Date();
-    const todaysUrl = "/"+data.username+"/"+(today.getMonth()+1)+"-"+(today.getDay()+1)+"-"+today.getFullYear();
-
+    let today:Date;
+    let todaysUrl = "";
+    
+      today = new Date();
+      todaysUrl = `${data.username}/${today.getMonth()+1}-${(today.getDate())}-${today.getFullYear()}`
     
     
   

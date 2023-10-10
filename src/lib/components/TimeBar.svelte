@@ -1,23 +1,8 @@
 <script lang='ts'>
-  import { reauthenticateWithCredential } from "firebase/auth";
-
+  import type { TimeChunk } from "$lib/types/frontend_types";
   
   
-  type Enumerate<N extends number, Acc extends number[] = []> = Acc['length'] extends N
-  ? Acc[number]
-  : Enumerate<N, [...Acc, Acc['length']]>
 
-    type IntRange<F extends number, T extends number> = Exclude<Enumerate<T>, Enumerate<F>>
-
-
-
-    type TimeChunk = {
-        name: string,
-        project: string,
-        color: string,
-        start: IntRange<0,49>,
-        end: IntRange<1,51>
-    }
 
     const testData:TimeChunk[] = [
         {

@@ -3,6 +3,13 @@
     import AuthCheck from "$lib/components/AuthCheck.svelte";
     import DelayContent from "$lib/components/DelayContent.svelte";
     import type { PageData } from "./$types";
+    import { refreshProjects } from "$lib/functions/firebaseFunctions";
+  import { togglProjects } from "$lib/stores/togglStore";
+  import { todoistProjects } from "$lib/stores/todoistStore";
+
+
+
+
 
 
     

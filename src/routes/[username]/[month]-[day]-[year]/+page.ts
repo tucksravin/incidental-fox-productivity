@@ -3,6 +3,7 @@ import type { PageLoad } from "./$types";
 import { db } from "$lib/stores/firebaseStore";
 import { error } from "@sveltejs/kit";
 
+
 export const load = (async ({ params }) => {
 
   let yr:number = parseInt(params.year);
@@ -28,6 +29,7 @@ export const load = (async ({ params }) => {
   if( isNaN(yr) || isNaN(mo) || isNaN(dy) || yr < 2015 || yr > 2125 || mo < 1 || mo > 12 || dy < 1 || dy > 31) {
     throw error(404, "that date does not exist!");
   }
+
 
   return {
     username: data.username,

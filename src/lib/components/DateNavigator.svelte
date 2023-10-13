@@ -31,8 +31,6 @@
     prevDay.setDate(getCurrentPageDate().getDate()-1)
     console.log("prev date: "+prevDay.toString())
     prevDayUrl = `/${data.username}/${prevDay.getMonth() + 1}-${prevDay.getDate()}-${prevDay.getFullYear()}?fromLeft`;
-    
-    //TODO: fix weird behaviors on setting links, seems to have a weird loop confined to a week?
 
 </script>
 

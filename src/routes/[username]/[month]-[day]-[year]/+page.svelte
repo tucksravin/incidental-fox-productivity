@@ -7,8 +7,15 @@
   import TimelineLabels from "$lib/components/TimelineLabels.svelte"
   import type { PageData } from "./$types";
   import { TodoistApi } from "@doist/todoist-api-typescript";
-  import { togglTimeEntries, togglLoading } from '$lib/stores/togglStore';
-  import { fetchDailyTimeEntries } from "$lib/functions/togglFunctions";
+  import { togglTimeEntries, togglLoading, togglProjects } from '$lib/stores/togglStore';
+  import { todoistProjects } from "$lib/stores/todoistStore";
+  import { fetchDailyTimeEntries, togglProjectIdToName } from "$lib/functions/togglFunctions";
+  import { userData } from "$lib/stores/firebaseStore";
+
+  $togglProjects;
+  $todoistProjects;
+
+
 
 
 
@@ -71,7 +78,7 @@
           {:else }
             {#each $togglTimeEntries as entry}
               <div>
-                {entry.description} in {entry.project_id}
+                {entry.description} in {togglProjectIdToName(entry.project_id)}
               </div>
               
             {/each}

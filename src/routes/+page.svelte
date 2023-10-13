@@ -2,6 +2,7 @@
   import { togglWorkspaceId, togglProjects } from '$lib/stores/togglStore';
   import { getTogglWorkspace, fetchTogglProjects } from '$lib/functions/togglFunctions';
   import { userData } from '$lib/stores/firebaseStore'
+  import {refreshProjects} from '$lib/functions/firebaseFunctions'
 
   $togglProjects;
   $togglWorkspaceId;
@@ -11,7 +12,7 @@
   }
 
   function fireProjects(){
-    fetchTogglProjects($userData.toggltoken, $userData.togglworkspaceid);
+    refreshProjects();
   }
 
 </script>
@@ -23,3 +24,4 @@
 <button class="btn mt-16" on:click={fireProjects}>Fetch Toggl Projects</button>
 
 <p>{JSON.stringify($togglProjects)!=="{}"&&$togglProjects!=null}</p>
+

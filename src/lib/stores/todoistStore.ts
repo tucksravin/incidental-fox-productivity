@@ -1,5 +1,3 @@
-//TODO: implement stores based on todoist api package
-
 import { writable} from "svelte/store";
 
 // Initialize the store with an empty object

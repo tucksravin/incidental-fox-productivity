@@ -1,9 +1,13 @@
 import { collection, getDocs, limit, query, where } from "firebase/firestore";
 import type { PageLoad } from "./$types";
-import { db } from "$lib/stores/firebaseStore";
+import { user, db, auth } from "$lib/stores/firebaseStore";
+import { beforeUpdate } from "svelte";
 import { error } from "@sveltejs/kit";
 
+
 export const load = (async ({ params }) => {
+
+
     
   const collectionRef = collection(db, "users");
 
@@ -19,9 +23,6 @@ export const load = (async ({ params }) => {
   if (!exists) {
     throw error(404, "that user does not exist!");
   }
-  
-
-
 
 
   return {

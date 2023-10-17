@@ -1,8 +1,8 @@
 <script lang="ts">
     import AuthCheck from "$lib/components/AuthCheck.svelte";
     import DelayContent from "$lib/components/DelayContent.svelte";
-    import { db, user, userData } from "$lib/stores/firebaseStore";
-    import { doc, getDoc, writeBatch } from "firebase/firestore"
+    import { db, userData } from "$lib/stores/firebaseStore";
+    import { doc, getDoc } from "firebase/firestore"
     import { createUserAccount } from "$lib/functions/firebaseFunctions";
     import { fade } from "svelte/transition"
     import { TodoistApi } from '@doist/todoist-api-typescript'

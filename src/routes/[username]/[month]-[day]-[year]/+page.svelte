@@ -10,7 +10,22 @@
   import { togglTimeEntries, togglLoading, togglProjects } from '$lib/stores/togglStore';
   import { todoistProjects } from "$lib/stores/todoistStore";
   import { fetchDailyTimeEntries, togglProjectIdToName } from "$lib/functions/togglFunctions";
-  import { userData } from "$lib/stores/firebaseStore";
+  import { user, firebaseProjects } from "$lib/stores/firebaseStore";
+  import { redirect } from "@sveltejs/kit";
+  import { refreshProjects} from "$lib/functions/firebaseFunctions";
+  import { onMount } from "svelte";
+  
+  
+  if(!user) redirect(307, '/login');
+
+  if($firebaseProjects.length==0){
+      onMount(()=>{
+        setTimeout(()=>{
+          refreshProjects($user);
+        }, 50)        
+      })
+    }
+
 
   $togglProjects;
   $todoistProjects;
@@ -41,8 +56,7 @@
     })
     .catch((error) => console.log(error))
 
-    
-//TODO: add project names based on firestore db
+
   
     
   
@@ -66,9 +80,9 @@
             {/each}
         </div>
         <div class="w-1/5 bg-slate-200 flex justify-between py-4">
-          <div class="w-8 h-full mx-2"><TimeBar /></div>
+          <div class="w-8 h-full mx-2 z-10"><TimeBar /></div>
           <TimelineLabels />
-          <div class="w-8 h-full mx-2"><TimeBar /></div>
+          <div class="w-8 h-full mx-2 z-10"><TimeBar /></div>
           
         </div>
         <div class="w-2/5 bg-blue-200">

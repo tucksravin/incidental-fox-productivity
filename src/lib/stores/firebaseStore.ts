@@ -28,6 +28,7 @@ export const app = initializeApp(firebaseConfig);
 export const db = getFirestore();
 export const auth = getAuth();
 export const storage = getStorage();
+export const firebaseProjects = writable<FirebaseProject[]>([]);
 export const firebaseLoading = writable<boolean>(false);
 
 

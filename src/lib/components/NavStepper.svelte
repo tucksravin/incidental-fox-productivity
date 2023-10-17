@@ -39,7 +39,6 @@
                 navLinks.forEach((link)=>{link.direction="?fromBottom"});
                     
             curr=false;
-            console.log(navLinks)
         },50)
     }
 

@@ -1,8 +1,6 @@
-import { writable } from 'svelte/store';
 import { Base64 } from 'js-base64';
 import { togglProjects, togglWorkspaceId, togglTimeEntries, togglLoading } from './../stores/togglStore';
-import { refreshProjects } from './firebaseFunctions';
-import { prodErrorMap } from 'firebase/auth';
+
 
 
 
@@ -31,6 +29,8 @@ async function getTogglWorkspace(apitoken:string ) {
     } catch (error) {
         console.error(error);
       }
+
+    return togglWorkspaceId;
 
 }
 
@@ -82,22 +82,12 @@ async function fetchDailyTimeEntries(apitoken:string, date:Date ) {
 
 function togglProjectIdToName (id:string) {  
   let name ="";
-  let projects:[any];
-  togglProjects.subscribe((value) => { 
-    if(Array.isArray(value) == false){
-      try{
-        refreshProjects()
-      }
-      catch(error){console.log(error)
-    }
-  }
-});
+  let projects:[any]=[{}];
+
   togglProjects.subscribe((value) => { projects = value;});
    
-
-     projects.forEach((project) => { if(project.id == id) name = project.name;
-
-     });
+  if(projects.length>0 )
+    projects.forEach((project) => { if(project.id == id) name = project.name;});
   
   return name;
 

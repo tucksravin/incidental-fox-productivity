@@ -6,8 +6,9 @@ import { fetchTodoistProjects } from "./todoistFunctions";
 import { writeBatch } from "firebase/firestore";
 import { togglWorkspaceId, togglProjects } from "$lib/stores/togglStore";
 import { todoistProjects } from "$lib/stores/todoistStore";
-import { user, userData } from "$lib/stores/firebaseStore";
+import { user, userData, firebaseProjects } from "$lib/stores/firebaseStore";
 import type { User } from "firebase/auth"
+
 
 
 
@@ -39,21 +40,18 @@ export async function createUserAccount(username:string, toggltoken:string, todo
 
 await batch.commit();
 
-await refreshProjects();
-
-
+await refreshProjects(currentUser);
 
 }
 
-
-export async function refreshProjects() {
+export async function refreshProjects(currentUser:User) {
     let currentProjects: FirebaseProject[] = [];
-    let currentUser : User | null = null;
     let currentUserData : any;
     let todoProjectsRefresh: [any];
     let togglProjectsRefresh: [any];
 
-    user.subscribe((value) => {  currentUser = value;});
+
+
     userData.subscribe((value) => {  currentUserData = value;});
 
     const docRef = doc(db, "users", currentUser!.uid);
@@ -97,11 +95,13 @@ export async function refreshProjects() {
         }
       });
 
-      console.log(currentProjects);
+      firebaseProjects.set(currentProjects);
+
+      console.log("projs refreshed")
 
       if(isUpdated){
        await updateDoc(docRef, { projects: currentProjects });
-        console.log(currentProjects);
+        //console.log(currentProjects);
         isUpdated = false;
       }
   }

@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { goto } from "$app/navigation";
+    import { goto } from "$app/navigation";
     import { auth, userData } from "$lib/stores/firebaseStore";
     import DelayContent from "$lib/components/DelayContent.svelte"
-    import { GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
+    import { GoogleAuthProvider, signInWithPopup} from "firebase/auth";
 
     $userData;
 

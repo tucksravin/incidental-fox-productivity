@@ -5,7 +5,7 @@ type FirebaseProject = {
     name: string,
     todoistId: string,
     togglId: string,
-    color: HEXColor
+    color: string
 }
 
 type FirebaseUserData = {
@@ -17,4 +17,4 @@ type FirebaseUserData = {
   
   }
 
-export {type HEXColor, type FirebaseProject, type FirebaseUserData}
+export { type FirebaseProject, type FirebaseUserData}

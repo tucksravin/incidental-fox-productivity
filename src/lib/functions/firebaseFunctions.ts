@@ -9,6 +9,7 @@ import { todoistProjects } from "$lib/stores/todoistStore";
 import { user, userData, firebaseProjects } from "$lib/stores/firebaseStore";
 import type { User } from "firebase/auth"
 import type { Project } from "@doist/todoist-api-typescript";
+import type { TogglProject } from "$lib/types/toggl_types";
 
 
 
@@ -49,7 +50,7 @@ export async function refreshProjects(currentUser:User) {
     let currentProjects: FirebaseProject[] = [];
     let currentUserData : FirebaseUserData;
     let todoProjectsRefresh: Project[];
-    let togglProjectsRefresh: [any];
+    let togglProjectsRefresh: TogglProject[];
 
 
 

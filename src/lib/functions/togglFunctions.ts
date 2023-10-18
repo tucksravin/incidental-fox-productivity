@@ -1,5 +1,6 @@
 import { Base64 } from 'js-base64';
 import { togglProjects, togglWorkspaceId, togglTimeEntries, togglLoading } from './../stores/togglStore';
+import type { TogglProject } from '$lib/types/toggl_types';
 
 
 
@@ -84,7 +85,7 @@ async function fetchDailyTimeEntries(apitoken:string, date:Date ) {
 
 function togglProjectIdToName (id:string) {  
   let name ="";
-  let projects:[any]=[{}];
+  let projects:TogglProject[]=[];
 
   togglProjects.subscribe((value) => { projects = value;});
    

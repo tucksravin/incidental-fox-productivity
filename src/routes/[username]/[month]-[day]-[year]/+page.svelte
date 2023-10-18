@@ -6,10 +6,12 @@
   import TimeBar from "$lib/components/TimeBar.svelte";
   import TimelineLabels from "$lib/components/TimelineLabels.svelte"
   import type { PageData } from "./$types";
+  import type { TimeChunk } from "$lib/types/frontend_types";
   import { TodoistApi } from "@doist/todoist-api-typescript";
   import { togglTimeEntries, togglLoading, togglProjects } from '$lib/stores/togglStore';
-  import { todoistProjects } from "$lib/stores/todoistStore";
   import { fetchDailyTimeEntries, togglProjectIdToName } from "$lib/functions/togglFunctions";
+  import { todoistTasks, todoistLoading } from '$lib/stores/todoistStore'
+  import { fetchTodoistTasks } from "$lib/functions/todoistFunctions";
   import { user, firebaseProjects } from "$lib/stores/firebaseStore";
   import { redirect } from "@sveltejs/kit";
   import { refreshProjects} from "$lib/functions/firebaseFunctions";
@@ -36,20 +38,14 @@
 
   fetchDailyTimeEntries(data.toggltoken, data.date);
 
-  //console.log(togglTimeEntries);
+  fetchTodoistTasks(data.todotoken, data.month, data.day, data.year);
 
-  const todoistApi = new TodoistApi(data.todotoken);
-  let tasksAPIResponse = [];
-  let todoistLoading = true;
-  
-  todoistApi.getTasks({filter: "due on "+data.month+"/"+data.day+"/"+data.year})
-    .then((tasks) => {
-     tasksAPIResponse =  tasks;
-      console.log(tasks)
-      todoistLoading=false;
-    })
-    .catch((error) => console.log(error))
 
+
+    let todoTimeChunks:TimeChunk[];
+
+
+    let togglTimeChunks:TimeChunk[];
 
   
     
@@ -66,17 +62,17 @@
       <div class="w-full h-full flex justify-between">
         <div class="w-2/5 bg-red-200">
           <h1>Todoist Stuff</h1>
-            {#if todoistLoading}
+            {#if $todoistLoading}
               <div class="loading loading-spinner loading-m text-warning"></div>
             {/if}
-            {#each tasksAPIResponse as task}
+            {#each $todoistTasks as task}
               <div>{task.content}</div>
             {/each}
         </div>
         <div class="w-1/5 bg-slate-200 flex justify-between py-4">
-          <div class="w-8 h-full mx-2 z-10"><TimeBar /></div>
+          <div class="w-8 h-full mx-2 z-10"><TimeBar timeChunks={todoTimeChunks}/></div>
           <TimelineLabels />
-          <div class="w-8 h-full mx-2 z-10"><TimeBar /></div>
+          <div class="w-8 h-full mx-2 z-10"><TimeBar timeChunks={togglTimeChunks}/></div>
           
         </div>
         <div class="w-2/5 bg-blue-200">

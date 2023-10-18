@@ -1,5 +1,5 @@
 //TODO: fill in pseudocode scaffold
-import { todoistLoading, todoistProjects } from "$lib/stores/todoistStore";
+import { todoistLoading, todoistProjects, todoistTasks } from "$lib/stores/todoistStore";
 import { TodoistApi } from "@doist/todoist-api-typescript";
 
 
@@ -21,6 +21,26 @@ export const fetchTodoistProjects = async (apitoken:string) => {
     }
     
 }
+
+export const fetchTodoistTasks = async (apitoken:string, month:number, day:number, year:number) => {
+    const todoistApi = new TodoistApi(apitoken);
+    todoistLoading.set(true);
+  
+  
+  
+  todoistApi.getTasks({filter: "due on "+month+"/"+day+"/"+year})
+    .then((tasks) => {
+      todoistTasks.set(tasks);
+      console.log(tasks)
+      todoistLoading.set(false);
+    })
+    .catch((error) => {
+        console.log(error)
+        todoistLoading.set(false);
+    })
+
+}
+
 
 
 

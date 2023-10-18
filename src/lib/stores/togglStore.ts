@@ -1,13 +1,12 @@
 import { writable } from 'svelte/store';
-import { fetchTogglProjects, getTogglWorkspace } from '$lib/functions/togglFunctions';
-import { userData } from '$lib/stores/firebaseStore';
+import type { TogglProject, TogglTimeEntry } from './../types/toggl_types';
 
 
 
 // Initialize the store with an empty object
-export const togglProjects = writable<any>({});
+export const togglProjects = writable<TogglProject[]>([]);
 export const togglWorkspaceId =  writable<string>("");
-export const togglTimeEntries = writable<any>({});
+export const togglTimeEntries = writable<TogglTimeEntry[]>([]);
 export const togglLoading = writable<boolean>(false);
 
 

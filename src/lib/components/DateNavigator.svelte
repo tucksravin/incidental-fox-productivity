@@ -23,13 +23,13 @@
     
     const nextDay = new Date();
     nextDay.setDate(getCurrentPageDate().getDate()+1);
-    console.log("next date: "+nextDay.toString())
+    //console.log("next date: "+nextDay.toString())
     nextDayUrl = `/${data.username}/${nextDay.getMonth() + 1}-${nextDay.getDate()}-${nextDay.getFullYear()}?fromRight`;
 
 
     const prevDay = new Date()
     prevDay.setDate(getCurrentPageDate().getDate()-1)
-    console.log("prev date: "+prevDay.toString())
+    //console.log("prev date: "+prevDay.toString())
     prevDayUrl = `/${data.username}/${prevDay.getMonth() + 1}-${prevDay.getDate()}-${prevDay.getFullYear()}?fromLeft`;
 
 </script>

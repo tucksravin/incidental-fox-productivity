@@ -22,16 +22,10 @@
       onMount(()=>{
         setTimeout(()=>{
           refreshProjects($user);
-        }, 50)        
+        }, 10)   
+        console.log($togglProjects)     
       })
     }
-
-
-  $togglProjects;
-  $todoistProjects;
-
-
-
 
 
   const months = [ "January", "February", "March", "April", "May", "June", 

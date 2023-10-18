@@ -4,8 +4,8 @@
     import DelayContent from "$lib/components/DelayContent.svelte";
     import type { PageData } from "./$types";
     import { refreshProjects } from "$lib/functions/firebaseFunctions";
-    import { auth, user, userData, firebaseProjects } from "$lib/stores/firebaseStore";
-    import { afterUpdate, onMount } from 'svelte'
+    import { user, firebaseProjects } from "$lib/stores/firebaseStore";
+    import { onMount } from 'svelte'
   
 
 
@@ -13,7 +13,7 @@
       onMount(()=>{
         setTimeout(()=>{
           refreshProjects($user);
-        }, 50)        
+        }, 10)        
       })
     }
 

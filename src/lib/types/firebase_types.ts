@@ -8,4 +8,13 @@ type FirebaseProject = {
     color: HEXColor
 }
 
-export {type HEXColor, type FirebaseProject}
+type FirebaseUserData = {
+    username: string,
+    toggltoken: string,
+    todotoken:string,
+    togglworkspaceid: string,
+    projects: FirebaseProject[]
+  
+  }
+
+export {type HEXColor, type FirebaseProject, type FirebaseUserData}

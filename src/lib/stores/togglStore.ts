@@ -6,7 +6,7 @@ import { userData } from '$lib/stores/firebaseStore';
 
 // Initialize the store with an empty object
 export const togglProjects = writable<any>({});
-export const togglWorkspaceId =  writable<any>({});
+export const togglWorkspaceId =  writable<string>("");
 export const togglTimeEntries = writable<any>({});
 export const togglLoading = writable<boolean>(false);
 

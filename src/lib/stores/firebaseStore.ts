@@ -12,7 +12,7 @@ import { doc, getFirestore, onSnapshot, getDoc } from "firebase/firestore";
 import { getAuth, onAuthStateChanged, type User } from "firebase/auth";
 import { getStorage } from "firebase/storage";
 import { writable, type Readable, derived } from "svelte/store";
-import type { FirebaseProject } from "../types/firebase_types";
+import type { FirebaseProject, FirebaseUserData } from "../types/firebase_types";
 
 const firebaseConfig = {
     apiKey: "AIzaSyCoBBpuTvTst-S1teDIJHmRYYAVzXIA8wc",
@@ -91,18 +91,10 @@ export function docStore<T>(
     };
   }
 
-  interface UserData {
-    username: string,
-    toggltoken: string,
-    todotoken:string,
-    togglworkspaceid: string,
-    projects: FirebaseProject[]
   
-  }
-  
-  export const userData: Readable<UserData | null> = derived(user, ($user, set) => { 
+  export const userData: Readable<FirebaseUserData | null> = derived(user, ($user, set) => { 
     if ($user) {
-      return docStore<UserData>(`users/${$user.uid}`).subscribe(set);
+      return docStore<FirebaseUserData>(`users/${$user.uid}`).subscribe(set);
     } else {
       set(null); 
     }

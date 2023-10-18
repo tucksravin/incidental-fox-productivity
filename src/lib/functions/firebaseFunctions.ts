@@ -1,5 +1,5 @@
 import { doc, updateDoc, getDoc } from "firebase/firestore";
-import type { FirebaseProject } from "../types/firebase_types";
+import type { FirebaseProject, FirebaseUserData } from "../types/firebase_types";
 import { db } from "$lib/stores/firebaseStore";
 import { fetchTogglProjects } from "./togglFunctions";
 import { fetchTodoistProjects } from "./todoistFunctions";
@@ -8,6 +8,7 @@ import { togglWorkspaceId, togglProjects } from "$lib/stores/togglStore";
 import { todoistProjects } from "$lib/stores/todoistStore";
 import { user, userData, firebaseProjects } from "$lib/stores/firebaseStore";
 import type { User } from "firebase/auth"
+import type { Project } from "@doist/todoist-api-typescript";
 
 
 
@@ -22,10 +23,10 @@ export async function createUserAccount(username:string, toggltoken:string, todo
   console.log("creating acct for: ", username)
 
   let currentUser : User | null = null;
-  let workspaceid : string | null = null;
+  let togglworkspaceid : string | null = null;
 
   user.subscribe((value) => {  currentUser = value;});
-  togglWorkspaceId.subscribe((value) => { workspaceid = value;});
+  togglWorkspaceId.subscribe((value) => { togglworkspaceid = value;});
 
 
 
@@ -34,7 +35,7 @@ export async function createUserAccount(username:string, toggltoken:string, todo
   batch.set(doc(db, "users", currentUser!.uid),{
       username,
       toggltoken,
-      workspaceid,
+      togglworkspaceid,
       todotoken
   })
 
@@ -46,8 +47,8 @@ await refreshProjects(currentUser);
 
 export async function refreshProjects(currentUser:User) {
     let currentProjects: FirebaseProject[] = [];
-    let currentUserData : any;
-    let todoProjectsRefresh: [any];
+    let currentUserData : FirebaseUserData;
+    let todoProjectsRefresh: Project[];
     let togglProjectsRefresh: [any];
 
 
@@ -61,7 +62,7 @@ export async function refreshProjects(currentUser:User) {
       currentProjects = docSnap.data().projects;
 
     await fetchTodoistProjects(currentUserData.todotoken);
-    await fetchTogglProjects(currentUserData.toggltoken, currentUserData.workspaceid);
+    await fetchTogglProjects(currentUserData.toggltoken, currentUserData.togglworkspaceid);
 
 
     togglProjects.subscribe((value) => { togglProjectsRefresh = value;});

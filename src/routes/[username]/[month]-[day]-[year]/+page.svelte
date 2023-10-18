@@ -9,7 +9,7 @@
   import type { TimeChunk } from "$lib/types/frontend_types";
   import { TodoistApi } from "@doist/todoist-api-typescript";
   import { togglTimeEntries, togglLoading, togglProjects } from '$lib/stores/togglStore';
-  import { fetchDailyTimeEntries, togglProjectIdToName } from "$lib/functions/togglFunctions";
+  import { fetchDailyTimeEntries, togglProjectIdToFirebaseProject } from "$lib/functions/togglFunctions";
   import { todoistTasks, todoistLoading } from '$lib/stores/todoistStore'
   import { fetchTodoistTasks } from "$lib/functions/todoistFunctions";
   import { user, firebaseProjects } from "$lib/stores/firebaseStore";
@@ -80,13 +80,14 @@
           {#if $togglLoading}
             <div class="loading loading-spinner loading-m text-warning"></div>
           {:else }
+          {#key $firebaseProjects}
             {#each $togglTimeEntries as entry}
               <div>
-                {entry.description} in {togglProjectIdToName(entry.project_id)}
+                {entry.description} in {togglProjectIdToFirebaseProject(entry.project_id)?.name}
               </div>
               
             {/each}
-          
+          {/key}
           {/if}
         </div>
       </div>

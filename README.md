@@ -26,6 +26,7 @@ build stores and functions to access then tie into layout
 ### fixes for later
 
 find a real solution for having the projects refresh only after the user auth has loaded in instead of just a timeout
+convert dates to luxon datetimes
 
 ### features for later
 
@@ -40,5 +41,6 @@ add more developed auth rules for firebase (fireship course)
 
 turn the time bars into circles like the journal
 customize colors and projects
+customize time span covered (probably just forward and back)
 deeper reports in a calendar view
 follow specific tasks, build trends

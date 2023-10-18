@@ -10,6 +10,7 @@ export type Enumerate<N extends number, Acc extends number[] = []> = Acc['length
       name: string,
       project: string,
       color: string,
-      start: IntRange<0,49>,
-      end: IntRange<1,51>
+      start: number,
+      end: number,
+      active: boolean
   }

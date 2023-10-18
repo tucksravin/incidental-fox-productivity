@@ -1,6 +1,10 @@
 import { Base64 } from 'js-base64';
 import { togglProjects, togglWorkspaceId, togglTimeEntries, togglLoading } from './../stores/togglStore';
 import type { TogglProject } from '$lib/types/toggl_types';
+import type { FirebaseProject } from '$lib/types/firebase_types';
+import { firebaseProjects } from '../stores/firebaseStore';
+
+
 
 
 
@@ -83,20 +87,29 @@ async function fetchDailyTimeEntries(apitoken:string, date:Date ) {
 }
 
 
-function togglProjectIdToName (id:string) {  
-  let name ="";
-  let projects:TogglProject[]=[];
+function togglProjectIdToFirebaseProject(id:string) {  
+  let allFirebaseProjects:FirebaseProject[];
+  firebaseProjects.subscribe((value) => { allFirebaseProjects = value;});
 
-  togglProjects.subscribe((value) => { projects = value;});
-   
-  if(projects.length>0 )
-    projects.forEach((project) => { if(project.id == id) name = project.name;});
-  
-  return name;
+  let currProject:FirebaseProject;
+
+  console.log("checking:");
+  console.log(parseInt(id))
+
+  allFirebaseProjects.forEach((project) => { 
+
+     if(parseInt(project.togglId) == parseInt(id)) currProject = project;
+    });
+
+    console.log(currProject)
+
+
+  return currProject;
+
 
 }
 
 //fetch specific time entry: takes api and time entry id as parameters, returns time entry
 
 // Export the store and the fetch function
-export { fetchTogglProjects, getTogglWorkspace, fetchDailyTimeEntries, togglProjectIdToName };
+export { fetchTogglProjects, getTogglWorkspace, fetchDailyTimeEntries, togglProjectIdToFirebaseProject };

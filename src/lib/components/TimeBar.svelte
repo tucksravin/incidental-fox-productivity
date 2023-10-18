@@ -10,28 +10,32 @@
             project: 'climbing',
             color: 'red',
             start: 3,
-            end: 30
+            end: 30,
+            active: false
         },
         {
             name: 'a',
             project: 'climbing',
             color: 'blue',
             start: 0,
-            end: 3
+            end: 3,
+            active:false
         },
         {
             name: 'a',
             project: 'climbing',
             color: 'blue',
             start: 30,
-            end: 31
+            end: 31,
+            active: false
         },
         {
             name: 'a',
             project: 'climbing',
             color: 'green',
             start: 31,
-            end: 50
+            end: 50,
+            active: false
         },
 
 

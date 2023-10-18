@@ -100,22 +100,12 @@ export async function refreshProjects(currentUser:User) {
       firebaseProjects.set(currentProjects);
 
       console.log("projs refreshed")
+      console.log(currentProjects);
 
       if(isUpdated){
        await updateDoc(docRef, { projects: currentProjects });
         //console.log(currentProjects);
         isUpdated = false;
       }
-  }
-
-    
-  
-  
-
-  export function todoistProjectIdToName(id:string) {  
-    let name = "";
-    todoistProjects.subscribe((value) => { value.forEach((project) => { if(project.id == id) name = project.name; })});
-    return name; 
-  
   }
 

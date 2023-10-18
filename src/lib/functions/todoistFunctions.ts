@@ -1,6 +1,9 @@
 //TODO: fill in pseudocode scaffold
 import { todoistLoading, todoistProjects, todoistTasks } from "$lib/stores/todoistStore";
+import { firebaseProjects } from "$lib/stores/firebaseStore";
 import { TodoistApi } from "@doist/todoist-api-typescript";
+import type { FirebaseProject } from "$lib/types/firebase_types";
+import { all } from "axios";
 
 
 export const fetchTodoistProjects = async (apitoken:string) => {
@@ -41,10 +44,22 @@ export const fetchTodoistTasks = async (apitoken:string, month:number, day:numbe
 
 }
 
+export function todoistProjectIdToFirebaseProject(id:string) {  
+    let allFirebaseProjects:FirebaseProject[];
+    firebaseProjects.subscribe((value) => { allFirebaseProjects = value;});
+
+    let currProject:FirebaseProject;
+
+    allFirebaseProjects.forEach((project) => { 
+        if(project.todoistId == id) currProject = project;
+    });
+
+    return currProject;
 
 
-
-// fetch todoist tasks for the day
+}
+  
+  
 
 // fetch specific todoist task
 

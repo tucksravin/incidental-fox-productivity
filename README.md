@@ -12,8 +12,8 @@ npm run dev
 
 ### mvp
 
-use todos and time entries to fill in either side of the timeline with time chunks
-fix time zones
+get time entries to render to the current page, not one behind
+use todos to fill in the left side of the timeline with time chunks
 build interface to add times and durations to todoist tasks so they can fill the left side
 scaffold and implement all database functions in function folder
 layout habit tracker/theme page (2 week sections) [no data]
@@ -27,6 +27,7 @@ build stores and functions to access then tie into layout
 
 find a real solution for having the projects refresh only after the user auth has loaded in instead of just a timeout
 convert dates to luxon datetimes
+see why todoist sometimes has cors problems and sometimes doesn't
 
 ### features for later
 
@@ -36,6 +37,7 @@ graphic design on tasks and time entries to float based on when they're on the s
 animate the time bars
 logo design
 add more developed auth rules for firebase (fireship course)
+move todoist api to express server if it remains inconsistent
 
 ### features for much later
 

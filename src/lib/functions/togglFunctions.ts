@@ -78,7 +78,7 @@ async function fetchDailyTimeEntries(apitoken:string, date:Date ) {
     
         togglTimeEntries.set(data);
 
-        console.log(togglTimeEntries);
+        //console.log(togglTimeEntries);
         togglLoading.set(false);
       } catch (error) {
         console.error(error);
@@ -93,15 +93,15 @@ function togglProjectIdToFirebaseProject(id:string) {
 
   let currProject:FirebaseProject;
 
-  console.log("checking:");
-  console.log(parseInt(id))
+  //console.log("checking:");
+  //console.log(parseInt(id))
 
   allFirebaseProjects.forEach((project) => { 
 
      if(parseInt(project.togglId) == parseInt(id)) currProject = project;
     });
 
-    console.log(currProject)
+    //console.log(currProject)
 
 
   return currProject;

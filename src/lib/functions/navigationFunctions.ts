@@ -13,6 +13,7 @@ export const getCurrentPageDate = () => {
 
     date.setDate(parseInt(day))
     date.setMonth(parseInt(month) - 1)
+    //set year?
 
 
     console.log(date.toString());

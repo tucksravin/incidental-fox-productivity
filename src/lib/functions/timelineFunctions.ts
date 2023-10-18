@@ -2,7 +2,9 @@ import type { TimeChunk } from "$lib/types/frontend_types";
 import type { TogglTimeEntry } from "$lib/types/toggl_types";
 import type { Task } from "@doist/todoist-api-typescript";
 import { togglProjectIdToFirebaseProject } from "./togglFunctions";
-const { DateTime } = require("luxon");
+import { DateTime } from "luxon";
+
+
 
 //every unit is 20 minues, 0 is 7:40a 50 is 12:20a
 
@@ -11,10 +13,12 @@ export const timeEntryToTimeChunk = (entry:TogglTimeEntry) => {
         start: convertTimeToTimelineUnits(entry.start),
         end: convertTimeToTimelineUnits(entry.stop),
         name: entry.description,
-        project: togglProjectIdToFirebaseProject(entry.pid).name,
-        color: togglProjectIdToFirebaseProject(entry.pid).color,
+        project: togglProjectIdToFirebaseProject(entry.pid)?.name,
+        color: togglProjectIdToFirebaseProject(entry.pid)?.color,
         active: entry.duration<0
     }
+
+    if(chunk.active) chunk.end = convertTimeToTimelineUnits(DateTime.now().toISO());
 
     return chunk;
 

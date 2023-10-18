@@ -7,7 +7,7 @@
   import TimelineLabels from "$lib/components/TimelineLabels.svelte"
   import type { PageData } from "./$types";
   import type { TimeChunk } from "$lib/types/frontend_types";
-  import { TodoistApi } from "@doist/todoist-api-typescript";
+  import { timeEntryToTimeChunk } from "$lib/functions/timelineFunctions";
   import { togglTimeEntries, togglLoading, togglProjects } from '$lib/stores/togglStore';
   import { fetchDailyTimeEntries, togglProjectIdToFirebaseProject } from "$lib/functions/togglFunctions";
   import { todoistTasks, todoistLoading } from '$lib/stores/todoistStore'
@@ -35,6 +35,13 @@
     
   export let data: PageData;
 
+  let togglTimeChunks:TimeChunk[]=[];
+
+  $togglTimeEntries.forEach((entry)=> {
+        togglTimeChunks.push(timeEntryToTimeChunk(entry))
+        console.log(entry);
+    })
+
 
   fetchDailyTimeEntries(data.toggltoken, data.date);
 
@@ -45,7 +52,9 @@
     let todoTimeChunks:TimeChunk[];
 
 
-    let togglTimeChunks:TimeChunk[];
+   
+
+
 
   
     
@@ -70,7 +79,9 @@
             {/each}
         </div>
         <div class="w-1/5 bg-slate-200 flex justify-between py-4">
+          {#key $firebaseProjects}
           <div class="w-8 h-full mx-2 z-10"><TimeBar timeChunks={todoTimeChunks}/></div>
+          {/key}
           <TimelineLabels />
           <div class="w-8 h-full mx-2 z-10"><TimeBar timeChunks={togglTimeChunks}/></div>
           

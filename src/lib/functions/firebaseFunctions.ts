@@ -16,9 +16,6 @@ import type { TogglProject } from "$lib/types/toggl_types";
 
 
 
-
-
-
 export async function createUserAccount(username:string, toggltoken:string, todotoken:string){
 
   console.log("creating acct for: ", username)

@@ -7,15 +7,14 @@
   import TimelineLabels from "$lib/components/TimelineLabels.svelte"
   import type { PageData } from "./$types";
   import type { TimeChunk } from "$lib/types/frontend_types";
-  import { timeEntryToTimeChunk } from "$lib/functions/timelineFunctions";
   import { togglTimeEntries, togglLoading, togglProjects, togglTimeline } from '$lib/stores/togglStore';
   import { fetchDailyTimeEntries, togglProjectIdToFirebaseProject } from "$lib/functions/togglFunctions";
   import { todoistTasks, todoistLoading } from '$lib/stores/todoistStore'
-  import { fetchTodoistTasks } from "$lib/functions/todoistFunctions";
+  import { fetchTodoistTasks, todoistProjectIdToFirebaseProject } from "$lib/functions/todoistFunctions";
   import { user, firebaseProjects } from "$lib/stores/firebaseStore";
   import { redirect } from "@sveltejs/kit";
   import { refreshProjects} from "$lib/functions/firebaseFunctions";
-  import { onMount, beforeUpdate, afterUpdate } from "svelte";
+  import { onMount} from "svelte";
   
   
   if(!user) redirect(307, '/login');
@@ -59,7 +58,7 @@
               <div class="loading loading-spinner loading-m text-warning"></div>
             {/if}
             {#each $todoistTasks as task}
-              <div>{task.content}</div>
+              <div>{task.content} in {todoistProjectIdToFirebaseProject(task.projectId)?.name}</div>
             {/each}
         </div>
         <div class="w-1/5 bg-slate-200 flex justify-between py-4">

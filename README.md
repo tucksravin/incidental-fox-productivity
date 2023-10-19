@@ -12,7 +12,6 @@ npm run dev
 
 ### mvp
 
-catch times that flip over to the next day UTC (for pt, anything after 5pm)
 use todos to fill in the left side of the timeline with time chunks
 build interface to add times and durations to todoist tasks so they can fill the left side
 scaffold and implement all database functions in function folder
@@ -31,6 +30,7 @@ convert dates to luxon datetimes
 see why todoist sometimes has cors problems and sometimes doesn't
 make animations to mask unvoidable loads and slowdowns
 
+
 ### features for later
 
 set up the full width versions of the toggl v todoist view
@@ -40,6 +40,7 @@ animate the time bars
 logo design
 add more developed auth rules for firebase (fireship course)
 move todoist api to express server if it remains inconsistent
+add check if internet goes out while someone is browsing
 
 ### features for much later
 

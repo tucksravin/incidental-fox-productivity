@@ -1,8 +1,11 @@
 import { Base64 } from 'js-base64';
-import { togglProjects, togglWorkspaceId, togglTimeEntries, togglLoading } from './../stores/togglStore';
+import { togglProjects, togglWorkspaceId, togglTimeEntries, togglLoading, togglTimeline } from './../stores/togglStore';
 import type { TogglProject } from '$lib/types/toggl_types';
 import type { FirebaseProject } from '$lib/types/firebase_types';
+import type { TimeChunk } from '$lib/types/frontend_types';
 import { firebaseProjects } from '../stores/firebaseStore';
+import { timeEntryToTimeChunk } from './timelineFunctions';
+import type { DateTime } from 'luxon';
 
 
 
@@ -27,7 +30,7 @@ async function getTogglWorkspace(apitoken:string ) {
     try{
         const authResponse = await fetch('https://incidental-fox-productivity.netlify.app/.netlify/functions/togglServer/auth/',  { headers : customHeaders } );
         const authData = await authResponse.json();
-        console.log('Auth Data:', authData);
+        //console.log('Auth Data:', authData);
         togglWorkspaceId.set(authData.default_workspace_id);
         togglLoading.set(false);
 
@@ -52,20 +55,23 @@ try {
     const dataResponse = await fetch('https://incidental-fox-productivity.netlify.app/.netlify/functions/togglServer/projects', { headers : customHeaders });
     
     const data = await dataResponse.json();
-    console.log('Response Text:', data);
+    //console.log('Response Text:', data);
 
     togglProjects.set(data);
     togglLoading.set(false);
   } catch (error) {
     console.error(error);
   }
+
+  console.log("entries fetched")
 }
 
-async function fetchDailyTimeEntries(apitoken:string, date:Date ) {
+async function fetchDailyTimeEntries(apitoken:string, date:DateTime ) {
   togglLoading.set(true);
 
     try {
-        let requested_date = date.toISOString().slice(0,10);
+        let requested_date = date.toISO();
+        //console.log(requested_date);
 
         let customHeaders = new Headers()
         customHeaders.append('apitoken', apitoken);
@@ -74,9 +80,10 @@ async function fetchDailyTimeEntries(apitoken:string, date:Date ) {
         const dataResponse = await fetch('https://incidental-fox-productivity.netlify.app/.netlify/functions/togglServer/time-entries', { headers : customHeaders });
         
         const data = await dataResponse.json();
-        console.log('Response Text fetch time entries:', data);
+        //console.log('Response Text fetch time entries:', data);
     
         togglTimeEntries.set(data);
+        setTogglTimeline();
 
         //console.log(togglTimeEntries);
         togglLoading.set(false);
@@ -84,6 +91,22 @@ async function fetchDailyTimeEntries(apitoken:string, date:Date ) {
         console.error(error);
         togglLoading.set(false);
       }
+}
+
+export function setTogglTimeline(){
+  let togglTimeChunks:TimeChunk[] = [];
+
+  let entries;
+  togglTimeEntries.subscribe((value) => { entries = value;});
+
+
+
+  entries.forEach((entry)=> {
+    togglTimeChunks.push(timeEntryToTimeChunk(entry))});
+
+console.log("toggl timeline set")
+
+togglTimeline.set(togglTimeChunks);
 }
 
 

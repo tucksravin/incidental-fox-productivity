@@ -1,4 +1,4 @@
-
+//switch to DateTime for consistency
 
 export const getCurrentPageDate = () => {
     const date = new Date();
@@ -16,6 +16,6 @@ export const getCurrentPageDate = () => {
     //set year?
 
 
-    console.log(date.toString());
+    //console.log(date.toString());
     return date;
 };

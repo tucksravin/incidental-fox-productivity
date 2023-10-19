@@ -1,7 +1,7 @@
 import { doc, updateDoc, getDoc } from "firebase/firestore";
 import type { FirebaseProject, FirebaseUserData } from "../types/firebase_types";
 import { db } from "$lib/stores/firebaseStore";
-import { fetchTogglProjects } from "./togglFunctions";
+import { fetchTogglProjects, setTogglTimeline } from "./togglFunctions";
 import { fetchTodoistProjects } from "./todoistFunctions";
 import { writeBatch } from "firebase/firestore";
 import { togglWorkspaceId, togglProjects } from "$lib/stores/togglStore";
@@ -95,6 +95,8 @@ export async function refreshProjects(currentUser:User) {
       });
 
       firebaseProjects.set(currentProjects);
+      setTogglTimeline();
+
 
       console.log("projs refreshed")
       console.log(currentProjects);

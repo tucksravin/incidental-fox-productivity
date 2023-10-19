@@ -13,7 +13,7 @@ export const fetchTodoistProjects = async (apitoken:string) => {
         const todoistApi = new TodoistApi(apitoken);
         await todoistApi.getProjects().then((projects) => { 
             todoistProjects.set(projects);
-            console.log(projects);
+            //console.log(projects);
             todoistLoading.set(false);
         
         });
@@ -34,7 +34,7 @@ export const fetchTodoistTasks = async (apitoken:string, month:number, day:numbe
   todoistApi.getTasks({filter: "due on "+month+"/"+day+"/"+year})
     .then((tasks) => {
       todoistTasks.set(tasks);
-      console.log(tasks)
+      //console.log(tasks)
       todoistLoading.set(false);
     })
     .catch((error) => {

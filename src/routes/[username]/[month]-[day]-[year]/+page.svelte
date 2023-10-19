@@ -8,26 +8,18 @@
   import type { PageData } from "./$types";
   import type { TimeChunk } from "$lib/types/frontend_types";
   import { timeEntryToTimeChunk } from "$lib/functions/timelineFunctions";
-  import { togglTimeEntries, togglLoading, togglProjects } from '$lib/stores/togglStore';
+  import { togglTimeEntries, togglLoading, togglProjects, togglTimeline } from '$lib/stores/togglStore';
   import { fetchDailyTimeEntries, togglProjectIdToFirebaseProject } from "$lib/functions/togglFunctions";
   import { todoistTasks, todoistLoading } from '$lib/stores/todoistStore'
   import { fetchTodoistTasks } from "$lib/functions/todoistFunctions";
   import { user, firebaseProjects } from "$lib/stores/firebaseStore";
   import { redirect } from "@sveltejs/kit";
   import { refreshProjects} from "$lib/functions/firebaseFunctions";
-  import { onMount } from "svelte";
+  import { onMount, beforeUpdate, afterUpdate } from "svelte";
   
   
   if(!user) redirect(307, '/login');
 
-  if($firebaseProjects.length==0){
-      onMount(()=>{
-        setTimeout(()=>{
-          refreshProjects($user);
-        }, 10)   
-        console.log($togglProjects)     
-      })
-    }
 
 
   const months = [ "January", "February", "March", "April", "May", "June", 
@@ -35,17 +27,37 @@
     
   export let data: PageData;
 
-  let togglTimeChunks:TimeChunk[]=[];
 
-  $togglTimeEntries.forEach((entry)=> {
-        togglTimeChunks.push(timeEntryToTimeChunk(entry))
-        console.log(entry);
-    })
-
-
-  fetchDailyTimeEntries(data.toggltoken, data.date);
+  
 
   fetchTodoistTasks(data.todotoken, data.month, data.day, data.year);
+
+  if($firebaseProjects.length==0){
+      onMount(()=>{
+        setTimeout(()=>{
+          refreshProjects($user);
+        }, 1)   
+        console.log($togglProjects)     
+      })
+    }
+
+
+  let togglTimeChunks:TimeChunk[]=[];
+
+
+    fetchDailyTimeEntries(data.toggltoken, data.date);
+
+
+
+
+
+  
+
+
+
+
+
+
 
 
 
@@ -83,7 +95,7 @@
           <div class="w-8 h-full mx-2 z-10"><TimeBar timeChunks={todoTimeChunks}/></div>
           {/key}
           <TimelineLabels />
-          <div class="w-8 h-full mx-2 z-10"><TimeBar timeChunks={togglTimeChunks}/></div>
+          <div class="w-8 h-full mx-2 z-10"><TimeBar timeChunks={$togglTimeline}/></div>
           
         </div>
         <div class="w-2/5 bg-blue-200">

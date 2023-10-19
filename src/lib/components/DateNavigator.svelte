@@ -4,13 +4,14 @@
     import type { PageData } from "./../../routes/[username]/[month]-[day]-[year]/$types";
     import Icon from "@iconify/svelte"
     import { getCurrentPageDate } from "./../functions/navigationFunctions"
+    import { DateTime } from 'luxon'
 
     export let data: PageData;
 
     let backButtonText = "previous day";
     let nextButtonText = "next day"
-    const today = new Date();
-    const isToday = data.date.toDateString()==today.toDateString();
+    const today = DateTime.now();
+    const isToday = data.date.toLocaleString()==today.toLocaleString();
 
     if(isToday){
         backButtonText = "yesterday"

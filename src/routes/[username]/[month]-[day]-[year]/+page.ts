@@ -1,7 +1,10 @@
 import { collection, getDocs, limit, query, where } from "firebase/firestore";
 import type { PageLoad } from "./$types";
 import { db } from "$lib/stores/firebaseStore";
-import { error } from "@sveltejs/kit";   
+import { error } from "@sveltejs/kit";  
+import { DateTime } from "luxon"; 
+
+ 
 
 
 
@@ -38,6 +41,6 @@ export const load = (async ({ params }) => {
     year: yr,
     day: dy,
     month: mo,
-    date: new Date(yr, mo - 1, dy)
+    date: DateTime.local(yr, mo, dy)
   };
 }) satisfies PageLoad;

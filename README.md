@@ -12,6 +12,7 @@ npm run dev
 
 ### mvp
 
+fix dates so that days/times are based on local timezone
 get time entries to render to the current page, not one behind
 use todos to fill in the left side of the timeline with time chunks
 build interface to add times and durations to todoist tasks so they can fill the left side
@@ -26,6 +27,7 @@ build stores and functions to access then tie into layout
 ### fixes for later
 
 find a real solution for having the projects refresh only after the user auth has loaded in instead of just a timeout
+make everything faster, fetch data only when needed everything else should be firebase/store based
 convert dates to luxon datetimes
 see why todoist sometimes has cors problems and sometimes doesn't
 

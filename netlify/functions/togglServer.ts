@@ -107,7 +107,7 @@ router.get('/time-entries', async (req, res) => {
   console.log(timeZoneDelta);
   let nextDay = givenDay.plus({days:1, hours:-1*timeZoneDelta});
 
-  let nextDateString = nextDay.toISODate();
+  let nextDateString = nextDay.toISO();
 
   console.log('https://api.track.toggl.com/api/v9/me/time_entries?start_date='+givenDateString+'&end_date='+nextDateString)
 

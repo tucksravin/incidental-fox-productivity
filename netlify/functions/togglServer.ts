@@ -100,7 +100,7 @@ router.get('/time-entries', async (req, res) => {
   }
 
 
-  let givenDay = DateTime.local().parse(givenDateString);
+  let givenDay = DateTime.local().fromISO(givenDateString);
   let nextDay = givenDay.plus({days:1});
 
   let nextDateString = nextDay.toISODate();

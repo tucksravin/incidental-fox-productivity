@@ -103,7 +103,8 @@ router.get('/time-entries', async (req, res) => {
   let givenDay = DateTime.fromISO(givenDateString);
   console.log(givenDateString);
 
-  let timeZoneDelta = parseInt(givenDateString.slice(-5,-3))
+  let timeZoneDelta = parseInt(givenDateString.slice(-6,-3));
+  console.log(timeZoneDelta);
   let nextDay = givenDay.plus({days:1, hours:-1*timeZoneDelta});
 
   let nextDateString = nextDay.toISODate();

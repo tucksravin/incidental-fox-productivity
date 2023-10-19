@@ -103,7 +103,7 @@ router.get('/time-entries', async (req, res) => {
   let givenDay = DateTime.fromISO(givenDateString);
   console.log(givenDateString);
 
-  let nextDay = givenDay.plus({days:1}).setTimeZone("America/New_York");
+  let nextDay = givenDay.plus({days:1}).setZone("America/New_York");
 
   let nextDateString = nextDay.toISO();
 

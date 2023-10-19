@@ -71,7 +71,7 @@ async function fetchDailyTimeEntries(apitoken:string, date:DateTime ) {
 
     try {
         let requested_date = date.toISO();
-        //console.log(requested_date);
+        console.log(requested_date);
 
         let customHeaders = new Headers()
         customHeaders.append('apitoken', apitoken);

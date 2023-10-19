@@ -96,7 +96,7 @@ router.get('/time-entries', (req, res) => __awaiter(void 0, void 0, void 0, func
     console.log(givenDateString);
     let timeZoneDelta = parseInt(givenDateString.slice(-6, -3));
     console.log(timeZoneDelta);
-    let nextDay = givenDay.plus({ days: 1, hours: -1 * timeZoneDelta });
+    let nextDay = givenDay.plus({ days: 1 });
     let nextDateString = nextDay.toISO();
     console.log('https://api.track.toggl.com/api/v9/me/time_entries?start_date=' + givenDateString + '&end_date=' + nextDateString);
     try {

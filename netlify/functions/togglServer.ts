@@ -6,6 +6,7 @@ import serverless from 'serverless-http';
 import axios from 'axios';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import { DateTime } from 'luxon';
 
 dotenv.config();
 
@@ -98,12 +99,11 @@ router.get('/time-entries', async (req, res) => {
     givenDateString = req.headers.requested_date;
   }
 
-  let nextDay = new Date();
-  let givenDate = new Date(Date.parse(givenDateString));
 
-  nextDay.setDate(givenDate.getDate()+1);
+  let givenDay = DateTime.local().parse(givenDateString);
+  let nextDay = givenDay.plus({days:1});
 
-  let nextDateString = nextDay.toISOString().slice(0,10);
+  let nextDateString = nextDay.toISODate();
 
   console.log('https://api.track.toggl.com/api/v9/me/time_entries?start_date='+givenDateString+'&end_date='+nextDateString)
 

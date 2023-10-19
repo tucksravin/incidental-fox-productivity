@@ -20,17 +20,10 @@
   
   if(!user) redirect(307, '/login');
 
-
-
   const months = [ "January", "February", "March", "April", "May", "June", 
            "July", "August", "September", "October", "November", "December" ];
     
   export let data: PageData;
-
-
-  
-
-  fetchTodoistTasks(data.todotoken, data.month, data.day, data.year);
 
   if($firebaseProjects.length==0){
       onMount(()=>{
@@ -42,33 +35,12 @@
     }
 
 
-  let togglTimeChunks:TimeChunk[]=[];
-
-
     fetchDailyTimeEntries(data.toggltoken, data.date);
 
+    //tie timeline update to this and proj refresh
+    fetchTodoistTasks(data.todotoken, data.month, data.day, data.year);
 
-
-
-
-  
-
-
-
-
-
-
-
-
-
-    let todoTimeChunks:TimeChunk[];
-
-
-   
-
-
-
-  
+    let todoTimeChunks:TimeChunk[]; 
     
   
 </script>

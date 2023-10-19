@@ -94,9 +94,7 @@ router.get('/time-entries', (req, res) => __awaiter(void 0, void 0, void 0, func
     }
     let givenDay = luxon_1.DateTime.fromISO(givenDateString);
     console.log(givenDateString);
-    let timeZoneDelta = parseInt(givenDateString.slice(-6, -3));
-    console.log(timeZoneDelta);
-    let nextDay = givenDay.plus({ days: 1 });
+    let nextDay = givenDay.plus({ days: 1 }).setTimeZone("America/New_York");
     let nextDateString = nextDay.toISO();
     console.log('https://api.track.toggl.com/api/v9/me/time_entries?start_date=' + givenDateString + '&end_date=' + nextDateString);
     try {

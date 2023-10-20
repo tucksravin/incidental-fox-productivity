@@ -9,7 +9,7 @@
   import type { TimeChunk } from "$lib/types/frontend_types";
   import { togglTimeEntries, togglLoading, togglProjects, togglTimeline } from '$lib/stores/togglStore';
   import { fetchDailyTimeEntries, togglProjectIdToFirebaseProject } from "$lib/functions/togglFunctions";
-  import { todoistTasks, todoistLoading } from '$lib/stores/todoistStore'
+  import { todoistTasks, todoistLoading, todoistTimeline } from '$lib/stores/todoistStore'
   import { fetchTodoistTasks, todoistProjectIdToFirebaseProject } from "$lib/functions/todoistFunctions";
   import { user, firebaseProjects } from "$lib/stores/firebaseStore";
   import { redirect } from "@sveltejs/kit";
@@ -57,13 +57,15 @@
             {#if $todoistLoading}
               <div class="loading loading-spinner loading-m text-warning"></div>
             {/if}
+            {#key $firebaseProjects}
             {#each $todoistTasks as task}
               <div>{task.content} in {todoistProjectIdToFirebaseProject(task.projectId)?.name}</div>
             {/each}
+            {/key}
         </div>
         <div class="w-1/5 bg-slate-200 flex justify-between py-4">
           {#key $firebaseProjects}
-          <div class="w-8 h-full mx-2 z-10"><TimeBar timeChunks={todoTimeChunks}/></div>
+          <div class="w-8 h-full mx-2 z-10"><TimeBar timeChunks={$todoistTimeline}/></div>
           {/key}
           <TimelineLabels />
           <div class="w-8 h-full mx-2 z-10"><TimeBar timeChunks={$togglTimeline}/></div>

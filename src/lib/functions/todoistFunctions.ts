@@ -1,9 +1,13 @@
 //TODO: fill in pseudocode scaffold
-import { todoistLoading, todoistProjects, todoistTasks } from "$lib/stores/todoistStore";
+import { todoistLoading, todoistProjects, todoistTasks, todoistTimeline } from "$lib/stores/todoistStore";
 import { firebaseProjects } from "$lib/stores/firebaseStore";
 import { TodoistApi } from "@doist/todoist-api-typescript";
 import type { FirebaseProject } from "$lib/types/firebase_types";
-import { all } from "axios";
+import type { TimeChunk } from "$lib/types/frontend_types";
+import { taskToTimeChunk } from "$lib/functions/timelineFunctions";
+
+
+
 
 
 export const fetchTodoistProjects = async (apitoken:string) => {
@@ -40,9 +44,30 @@ export const fetchTodoistTasks = async (apitoken:string, month:number, day:numbe
     .catch((error) => {
         console.log(error)
         todoistLoading.set(false);
-    })
+    });
+
+    setTodoistTimeline();
 
 }
+
+export function setTodoistTimeline(){
+    let todoistTimeChunks:TimeChunk[] = [];
+  
+    let tasks;
+    todoistTasks.subscribe((value) => { tasks = value;});
+  
+  
+  
+   tasks.forEach((entry)=> {
+        console.log("trying to add to timeline ")
+        console.log(entry)
+      todoistTimeChunks.push(taskToTimeChunk(entry))});
+  
+  console.log("todoist timeline set")
+  
+  todoistTimeline.set(todoistTimeChunks);
+  }
+
 
 export function todoistProjectIdToFirebaseProject(id:string) {  
     let allFirebaseProjects:FirebaseProject[];

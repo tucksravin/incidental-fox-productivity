@@ -99,8 +99,8 @@ export async function refreshProjects(currentUser:User) {
       setTodoistTimeline();
 
 
-      console.log("projs refreshed")
-      console.log(currentProjects);
+      //console.log("projs refreshed")
+      //console.log(currentProjects);
 
       if(isUpdated){
        await updateDoc(docRef, { projects: currentProjects });

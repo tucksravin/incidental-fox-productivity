@@ -63,7 +63,7 @@ try {
     console.error(error);
   }
 
-  console.log("entries fetched")
+  //console.log("entries fetched")
 }
 
 async function fetchDailyTimeEntries(apitoken:string, date:DateTime ) {
@@ -71,7 +71,7 @@ async function fetchDailyTimeEntries(apitoken:string, date:DateTime ) {
 
     try {
         let requested_date = date.toISO();
-        console.log(requested_date);
+       // console.log(requested_date);
 
         let customHeaders = new Headers()
         customHeaders.append('apitoken', apitoken);
@@ -104,7 +104,7 @@ export function setTogglTimeline(){
   entries.forEach((entry)=> {
     togglTimeChunks.push(timeEntryToTimeChunk(entry))});
 
-console.log("toggl timeline set")
+//console.log("toggl timeline set")
 
 togglTimeline.set(togglTimeChunks);
 }

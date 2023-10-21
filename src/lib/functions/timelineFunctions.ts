@@ -46,7 +46,7 @@ const convertDurationToTimelineUnits = (duration:number) => Math.round(duration/
 
 const convertTodoistDurationToTimlineUnits = (durationObject):number =>{
     let timelineDuration:number = 0;
-    console.log(durationObject)
+    //console.log(durationObject)
     
     if(durationObject == null) return 0;
 
@@ -68,13 +68,6 @@ const convertTodoistDurationToTimlineUnits = (durationObject):number =>{
 
     timelineDuration = timelineDuration/20;
 
-    console.log(timelineDuration)
+    //console.log(timelineDuration)
     return timelineDuration;
-}
-
-
-
-
-const checkIfValidStartTime = (startTime:number) => {
-
 }

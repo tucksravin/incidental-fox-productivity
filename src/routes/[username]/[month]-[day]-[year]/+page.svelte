@@ -29,15 +29,15 @@
         setTimeout(()=>{
           refreshProjects($user);
         }, 1)   
-        console.log($togglProjects)     
+        //console.log($togglProjects)     
       })
     }
-
+//tie timeline update to this and proj refresh
+fetchTodoistTasks(data.todotoken, data.month, data.day, data.year);
 
     fetchDailyTimeEntries(data.toggltoken, data.date);
 
-    //tie timeline update to this and proj refresh
-    fetchTodoistTasks(data.todotoken, data.month, data.day, data.year);
+    
 
     let todoTimeChunks:TimeChunk[]; 
     

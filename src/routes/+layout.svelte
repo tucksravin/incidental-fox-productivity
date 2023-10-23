@@ -6,17 +6,9 @@
    import { page } from "$app/stores";
    import NavStepper from "$lib/components/NavStepper.svelte"
    import AnimatedCard from "$lib/components/AnimatedCard.svelte";
-   
-
-
 
    $user;
    $userData;
-
-
-
-
-
 
     const navLinksLogin = [
         {
@@ -34,7 +26,7 @@
     const navLinksDash = [
         {
             name:"dash",
-            href:"",
+            href: "",
             direction:"?fromLeft"
         },
         {

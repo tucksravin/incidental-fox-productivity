@@ -104,10 +104,12 @@ router.get('/time-entries', async (req, res) => {
   console.log(givenDateString);
 
   let nextDay = givenDay.plus({days:1}).setZone("America/New_York");
+  //^the request fails without manually setting a non-UTC timezone^
+  //
 
   let nextDateString = nextDay.toISO();
 
-  console.log('https://api.track.toggl.com/api/v9/me/time_entries?start_date='+givenDateString+'&end_date='+nextDateString)
+  //console.log('https://api.track.toggl.com/api/v9/me/time_entries?start_date='+givenDateString+'&end_date='+nextDateString)
 
   
   try {

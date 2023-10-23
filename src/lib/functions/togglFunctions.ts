@@ -1,20 +1,12 @@
 import { Base64 } from 'js-base64';
 import { togglProjects, togglWorkspaceId, togglTimeEntries, togglLoading, togglTimeline } from './../stores/togglStore';
-import type { TogglProject } from '$lib/types/toggl_types';
 import type { FirebaseProject } from '$lib/types/firebase_types';
 import type { TimeChunk } from '$lib/types/frontend_types';
 import { firebaseProjects } from '../stores/firebaseStore';
 import { timeEntryToTimeChunk } from './timelineFunctions';
 import type { DateTime } from 'luxon';
 
-
-
-
-
-
 //TODO: move functions from here to togglfunctions
-
-
 
 async function getTogglWorkspace(apitoken:string ) {
 

@@ -12,7 +12,7 @@ npm run dev
 
 ### mvp
 
-use todos to fill in the left side of the timeline with time chunks
+stop the timeline from lagging a page behind
 build interface to add times and durations to todoist tasks so they can fill the left side
 scaffold and implement all database functions in function folder
 layout habit tracker/theme page (2 week sections) [no data]
@@ -24,12 +24,16 @@ build stores and functions to access then tie into layout
 
 ### fixes for later
 
+move arrows off of card to give timeline max space
 find a real solution for having the projects refresh only after the user auth has loaded in instead of just a timeout
 make everything faster, fetch data only when needed everything else should be firebase/store based
 convert dates to luxon datetimes
 see why todoist sometimes has cors problems and sometimes doesn't
 make animations to mask unvoidable loads and slowdowns
-
+get rid of unexpected width/height attr error from console
+unify all fetch method syntax
+get completed todoist tasks for going back (might need to convert to sync api)
+make nav for all options
 
 ### features for later
 

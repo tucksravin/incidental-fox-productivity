@@ -5,9 +5,9 @@
   import DelayContent from "$lib/components/DelayContent.svelte";
   import TimeBar from "$lib/components/TimeBar.svelte";
   import TimelineLabels from "$lib/components/TimelineLabels.svelte"
-  import type { PageData } from "./$types";
-  import type { TimeChunk } from "$lib/types/frontend_types";
-  import { togglTimeEntries, togglLoading, togglProjects, togglTimeline } from '$lib/stores/togglStore';
+  import TaskBox from "../../../lib/components/TaskBox.svelte";
+  import type { PageData } from "./$types"
+  import { togglTimeEntries, togglLoading, togglTimeline } from '$lib/stores/togglStore';
   import { fetchDailyTimeEntries, togglProjectIdToFirebaseProject } from "$lib/functions/togglFunctions";
   import { todoistTasks, todoistLoading, todoistTimeline } from '$lib/stores/todoistStore'
   import { fetchTodoistTasks, todoistProjectIdToFirebaseProject } from "$lib/functions/todoistFunctions";
@@ -15,6 +15,9 @@
   import { redirect } from "@sveltejs/kit";
   import { refreshProjects} from "$lib/functions/firebaseFunctions";
   import { onMount} from "svelte";
+  import { DateTime } from "luxon"
+  import type { fromBase64 } from "js-base64";
+  import { Task } from "@doist/todoist-api-typescript";
   
   
   if(!user) redirect(307, '/login');
@@ -33,13 +36,8 @@
       })
     }
 //tie timeline update to this and proj refresh
-fetchTodoistTasks(data.todotoken, data.month, data.day, data.year);
-
+    fetchTodoistTasks(data.todotoken, data.month, data.day, data.year);
     fetchDailyTimeEntries(data.toggltoken, data.date);
-
-    
-
-    let todoTimeChunks:TimeChunk[]; 
     
   
 </script>
@@ -50,26 +48,22 @@ fetchTodoistTasks(data.todotoken, data.month, data.day, data.year);
   </svelte:head>
   <DelayContent>
     <AuthCheck>
-      <h1>data for {months[data.month-1]} {data.day}, {data.year}</h1>
-      <div class="w-full h-full flex justify-between">
-        <div class="w-2/5 bg-red-200">
-          <h1>Todoist Stuff</h1>
+      <h1>{months[data.month-1]} {data.day}, {data.year}, a {DateTime.local(data.year,data.month,data.day).weekdayLong}</h1>
+      <div class="w-full h-4/5 flex justify-between">
+        <div class="w-2/5 relative overflow-scroll">
             {#if $todoistLoading}
               <div class="loading loading-spinner loading-m text-warning"></div>
             {/if}
             {#key $firebaseProjects}
             {#each $todoistTasks as task}
-              <div>{task.content} in {todoistProjectIdToFirebaseProject(task.projectId)?.name}</div>
+              <TaskBox {task}/>
             {/each}
             {/key}
         </div>
-        <div class="w-1/5 bg-slate-200 flex justify-between py-4">
-          {#key $firebaseProjects}
-          <div class="w-8 h-full mx-2 z-10"><TimeBar timeChunks={$todoistTimeline}/></div>
-          {/key}
+        <div class="w-1/5 bg-slate-200 flex justify-between py-4">         
+          <div class="w-8 h-full mx-2 z-10"><TimeBar timeChunks={$todoistTimeline}/></div>    
           <TimelineLabels />
           <div class="w-8 h-full mx-2 z-10"><TimeBar timeChunks={$togglTimeline}/></div>
-          
         </div>
         <div class="w-2/5 bg-blue-200">
           <h1>Toggl Stuff</h1>
@@ -80,8 +74,7 @@ fetchTodoistTasks(data.todotoken, data.month, data.day, data.year);
             {#each $togglTimeEntries as entry}
               <div>
                 {entry.description} in {togglProjectIdToFirebaseProject(entry.project_id)?.name}
-              </div>
-              
+              </div>         
             {/each}
           {/key}
           {/if}

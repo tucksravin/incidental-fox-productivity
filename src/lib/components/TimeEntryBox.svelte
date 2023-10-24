@@ -1,7 +1,6 @@
 <script lang="ts">
     import { togglProjectIdToFirebaseProject } from '$lib/functions/togglFunctions';
     import type { TogglTimeEntry } from '$lib/types/toggl_types';
-    import { onMount } from 'svelte'
     import { DateTime } from 'luxon'
     
     

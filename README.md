@@ -41,6 +41,8 @@ make nav for all options
 
 ### features for later
 
+add animations and transtions within pages
+have time input check if there's overlap
 set up the full width versions of the toggl v todoist view
 drag n drop and resize on time bars
 animate the time bars

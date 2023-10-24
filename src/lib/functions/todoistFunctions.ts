@@ -5,6 +5,9 @@ import { TodoistApi } from "@doist/todoist-api-typescript";
 import type { FirebaseProject } from "$lib/types/firebase_types";
 import type { TimeChunk } from "$lib/types/frontend_types";
 import { taskToTimeChunk } from "$lib/functions/timelineFunctions";
+import { DateTime } from "luxon"
+
+
 
 
 
@@ -87,7 +90,27 @@ export function todoistProjectIdToFirebaseProject(id:string) {
 
 // fetch specific todoist task
 
-// add time to todoist task
+// add start time to todoist task
+
+export async function addStartTimeToTask(apitoken:string, task_id:string, startTime:string) {
+    const todoistApi = new TodoistApi(apitoken);
+
+    todoistApi.updateTask(task_id, { due_datetime: startTime })
+    .then((isSuccess) => console.log(isSuccess))
+    .catch((error) => console.log(error))
+
+}
+
+// add duration to todoist task
+export async function addDurationToTask(apitoken:string, task_id:string, startTime:string, endTime:string) {
+    const todoistApi = new TodoistApi(apitoken);
+    let minutes = DateTime.fromISO(endTime).diff(DateTime.fromISO(startTime)).as('minutes');
+
+    todoistApi.updateTask(task_id, { duration: minutes, duration_unit: "minute" })
+    .then((isSuccess) => console.log(isSuccess))
+    .catch((error) => console.log(error))
+
+}
 
 // delete todoist task
 

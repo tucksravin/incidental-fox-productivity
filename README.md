@@ -12,10 +12,11 @@ npm run dev
 
 ### mvp
 
-time entering pop-ups (use native input type=time), add other buttons
+be able to remove times from task by clicking on the time or the bar
 fix toggl ctx error
 stop the timeline from lagging a page behind
 stop project on task entries from also lagging a page behind
+method to add a task, delete a task, postpone a task by a day, choose a new date for it
 scaffold and implement all database functions in function folder
 layout habit tracker/theme page (2 week sections) [no data]
 set up the journal page [no data]
@@ -23,6 +24,7 @@ layout dashboard [ no data ]
 add the theme / schedule / journal links to nav with relevant animations
 build the journal, theme, habit data structure for firebase
 build stores and functions to access then tie into layout
+
 
 ### fixes for later
 
@@ -36,14 +38,18 @@ see why todoist sometimes has cors problems and sometimes doesn't
 make animations to mask unvoidable loads and slowdowns
 get rid of unexpected width/height attr error from console
 unify all fetch method syntax
+add ability to complete tasks
+add ability to start/change times
 get completed todoist tasks for going back and include checkmarks (might need to convert to sync api)
 make nav for all options
 
 ### features for later
 
+full edit box for tasks
 add animations and transtions within pages
 have time input check if there's overlap
 set up the full width versions of the toggl v todoist view
+responsive designs
 drag n drop and resize on time bars
 animate the time bars
 logo design

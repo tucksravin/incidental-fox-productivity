@@ -5,7 +5,8 @@
   import DelayContent from "$lib/components/DelayContent.svelte";
   import TimeBar from "$lib/components/TimeBar.svelte";
   import TimelineLabels from "$lib/components/TimelineLabels.svelte"
-  import TaskBox from "../../../lib/components/TaskBox.svelte";
+  import TaskBox from "$lib/components/TaskBox.svelte";
+  import TimeEntryBox from "$lib/components/TimeEntryBox.svelte";
   import type { PageData } from "./$types"
   import { togglTimeEntries, togglLoading, togglTimeline } from '$lib/stores/togglStore';
   import { fetchDailyTimeEntries, togglProjectIdToFirebaseProject } from "$lib/functions/togglFunctions";
@@ -16,8 +17,7 @@
   import { refreshProjects} from "$lib/functions/firebaseFunctions";
   import { onMount} from "svelte";
   import { DateTime } from "luxon"
-  import type { fromBase64 } from "js-base64";
-  import { Task } from "@doist/todoist-api-typescript";
+
   
   
   if(!user) redirect(307, '/login');
@@ -54,6 +54,7 @@
             {#if $todoistLoading}
               <div class="loading loading-spinner loading-m text-warning"></div>
             {/if}
+
             {#key $firebaseProjects}
             {#each $todoistTasks as task}
               <TaskBox {task}/>
@@ -65,16 +66,14 @@
           <TimelineLabels />
           <div class="w-8 h-full mx-2 z-10"><TimeBar timeChunks={$togglTimeline}/></div>
         </div>
-        <div class="w-2/5 bg-blue-200">
-          <h1>Toggl Stuff</h1>
+        <div class="w-2/5">
+
           {#if $togglLoading}
             <div class="loading loading-spinner loading-m text-warning"></div>
           {:else }
           {#key $firebaseProjects}
             {#each $togglTimeEntries as entry}
-              <div>
-                {entry.description} in {togglProjectIdToFirebaseProject(entry.project_id)?.name}
-              </div>         
+              <TimeEntryBox {entry} />     
             {/each}
           {/key}
           {/if}

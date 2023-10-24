@@ -13,7 +13,7 @@ npm run dev
 ### mvp
 
 stop the timeline from lagging a page behind
-build interface to add times and durations to todoist tasks so they can fill the left side
+stop project on task entries from also lagging a page behind
 scaffold and implement all database functions in function folder
 layout habit tracker/theme page (2 week sections) [no data]
 set up the journal page [no data]
@@ -24,6 +24,8 @@ build stores and functions to access then tie into layout
 
 ### fixes for later
 
+sort task boxes
+sort entry boxes
 move arrows off of card to give timeline max space
 find a real solution for having the projects refresh only after the user auth has loaded in instead of just a timeout
 make everything faster, fetch data only when needed everything else should be firebase/store based

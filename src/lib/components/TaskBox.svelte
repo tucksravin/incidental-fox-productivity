@@ -46,6 +46,7 @@
 
 </script>
 
+
 <div class="w-full h-20 py-2 my-4 flex-col rounded-lg" style={boxBgColorCSS}>
     <div class="w-full h-8 p-2 px-4 text-left text-md font-semibold text-slate-700">{task?.content}</div>
     <div class="w-full h-8 p-2 pl-4 flex justify-between align-middle">

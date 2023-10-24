@@ -12,6 +12,7 @@ npm run dev
 
 ### mvp
 
+time entering pop-ups (use native input type=time), add other buttons
 stop the timeline from lagging a page behind
 stop project on task entries from also lagging a page behind
 scaffold and implement all database functions in function folder
@@ -34,23 +35,25 @@ see why todoist sometimes has cors problems and sometimes doesn't
 make animations to mask unvoidable loads and slowdowns
 get rid of unexpected width/height attr error from console
 unify all fetch method syntax
-get completed todoist tasks for going back (might need to convert to sync api)
+get completed todoist tasks for going back and include checkmarks (might need to convert to sync api)
 make nav for all options
 
 ### features for later
 
 set up the full width versions of the toggl v todoist view
 drag n drop and resize on time bars
-graphic design on tasks and time entries to float based on when they're on the schedule
 animate the time bars
 logo design
 add more developed auth rules for firebase (fireship course)
+calendar view
 move todoist api to express server if it remains inconsistent
 add check if internet goes out while someone is browsing
 
 ### features for much later
 
+make my own time entering ui (or this? <https://codesandbox.io/s/condescending-colden-7gjkp?file=/App.svelte> or <https://fengyuanchen.github.io/pickerjs/> )
 turn the time bars into circles like the journal
+graphic design on tasks and time entries to float based on when they're on the schedule
 customize colors and projects
 customize time span covered (probably just forward and back)
 deeper reports in a calendar view

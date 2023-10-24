@@ -88,13 +88,13 @@
     <div class="w-full h-8 p-2 pl-4 flex justify-between align-middle">
         <div class="flex align-middle h-full">
             {#if !task.due?.datetime}
-                <button class="rounded-full text-sm px-2 h-6 border hover:border-slate-800 hover:bg-slate-200 hover:text-slate-800 transition-all duration-300 cursor-pointer" on:click={showTimeInput} on:keypress={showTimeInput}>what time are we doing this?</button>
+                <button class="rounded-full text-xs px-2 h-6 border hover:border-slate-800 hover:bg-slate-200 hover:text-slate-800 transition-all duration-300 cursor-pointer" on:click={showTimeInput} on:keypress={showTimeInput}>what time are we doing this?</button>
             {:else}
-                <div class="text-sm">{DateTime.fromISO(task.due.datetime).toLocaleString(DateTime.TIME_24_SIMPLE)} -&nbsp;</div>
+                <div class="text-xs h-6 py-1">{DateTime.fromISO(task.due.datetime).toLocaleString(DateTime.TIME_24_SIMPLE)} -&nbsp;</div>
                 {#if !task.duration}
-                    <button class="rounded-full text-sm h-6 px-2 border hover:border-slate-800 hover:bg-slate-200 hover:text-slate-800 transition-all duration-300 cursor-pointer" on:click={showTimeInput} on:keypress={showTimeInput}>until when?</button>
+                    <button class="rounded-full text-xs h-6 px-2 border hover:border-slate-800 hover:bg-slate-200 hover:text-slate-800 transition-all duration-300 cursor-pointer" on:click={showTimeInput} on:keypress={showTimeInput}>until when?</button>
                 {:else}
-                    <div class="text-sm">{end.toLocaleString(DateTime.TIME_24_SIMPLE)}</div>
+                    <div class="text-xs h-6 py-1">{end.toLocaleString(DateTime.TIME_24_SIMPLE)}</div>
                 {/if}
             {/if}
         </div>

@@ -13,6 +13,7 @@ npm run dev
 ### mvp
 
 time entering pop-ups (use native input type=time), add other buttons
+fix toggl ctx error
 stop the timeline from lagging a page behind
 stop project on task entries from also lagging a page behind
 scaffold and implement all database functions in function folder

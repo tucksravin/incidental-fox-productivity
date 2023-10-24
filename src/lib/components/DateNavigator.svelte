@@ -35,14 +35,14 @@
 
 </script>
 
-<div class="w-full h-full flex justify-between align-middle">
-    <a class="hover:opacity-80 cursor-pointer" href={prevDayUrl}>
-        <Icon icon="tabler:arrow-badge-left" inline={true} height="4rem" width="4rem"/>
-        <div>{backButtonText}</div>     
+<div class="w-[120%] flex justify-between align-middle -ml-[10%]">
+    <a class="hover:opacity-80 cursor-pointer h-24 w-24 flex-col" href={prevDayUrl}>
+        <Icon icon="tabler:arrow-badge-left" height="48" class="float-left -ml-2"/>
+        <div class="float-left">{backButtonText}</div>     
     </a>
 
-    <a class="hover:opacity-80 cursor-pointer" href={nextDayUrl}>
-        <Icon icon="tabler:arrow-badge-right" inline={true} height="4rem" width="4rem"/>
-        <div>{nextButtonText}</div>     
+    <a class="hover:opacity-80 cursor-pointer h-24 w-24 flex-col" href={nextDayUrl}>
+        <Icon icon="tabler:arrow-badge-right" height="48" class="float-right -mr-2"/>
+        <div class="float-right">{nextButtonText}</div>     
     </a>
 </div>

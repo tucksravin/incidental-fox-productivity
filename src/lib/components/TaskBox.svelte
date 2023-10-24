@@ -1,6 +1,7 @@
 <script lang="ts">
     import type { Task } from "@doist/todoist-api-typescript";
     import { todoistProjectIdToFirebaseProject } from "$lib/functions/todoistFunctions";
+    import Icon from "@iconify/svelte"
     import { DateTime } from 'luxon'
     
     
@@ -80,7 +81,7 @@
 {#if isTimeInputVisible}
 
     <div class="top-0 left-0 fixed bg-slate-200 z-50 h-48 w-2/5 min-w-[24rem] mx-[30vw] mt-[20vh] rounded-lg" >
-        <input id="time-input" class="mx-auto rounded-sm mt-8 p-1 text-3xl" type="time" />
+        <input id="time-input" class="mx-auto rounded-sm mt-12 p-1 text-3xl" type="time" />
     </div>
 
 <div class="top-0 left-0 fixed z-40 w-screen h-screen bg-slate-800/25 flex-row" on:click={hideTimeInput} aria-hidden > 

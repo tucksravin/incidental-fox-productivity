@@ -12,5 +12,6 @@ export type Enumerate<N extends number, Acc extends number[] = []> = Acc['length
       color: string,
       start: number,
       end: number,
-      active: boolean
+      active: boolean,
+      id: string
   }

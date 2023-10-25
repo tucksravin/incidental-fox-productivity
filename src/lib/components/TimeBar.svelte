@@ -4,44 +4,8 @@
   
 
 
-    const testData:TimeChunk[] = [
-        {
-            name: 'a',
-            project: 'climbing',
-            color: 'red',
-            start: 3,
-            end: 30,
-            active: false
-        },
-        {
-            name: 'a',
-            project: 'climbing',
-            color: 'blue',
-            start: 0,
-            end: 3,
-            active:false
-        },
-        {
-            name: 'a',
-            project: 'climbing',
-            color: 'blue',
-            start: 30,
-            end: 31,
-            active: false
-        },
-        {
-            name: 'a',
-            project: 'climbing',
-            color: 'green',
-            start: 31,
-            end: 50,
-            active: false
-        },
-
-
-    ] 
   
-   export let timeChunks:TimeChunk[] = testData;
+   export let timeChunks:TimeChunk[] = [];
 
    function chunksByStart(a:TimeChunk, b:TimeChunk){
     if(a.start<b.start)
@@ -60,7 +24,7 @@
   </script>
   
 <div class="w-full h-full relative rounded-full overflow-hidden border-slate-600 border-2 bg-slate-400">
-    {#each timeChunks as chunk}
+    {#each timeChunks as chunk, index (chunk.id)}
         <!--white backing element so hover doesn't show overlap with otther entries-->
         <div 
             class= "w-full absolute rounded-full"

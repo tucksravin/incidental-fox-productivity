@@ -12,10 +12,8 @@ npm run dev
 
 ### mvp
 
-be able to remove times from task by clicking on the time or the bar
-fix toggl ctx error
+be able to change time of task by clicking on the time or the bar
 stop the timeline from lagging a page behind
-stop project on task entries from also lagging a page behind
 method to add a task, delete a task, postpone a task by a day, choose a new date for it
 scaffold and implement all database functions in function folder
 layout habit tracker/theme page (2 week sections) [no data]
@@ -24,7 +22,6 @@ layout dashboard [ no data ]
 add the theme / schedule / journal links to nav with relevant animations
 build the journal, theme, habit data structure for firebase
 build stores and functions to access then tie into layout
-
 
 ### fixes for later
 

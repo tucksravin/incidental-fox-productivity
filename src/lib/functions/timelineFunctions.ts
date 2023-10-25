@@ -16,7 +16,8 @@ export const timeEntryToTimeChunk = (entry:TogglTimeEntry) => {
         name: entry.description,
         project: togglProjectIdToFirebaseProject(entry.pid)?.name,
         color: togglProjectIdToFirebaseProject(entry.pid)?.color,
-        active: entry.duration<0
+        active: entry.duration<0,
+        id: entry.id
     }
 
     if(chunk.active) chunk.end = convertTimeToTimelineUnits(DateTime.now().toISO());
@@ -32,7 +33,8 @@ export const taskToTimeChunk= (task:Task) => {
         name: task.content,
         project: todoistProjectIdToFirebaseProject(task.projectId)?.name,
         color: todoistProjectIdToFirebaseProject(task.projectId)?.color,
-        active:false
+        active:false,
+        id: task.id
     }
 
     

@@ -17,16 +17,16 @@
     if(entry?.start)
         start = DateTime.fromISO(entry.start).setZone('system');
 
-    console.log("start")
-    console.log(start.toLocaleString(DateTime.TIME_24_SIMPLE))
+    //console.log("start")
+    //console.log(start.toLocaleString(DateTime.TIME_24_SIMPLE))
     
 
     let stop = null;
 
     if(entry?.stop)
         stop = DateTime.fromISO(entry.stop).setZone('system');
-    console.log("stop")
-    console.log(stop)
+    //console.log("stop")
+    //console.log(stop)
 
 
 

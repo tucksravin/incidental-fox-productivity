@@ -56,7 +56,7 @@
             {/if}
 
             {#key $firebaseProjects}
-            {#each $todoistTasks as task}
+            {#each $todoistTasks as task, id (task.id)}
               <TaskBox {task}/>
             {/each}
             {/key}
@@ -72,7 +72,7 @@
             <div class="loading loading-spinner loading-m text-warning"></div>
           {:else }
           {#key $firebaseProjects}
-            {#each $togglTimeEntries as entry}
+            {#each $togglTimeEntries as entry, id (entry.id)}
               <TimeEntryBox {entry} />     
             {/each}
           {/key}

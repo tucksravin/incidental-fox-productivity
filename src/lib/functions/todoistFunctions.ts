@@ -43,13 +43,14 @@ export const fetchTodoistTasks = async (apitoken:string, month:number, day:numbe
       todoistTasks.set(tasks);
       //console.log(tasks)
       todoistLoading.set(false);
+      setTodoistTimeline();
     })
     .catch((error) => {
         console.log(error)
         todoistLoading.set(false);
     });
 
-    setTodoistTimeline();
+    
 
 }
 
@@ -62,11 +63,11 @@ export function setTodoistTimeline(){
   
   
    tasks.forEach((entry)=> {
-       // console.log("trying to add to timeline ")
-        //console.log(entry)
+        console.log("trying to add to timeline ")
+        console.log(entry)
       todoistTimeChunks.push(taskToTimeChunk(entry))});
   
-    //console.log("todoist timeline set")
+    console.log("todoist timeline set")
     todoistTimeline.set(todoistTimeChunks);
   }
 

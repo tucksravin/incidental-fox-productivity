@@ -63,11 +63,11 @@ export function setTodoistTimeline(){
   
   
    tasks.forEach((entry)=> {
-        console.log("trying to add to timeline ")
-        console.log(entry)
+        //console.log("trying to add to timeline ")
+        //console.log(entry)
       todoistTimeChunks.push(taskToTimeChunk(entry))});
   
-    console.log("todoist timeline set")
+    //console.log("todoist timeline set")
     todoistTimeline.set(todoistTimeChunks);
   }
 

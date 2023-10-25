@@ -53,13 +53,14 @@
         <div class="w-2/5 relative overflow-scroll">
             {#if $todoistLoading}
               <div class="loading loading-spinner loading-m text-warning"></div>
-            {/if}
-
+            
+            {:else }
             {#key $firebaseProjects}
             {#each $todoistTasks as task, id (task.id)}
               <TaskBox {task}/>
             {/each}
             {/key}
+            {/if}
         </div>
         <div class="w-1/5 bg-slate-200 flex justify-between py-4">         
           <div class="w-8 h-full mx-2 z-10"><TimeBar timeChunks={$todoistTimeline}/></div>    

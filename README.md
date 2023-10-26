@@ -30,6 +30,7 @@ build the journal, theme, habit data structure for firebase
 build stores and functions to access then tie into layout
 add a conditional today button
 add links to toggl and todoist in top corners
+reactive title
 
 ### fixes for later
 
@@ -49,6 +50,7 @@ fix lag on update for times and all other methods, can probably manually update 
 dynamically limit what times you can set
 fetch console error
 
+
 ### features for later
 
 method to add a task
@@ -63,9 +65,9 @@ animate the time bars
 logo design
 add more developed auth rules for firebase (fireship course)
 calendar view
+build a custom datepicker
 move todoist api to express server if it remains inconsistent
 add check if internet goes out while someone is browsing
-reactive title
 get completed todoist tasks for going back and include checkmarks (might need to convert to sync api)
 
 ### features for much later

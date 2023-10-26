@@ -28,7 +28,7 @@
   </script>
   
 <div class="w-full h-full relative rounded-full overflow-hidden border-slate-600 border-2 bg-slate-400">
-    {#each timeChunks as chunk, index (chunk.id)}
+    {#each timeChunks as chunk, id (chunk.id+chunk.start)}
         <!--white backing element so hover doesn't show overlap with otther entries-->
         <div 
             class= "w-full absolute rounded-full"
@@ -36,6 +36,7 @@
                 height: {((chunk.end-chunk.start+2.1)*2)}%;
                 background-color: white;
                 top: {(chunk.start-2)*2}%;
+
                 "
             >
         </div>
@@ -47,6 +48,7 @@
                 height: {((chunk.end-chunk.start+2.1)*2)}%;
                 background-color: {chunk.color};
                 top: {(chunk.start-2)*2}%;
+                z-index: {55-chunk.start}
                 "
             on:click={()=>{
                 removeTimesFromTask($userData.todotoken, chunk.id, getCurrentPageDate());

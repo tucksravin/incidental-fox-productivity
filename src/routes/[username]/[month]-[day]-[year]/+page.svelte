@@ -48,7 +48,7 @@
   </svelte:head>
   <DelayContent>
     <AuthCheck>
-      <h1>{months[data.month-1]} {data.day}, {data.year}, a {DateTime.local(data.year,data.month,data.day).weekdayLong}</h1>
+      <h1 class="text-lg font-semibold">{months[data.month-1]} {data.day}, {data.year}, a {DateTime.local(data.year,data.month,data.day).weekdayLong}</h1>
       <div class="w-full h-full flex justify-between">
         <div class="w-2/5 relative overflow-scroll">
             {#if $todoistLoading}

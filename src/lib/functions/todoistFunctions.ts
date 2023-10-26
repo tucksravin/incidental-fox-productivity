@@ -103,6 +103,14 @@ export async function addStartTimeToTask(apitoken:string, task_id:string, startT
 
 }
 
+export async function addDateToTask(apitoken:string, task_id:string, date:DateTime) {
+    const todoistApi = new TodoistApi(apitoken);
+    todoistApi.updateTask(task_id, { due_date: date.toISODate(), due_string: date.toISODate() })
+    .then((isSuccess) => console.log(isSuccess))
+    .catch((error) => console.log(error))
+
+}
+
 // add duration to todoist task
 export async function addDurationToTask(apitoken:string, task_id:string, startTime:string, endTime:string) {
     const todoistApi = new TodoistApi(apitoken);

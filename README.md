@@ -21,9 +21,6 @@ npm run build:functions
 
 ### mvp
 
-pull input popup into its own component
-choose a new date for a task
-add ability to start/change times
 scaffold and implement all database functions in function folder
 layout habit tracker/theme page (2 week sections) [no data]
 set up the journal page [no data]
@@ -38,6 +35,7 @@ add links to toggl and todoist in top corners
 
 sort task boxes
 sort entry boxes
+fix stacking of todoist time chunks
 find a real solution for having the projects refresh only after the user auth has loaded in instead of just a timeout
 make everything faster, fetch data only when needed everything else should be firebase/store based
 convert all dates to luxon datetimes

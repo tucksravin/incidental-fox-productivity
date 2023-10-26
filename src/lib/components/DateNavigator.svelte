@@ -35,12 +35,12 @@
 </script>
 
 <div class="w-[120%] flex justify-between align-middle -ml-[10%]">
-    <a class="hover:opacity-80 cursor-pointer h-24 w-24 flex-col" href={prevDayUrl}>
+    <a class="hover:opacity-80 cursor-pointer h-24 w-24 flex-col transition-opacity" href={prevDayUrl}>
         <Icon icon="tabler:arrow-badge-left" height="48" class="float-left -ml-2"/>
         <div class="float-left">{backButtonText}</div>     
     </a>
 
-    <a class="hover:opacity-80 cursor-pointer h-24 w-24 flex-col" href={nextDayUrl}>
+    <a class="hover:opacity-80 cursor-pointer h-24 w-24 flex-col transition-opacity" href={nextDayUrl}>
         <Icon icon="tabler:arrow-badge-right" height="48" class="float-right -mr-2"/>
         <div class="float-right">{nextButtonText}</div>     
     </a>

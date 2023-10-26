@@ -23,8 +23,7 @@ npm run build:functions
 
 scaffold and implement all database functions in function folder
 layout habit tracker/theme page (2 week sections) [no data]
-set up the journal page [no data]
-layout dashboard [ no data ]
+set up the journal page / dashboard [no data]
 add the theme / schedule / journal links to nav with relevant animations (break into daily, fortnightly, quarterly, and yearly pages)
 build the journal, theme, habit data structure for firebase
 build stores and functions to access then tie into layout

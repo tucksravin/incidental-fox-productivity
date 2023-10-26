@@ -1,6 +1,6 @@
 <script lang="ts">
     import type { Task } from "@doist/todoist-api-typescript";
-    import { todoistProjectIdToFirebaseProject, addStartTimeToTask, addDurationToTask, fetchTodoistTasks, postponeTaskByADay, completeTask, deleteTask } from "$lib/functions/todoistFunctions";
+    import { todoistProjectIdToFirebaseProject, postponeTaskByADay, completeTask, deleteTask } from "$lib/functions/todoistFunctions";
     import InputBox from "./InputBox.svelte";
     import { userData } from "$lib/stores/firebaseStore";
     import Icon from "@iconify/svelte"

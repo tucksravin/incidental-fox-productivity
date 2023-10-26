@@ -36,7 +36,7 @@
                 height: {((chunk.end-chunk.start+2.1)*2)}%;
                 background-color: white;
                 top: {(chunk.start-2)*2}%;
-
+                z-index: {54-chunk.start}
                 "
             >
         </div>

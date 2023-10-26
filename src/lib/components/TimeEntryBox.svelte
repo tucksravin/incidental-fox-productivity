@@ -44,6 +44,6 @@
                     <div class="text-sm">{stop.toLocaleString(DateTime.TIME_24_SIMPLE)}</div>
                 {/if}
         </div>
-        <div class="h-6 px-2 text-sm rounded-full text-slate-100" style={projectLabelBgColorCSS}>{project?.name}</div>
+        <div class="h-6 px-2 py-1 text-xs rounded-full text-slate-100" style={projectLabelBgColorCSS}>{project?.name}</div>
     </div>
 </div>

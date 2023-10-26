@@ -46,7 +46,7 @@ in:fly = {getDirection().in}
 out:fly = {getDirection().out}
 >
 
-    <div class="card-body items-center text-center flex align-middle justify-center" >
+    <div class="card-body items-center text-center flex align-middle justify-center relative h-full w-full" >
             <slot />
      </div>
     

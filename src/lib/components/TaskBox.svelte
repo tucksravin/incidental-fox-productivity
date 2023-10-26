@@ -89,16 +89,16 @@ const hideTask = () => isHidden = true;
     <div class="w-full h-8 p-2 px-4 flex flex-row justify-between">
         <h3 class="text-left text-md font-semibold text-slate-700">{task?.content}</h3>
         <div class="h-full flex flex-row">
-            <button  class="ml-2 cursor-pointer hover:opacity-80 hover:text-red-700 transition-all" on:click={()=>deleteTask($userData.todotoken, task.id)}>
+            <button  class="ml-2 cursor-pointer hover:opacity-80 hover:text-red-700 transition-all" on:click={()=>{deleteTask($userData.todotoken, task.id); hideTask();}}>
                 <Icon icon="tabler:trash" />
             </button>
             <button  class="ml-2 cursor-pointer hover:opacity-80 hover:text-yellow-500 transition-all" >
                 <Icon icon="tabler:calendar" />
             </button>
-            <button class="rotate-180 ml-2 cursor-pointer hover:opacity-80 hover:text-yellow-500 transition-all" on:click={()=>postponeTaskByADay($userData.todotoken, task.id)}>
+            <button class="rotate-180 ml-2 cursor-pointer hover:opacity-80 hover:text-yellow-500 transition-all" on:click={()=>{postponeTaskByADay($userData.todotoken, task.id); hideTask();}}>
                 <Icon icon="tabler:rotate-clockwise" />
             </button>
-            <button class="ml-2 cursor-pointer hover:opacity-80 hover:text-green-700 transition-all" on:click={()=>completeTask($userData.todotoken, task.id)} >
+            <button class="ml-2 cursor-pointer hover:opacity-80 hover:text-green-700 transition-all" on:click={()=>{completeTask($userData.todotoken, task.id); hideTask();}} >
                 <Icon icon="tabler:checkbox" />
             </button>
         </div>

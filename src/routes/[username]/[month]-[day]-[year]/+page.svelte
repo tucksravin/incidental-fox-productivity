@@ -67,7 +67,7 @@
           <TimelineLabels />
           <div class="w-8 h-full mx-2 z-10"><TimeBar timeChunks={$togglTimeline}/></div>
         </div>
-        <div class="w-2/5">
+        <div class="w-2/5 relative overflow-scroll">
 
           {#if $togglLoading}
             <div class="loading loading-spinner loading-m text-warning"></div>

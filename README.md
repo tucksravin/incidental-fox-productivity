@@ -21,7 +21,9 @@ npm run build:functions
 
 ### mvp
 
-method to add a task, delete a task, complete a task, postpone a task by a day, choose a new date for it
+pull input popup into its own component
+choose a new date for a task
+add ability to start/change times
 scaffold and implement all database functions in function folder
 layout habit tracker/theme page (2 week sections) [no data]
 set up the journal page [no data]
@@ -41,20 +43,19 @@ make everything faster, fetch data only when needed everything else should be fi
 convert all dates to luxon datetimes
 see why todoist sometimes has cors problems and sometimes doesn't
 make animations to mask unvoidable loads and slowdowns
-get rid of unexpected width/height attr error from console
 unify all fetch method syntax
-add ability to complete tasks
-add ability to start/change times
 make nav for all options
 maybe delay the slide in a touch so everything is generally already loaded in
 let chunks know if they're a todoist chunk or toggl chunk
-fix lag on update for times, can probably manually update the store in the dom without pinging server if I give all the todoist methods access
+fix lag on update for times and all other methods, can probably manually update the store in the dom without pinging server if I give all the todoist methods access to the stores
 dynamically limit what times you can set
-fetch error
+fetch console error
 
 ### features for later
 
+method to add a task
 full edit box for tasks
+hide/customize scrollbars
 add animations and transtions within pages
 have time input check if there's overlap
 set up the full width versions of the toggl v todoist view

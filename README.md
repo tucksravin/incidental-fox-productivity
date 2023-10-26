@@ -12,7 +12,6 @@ npm run dev
 
 ### mvp
 
-be able to remove task timing by clicking the bar
 method to add a task, delete a task, complete a task, postpone a task by a day, choose a new date for it
 scaffold and implement all database functions in function folder
 layout habit tracker/theme page (2 week sections) [no data]
@@ -41,6 +40,7 @@ add ability to start/change times
 get completed todoist tasks for going back and include checkmarks (might need to convert to sync api)
 make nav for all options
 maybe delay the slide in a touch so everything is generally already loaded in
+let chunks know if they're a todoist chunk or toggl chunk
 
 ### features for later
 

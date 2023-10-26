@@ -113,6 +113,28 @@ export async function addDurationToTask(apitoken:string, task_id:string, startTi
 
 }
 
+export async function removeTimesFromTask(apitoken:string, task_id:string, date:DateTime){
+    const todoistApi = new TodoistApi(apitoken);
+    todoistApi.updateTask(task_id, { 
+        duration: null, duration_unit: null, due_string:"no date" }
+ )
+    .then((isSuccess) => console.log(isSuccess))
+    .catch((error) => console.log(error))
+
+    setTaskDate(apitoken, task_id, date)
+
+
+}
+
+export async function setTaskDate(apitoken:string, task_id:string, date:DateTime){
+    const todoistApi = new TodoistApi(apitoken);
+    console.log(date);
+    todoistApi.updateTask(task_id, { due_date: date.toISODate(), due_string: date.toISODate() })
+    .then((isSuccess) => console.log(isSuccess))
+    .catch((error) => console.log(error))
+
+}
+
 // delete todoist task
 
 // mark todoist task as complete

@@ -9,9 +9,9 @@
   import TimeEntryBox from "$lib/components/TimeEntryBox.svelte";
   import type { PageData } from "./$types"
   import { togglTimeEntries, togglLoading, togglTimeline } from '$lib/stores/togglStore';
-  import { fetchDailyTimeEntries, togglProjectIdToFirebaseProject } from "$lib/functions/togglFunctions";
+  import { fetchDailyTimeEntries } from "$lib/functions/togglFunctions";
   import { todoistTasks, todoistLoading, todoistTimeline } from '$lib/stores/todoistStore'
-  import { fetchTodoistTasks, todoistProjectIdToFirebaseProject } from "$lib/functions/todoistFunctions";
+  import { fetchTodoistTasks } from "$lib/functions/todoistFunctions";
   import { user, firebaseProjects } from "$lib/stores/firebaseStore";
   import { redirect } from "@sveltejs/kit";
   import { refreshProjects} from "$lib/functions/firebaseFunctions";

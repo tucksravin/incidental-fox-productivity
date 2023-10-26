@@ -1,5 +1,9 @@
 <script lang='ts'>
   import type { TimeChunk } from "$lib/types/frontend_types";
+  import { removeTimesFromTask } from "$lib/functions/todoistFunctions";
+  import { userData, user } from "$lib/stores/firebaseStore";
+  import { refreshProjects } from "$lib/functions/firebaseFunctions";
+  import { getCurrentPageDate } from "$lib/functions/navigationFunctions";
   
   
 
@@ -44,6 +48,12 @@
                 background-color: {chunk.color};
                 top: {(chunk.start-2)*2}%;
                 "
+            on:click={()=>{
+                removeTimesFromTask($userData.todotoken, chunk.id, getCurrentPageDate());
+                console.log("clicked "+chunk.id)
+                refreshProjects($user);
+                }}
+            aria-hidden
             >
         </div>
         

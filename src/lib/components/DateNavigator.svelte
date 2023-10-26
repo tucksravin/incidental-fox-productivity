@@ -22,16 +22,15 @@
     let prevDayUrl = "";
 
     
-    const nextDay = new Date();
-    nextDay.setDate(getCurrentPageDate().getDate()+1);
+    const nextDay = getCurrentPageDate().plus({days:1})
+
     //console.log("next date: "+nextDay.toString())
-    nextDayUrl = `/${data.username}/${nextDay.getMonth() + 1}-${nextDay.getDate()}-${nextDay.getFullYear()}?fromRight`;
+    nextDayUrl = `/${data.username}/${nextDay.month}-${nextDay.day}-${nextDay.year}?fromRight`;
 
 
-    const prevDay = new Date()
-    prevDay.setDate(getCurrentPageDate().getDate()-1)
+    const prevDay = getCurrentPageDate().minus({days:1})
     //console.log("prev date: "+prevDay.toString())
-    prevDayUrl = `/${data.username}/${prevDay.getMonth() + 1}-${prevDay.getDate()}-${prevDay.getFullYear()}?fromLeft`;
+    prevDayUrl = `/${data.username}/${prevDay.month}-${prevDay.day}-${prevDay.year}?fromLeft`;
 
 </script>
 

@@ -1,6 +1,6 @@
 <script lang="ts">
     import type { Task } from "@doist/todoist-api-typescript";
-    import { todoistProjectIdToFirebaseProject, addStartTimeToTask, addDurationToTask, fetchTodoistTasks } from "$lib/functions/todoistFunctions";
+    import { todoistProjectIdToFirebaseProject, addStartTimeToTask, addDurationToTask, fetchTodoistTasks, postponeTaskByADay, completeTask, deleteTask } from "$lib/functions/todoistFunctions";
     import { userData } from "$lib/stores/firebaseStore";
     import Icon from "@iconify/svelte"
     import { DateTime } from 'luxon'
@@ -11,6 +11,8 @@
     export let task:Task;
 
     let project = todoistProjectIdToFirebaseProject(task.projectId);
+
+    let isHidden = false;
 
     let boxBgColorCSS = `background-color:${project?.color}20`
     let projectLabelBgColorCSS = `background-color:${project?.color}`
@@ -73,7 +75,7 @@
 
     }
 
-    
+const hideTask = () => isHidden = true;    
 
 
     
@@ -82,10 +84,26 @@
 
 </script>
 
-<div>
-<div class="w-full h-20 py-2 my-4 flex-col rounded-lg" style={boxBgColorCSS}>
-    <div class="w-full h-8 p-2 px-4 text-left text-md font-semibold text-slate-700">{task?.content}</div>
-    <div class="w-full h-8 p-2 pl-4 flex justify-between align-middle">
+<div class:hidden={isHidden}>
+<div class="w-full h-20 my-4 flex-col rounded-lg flex justify-between" style={boxBgColorCSS}>
+    <div class="w-full h-8 p-2 px-4 flex flex-row justify-between">
+        <h3 class="text-left text-md font-semibold text-slate-700">{task?.content}</h3>
+        <div class="h-full flex flex-row">
+            <button  class="ml-2 cursor-pointer hover:opacity-80 hover:text-red-700 transition-all" on:click={()=>deleteTask($userData.todotoken, task.id)}>
+                <Icon icon="tabler:trash" />
+            </button>
+            <button  class="ml-2 cursor-pointer hover:opacity-80 hover:text-yellow-500 transition-all" >
+                <Icon icon="tabler:calendar" />
+            </button>
+            <button class="rotate-180 ml-2 cursor-pointer hover:opacity-80 hover:text-yellow-500 transition-all" on:click={()=>postponeTaskByADay($userData.todotoken, task.id)}>
+                <Icon icon="tabler:rotate-clockwise" />
+            </button>
+            <button class="ml-2 cursor-pointer hover:opacity-80 hover:text-green-700 transition-all" on:click={()=>completeTask($userData.todotoken, task.id)} >
+                <Icon icon="tabler:checkbox" />
+            </button>
+        </div>
+    </div>
+    <div class="w-full h-8 px-3 flex justify-between align-middle">
         <div class="flex align-middle h-full">
             {#if !task.due?.datetime}
                 <button class="rounded-full text-xs px-2 h-6 border hover:border-slate-800 hover:bg-slate-200 hover:text-slate-800 transition-all duration-300 cursor-pointer" on:click={showTimeInput} on:keypress={showTimeInput}>what time are we doing this?</button>
@@ -98,7 +116,7 @@
                 {/if}
             {/if}
         </div>
-        <div class="h-6 px-2 text-sm rounded-full text-slate-100" style={projectLabelBgColorCSS}>{project?.name}</div>
+        <div class="h-6 px-2 py-1 text-xs rounded-full text-slate-100" style={projectLabelBgColorCSS}>{project?.name}</div>
     </div>
 </div>
 {#if isTimeInputVisible}

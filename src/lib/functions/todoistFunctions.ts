@@ -1,5 +1,6 @@
 //TODO: fill in pseudocode scaffold
 import { todoistLoading, todoistProjects, todoistTasks, todoistTimeline } from "$lib/stores/todoistStore";
+import { getCurrentPageDate } from "./navigationFunctions";
 import { firebaseProjects } from "$lib/stores/firebaseStore";
 import { TodoistApi } from "@doist/todoist-api-typescript";
 import type { FirebaseProject } from "$lib/types/firebase_types";
@@ -128,6 +129,7 @@ export async function removeTimesFromTask(apitoken:string, task_id:string, date:
 
 export async function setTaskDate(apitoken:string, task_id:string, date:DateTime){
     const todoistApi = new TodoistApi(apitoken);
+    console.log("trying to set new date")
     console.log(date);
     todoistApi.updateTask(task_id, { due_date: date.toISODate(), due_string: date.toISODate() })
     .then((isSuccess) => console.log(isSuccess))
@@ -135,8 +137,26 @@ export async function setTaskDate(apitoken:string, task_id:string, date:DateTime
 
 }
 
+export async function postponeTaskByADay(apitoken:string, task_id:string){
+    console.log("postpone")
+    setTaskDate(apitoken, task_id, getCurrentPageDate().plus({days:1}))
+
+}
+
 // delete todoist task
+export async function deleteTask(apitoken:string, task_id:string){
+    const todoistApi = new TodoistApi(apitoken);
+    //console.log(date);
+    todoistApi.deleteTask(task_id)
+    .then((isSuccess) => console.log(isSuccess))
+    .catch((error) => console.log(error))
+}
 
-// mark todoist task as complete
+export async function completeTask(apitoken:string, task_id:string){
+    const todoistApi = new TodoistApi(apitoken);
+    //console.log(date);
+    todoistApi.closeTask(task_id)
+    .then((isSuccess) => console.log(isSuccess))
+    .catch((error) => console.log(error))
+}
 
-// edit todoist task

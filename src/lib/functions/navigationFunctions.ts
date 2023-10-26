@@ -1,7 +1,7 @@
 //switch to DateTime for consistency
 import { DateTime } from 'luxon'
 
-export const getCurrentPageDate = () => {
+export const getCurrentPageDate = ():DateTime => {
     let url = window.location.href;
     let dateString  = url.slice(url.lastIndexOf('/') + 1, url.lastIndexOf('?'));
     if (url.lastIndexOf('?')<0) 
@@ -13,6 +13,6 @@ export const getCurrentPageDate = () => {
 
     let date = DateTime.local(parseInt(year), parseInt(month), parseInt(day))
 
-    console.log(date.toString());
+    //console.log(date.toString());
     return date;
 };

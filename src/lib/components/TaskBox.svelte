@@ -23,14 +23,14 @@
 
     if(task.due){
         //console.log(task.due.datetime)
-        start = DateTime.fromISO(task.due.datetime).setZone('system');
+        start = DateTime.fromISO(task.due.datetime);
         if(task.duration){
             //console.log(start)
             //console.log(task.due.datetime)
             //console.log(task.duration)
             switch(task.duration.unit){
                 case "minute":
-                    end = start.plus({ minutes: task.duration.amount }).setZone('system')
+                    end = start.plus({ minutes: task.duration.amount });
                     break;
                 case "day":
                     end = start.plus({ days: task.duration.amount })
@@ -47,25 +47,25 @@
 
     let showTimeInput = () => isTimeInputVisible = true;
 
-    let buildInputDateString = ():string =>  
-    DateTime.local(parseInt(task.due.date.slice(0,4)),parseInt(task.due.date.slice(5,7)),parseInt(task.due.date.slice(8,10)),parseInt(inputTime.slice(0,2)), parseInt(inputTime.slice(3,5))).toISO();
+    let parseInputDate = ():DateTime =>  
+    DateTime.local(parseInt(task.due.date.slice(0,4)),parseInt(task.due.date.slice(5,7)),parseInt(task.due.date.slice(8,10)),parseInt(inputTime.slice(0,2)), parseInt(inputTime.slice(3,5)));
          
 
     
 
     let handleTimeSubmit = async () => {
         hideTimeInput();
-        let testdate = DateTime.local(task.due.date.slice(0,4),task.due.date.slice(5,7),task.due.date.slice(8,10),inputTime.slice(0,2), inputTime.slice(3,5));
+        //let testdate = DateTime.local(task.due.date.slice(0,4),task.due.date.slice(5,7),task.due.date.slice(8,10),inputTime.slice(0,2), inputTime.slice(3,5));
         //console.log(testdate);
         //console.log(task.due.date.slice(8,10))
         //console.log(inputTime.slice(0,2))
         //console.log(buildInputDateString())
 
         if(!task.due?.datetime){
-            await addStartTimeToTask($userData.todotoken, task.id, buildInputDateString())
+            await addStartTimeToTask($userData.todotoken, task.id, parseInputDate().setZone('UTC').toISO())
         }
         else{
-            await addDurationToTask($userData.todotoken, task.id, task.due.datetime, buildInputDateString())
+            await addDurationToTask($userData.todotoken, task.id, task.due.datetime, parseInputDate().toISO())
         }
         let date = DateTime.fromISO(task.due.date)
         

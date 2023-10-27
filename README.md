@@ -49,7 +49,6 @@ fix lag on update for times and all other methods, can probably manually update 
 dynamically limit what times you can set
 fetch console error
 
-
 ### features for later
 
 method to add a task
@@ -58,6 +57,7 @@ hide/customize scrollbars
 add animations and transtions within pages
 have time input check if there's overlap
 set up the full width versions of the toggl v todoist view
+store often accessed data in firebase for quicker queries (fortnightly habit tracker stuff probably)
 responsive designs
 drag n drop and resize on time bars
 animate the time bars

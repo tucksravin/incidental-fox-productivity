@@ -22,7 +22,6 @@ npm run build:functions
 ### mvp
 
 scaffold and implement all database functions in function folder
-layout habit tracker/theme page (2 week sections) [no data]
 set up the journal page / dashboard [no data]
 add the theme / schedule / journal links to nav with relevant animations (break into daily, fortnightly, quarterly, and yearly pages)
 build the journal, theme, habit data structure for firebase
@@ -48,6 +47,7 @@ let chunks know if they're a todoist chunk or toggl chunk
 fix lag on update for times and all other methods, can probably manually update the store in the dom without pinging server if I give all the todoist methods access to the stores
 dynamically limit what times you can set
 fetch console error
+clean up habit tracker layout
 
 ### features for later
 

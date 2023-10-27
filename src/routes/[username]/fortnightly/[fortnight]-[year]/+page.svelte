@@ -1,6 +1,6 @@
 <script lang="ts">
     import { DateTime } from 'luxon'
-    import { firebaseProjects, user } from '$lib/stores/firebaseStore'
+    import { firebaseProjects, user, app, auth } from '$lib/stores/firebaseStore'
     import { refreshProjects } from '$lib/functions/firebaseFunctions.js';
     import { onMount } from "svelte"
     
@@ -13,23 +13,19 @@
     $user;
 
     if($firebaseProjects.length==0){
-      onMount(()=>{
-        setTimeout(()=>{
-          refreshProjects($user);
-        }, 1)   
-        //console.log($togglProjects)     
-      })
+        onMount(()=>{
+            
+          refreshProjects($user)
+        })
     }
-        
+
+ 
     for(let i = 0 ; i<14 ; i++)
         dates.push(fortnightStartDate.plus({days:i}));
-
-    
         let sevenRandomBools = ():boolean[] => {
         let out = []
         for(let i = 0 ; i<7 ; i++)
             out.push(Math.random()<0.5);
-        
             return out;
         }
 
@@ -39,20 +35,20 @@
 
     const getHabitTextColorCSS = (habit:string) => {
         let color = "#475569";
-        console.log(habit);
-        console.log($firebaseProjects)
+        //console.log(habit);
+        //console.log($firebaseProjects)
 
         $firebaseProjects.forEach(project => {
-            if(project.name===habit)
+            if(project.name==habit)
                 color=project.color;
-
-                console.log("checked against "+project.name)
         });
 
         return "color:"+color;
     }
 
 </script>
+
+
 
 <div class="flex flex-row w-full h-full">
     <div class=" flex flex-col justify-between w-1/3 border-r-slate-400 border-r-2">
@@ -67,11 +63,13 @@
             <div class="w-5/6 h-full flex flex-col border-b border-slate-400">
                 <div class="h-1/3 w-full"></div>
                 <div class="h-2/3 w-full flex flex-row">
+                    {#key $firebaseProjects}
                     {#each habits as habit}
-                        <div class="-rotate-45 h-full w-9 border-l mr-8 -ml-8 border-slate-400 " style={getHabitTextColorCSS(habit)}>
-                            <div class="rotate-90 text-slate-600 text-xs -translate-x-1 translate-y-6">{habit}</div>
+                        <div class="-rotate-45 h-full w-9 border-l mr-8 -ml-8 border-slate-400 " >
+                            <div class="rotate-90 text-slate-600 text-xs -translate-x-1 translate-y-6" style={getHabitTextColorCSS(habit)}>{habit}</div>
                         </div>
                     {/each}
+                    {/key}
                 </div>
             </div>
         </div>
@@ -79,7 +77,7 @@
         <div class="w-full h-5/6 flex flex-row">
             <div class="w-1/6 h-full flex flex-col content-end">
                 {#each dates as date}
-                <div class="ml-[33.33333%] w-2/3 h-9 p-2 pr-6 text-right border border-t-0 border-l-0 border-slate-400 text-slate-600 text-sm">{date.toLocaleString({ month: 'short', day: 'numeric' })}</div>
+                <div class="md:ml-[33.33333%] md:w-2/3 h-9 p-4 pr-6 border border-t-0 border-l-0 border-slate-400 text-slate-600 text-xs whitespace-nowrap">{date.toLocaleString({ month: 'short', day: 'numeric' })}</div>
                 {/each}
             </div>
             <div class="w-5/6 h-full flex flex-col">

@@ -58,8 +58,18 @@ function userStore() {
     return () => unsubscribe();
   });
 
+  const known = new Promise<void>(resolve => {
+    let unsub = () => { }
+    unsub = subscribe(user => {
+      if (user !== undefined) {
+        resolve()
+        unsub()
+      }
+    })
+  })
+
   return {
-    subscribe,
+    subscribe, known
   };
 }
 

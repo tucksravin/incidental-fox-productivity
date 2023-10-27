@@ -1,7 +1,9 @@
 <script lang="ts">
     import { DateTime } from 'luxon'
-    import { firebaseProjects, user, app, auth } from '$lib/stores/firebaseStore'
+    import { firebaseProjects, user, userData } from '$lib/stores/firebaseStore'
+    import { fetchDailyTimeEntries } from '$lib/functions/togglFunctions.js';
     import { refreshProjects } from '$lib/functions/firebaseFunctions.js';
+    import { fetchTodoistTasks } from '$lib/functions/todoistFunctions.js';
     import { onMount } from "svelte"
     
     export let data;
@@ -12,13 +14,18 @@
     $firebaseProjects;
     $user;
 
-    if($firebaseProjects.length==0){
-        onMount(()=>{
-            
-          refreshProjects($user)
-        })
-    }
 
+    if($firebaseProjects.length==0){
+      onMount(()=>{
+        setTimeout(()=>{
+          refreshProjects($user);
+        }, 1)   
+        //console.log($togglProjects)     
+      })
+    }
+//tie timeline update to this and proj refresh
+    fetchTodoistTasks($userData.todotoken, DateTime.now());
+    fetchDailyTimeEntries($userData.toggltoken, DateTime.now());
  
     for(let i = 0 ; i<14 ; i++)
         dates.push(fortnightStartDate.plus({days:i}));
@@ -84,7 +91,7 @@
                 {#each dates as date}
                 <div class="h-9 w-full flex flex-row border-b">
                     {#each sevenRandomBools() as bool}
-                        <div class="h-full w-9 border-r" class:bg-red-700={!bool} class:bg-green-700={bool}></div>
+                        <div class="h-full w-9 border-r rounded-sm" class:bg-red-800={!bool} class:bg-green-800={bool}></div>
                     {/each}
                 </div>
                 {/each}

@@ -33,9 +33,13 @@ export const fetchTodoistProjects = async (apitoken:string) => {
     
 }
 
-export const fetchTodoistTasks = async (apitoken:string, month:number, day:number, year:number) => {
+export const fetchTodoistTasks = async (apitoken:string, date:DateTime) => {
     const todoistApi = new TodoistApi(apitoken);
     todoistLoading.set(true);
+
+    let month = date.month
+    let day = date.day
+    let year = date.year
   
   
   

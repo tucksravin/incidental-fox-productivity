@@ -36,7 +36,7 @@
       })
     }
 //tie timeline update to this and proj refresh
-    fetchTodoistTasks(data.todotoken, data.month, data.day, data.year);
+    fetchTodoistTasks(data.todotoken,data.date);
     fetchDailyTimeEntries(data.toggltoken, data.date);
     
   

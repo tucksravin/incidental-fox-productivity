@@ -24,8 +24,8 @@
       })
     }
 //tie timeline update to this and proj refresh
-    fetchTodoistTasks($userData.todotoken, DateTime.now());
-    fetchDailyTimeEntries($userData.toggltoken, DateTime.now());
+    fetchTodoistTasks(data.todotoken, DateTime.now());
+    fetchDailyTimeEntries(data.toggltoken, DateTime.now());
  
     for(let i = 0 ; i<14 ; i++)
         dates.push(fortnightStartDate.plus({days:i}));

@@ -10,9 +10,9 @@ import { DateTime } from "luxon";
 
 export const load = (async ({ params }) => {
 
-  let yr:number = parseInt(params.year);
-  let mo:number = parseInt(params.month);
-  let dy:number = parseInt(params.day);
+  let yr = parseInt(params.year);
+  let mo = parseInt(params.month);
+  let dy = parseInt(params.day);
     
   const collectionRef = collection(db, "users");
 

@@ -24,7 +24,7 @@
     let todaysUrl = "";
     
       today = new Date();
-      todaysUrl = `${data.username}/${today.getMonth()+1}-${(today.getDate())}-${today.getFullYear()}`
+      todaysUrl = `${data.username}/daily/${today.getMonth()+1}-${(today.getDate())}-${today.getFullYear()}`
     
     
   

@@ -1,7 +1,7 @@
 <script lang='ts'>
     //will fill in whatever container it is placed in
 
-    import type { PageData } from "./../../routes/[username]/[month]-[day]-[year]/$types";
+    import type { PageData } from "./../../routes/[username]/daily/[month]-[day]-[year]/$types";
     import Icon from "@iconify/svelte"
     import { getCurrentPageDate } from "./../functions/navigationFunctions"
     import { DateTime } from 'luxon'
@@ -25,12 +25,12 @@
     const nextDay = getCurrentPageDate().plus({days:1})
 
     //console.log("next date: "+nextDay.toString())
-    nextDayUrl = `/${data.username}/${nextDay.month}-${nextDay.day}-${nextDay.year}?fromRight`;
+    nextDayUrl = `/${data.username}/daily/${nextDay.month}-${nextDay.day}-${nextDay.year}?fromRight`;
 
 
     const prevDay = getCurrentPageDate().minus({days:1})
     //console.log("prev date: "+prevDay.toString())
-    prevDayUrl = `/${data.username}/${prevDay.month}-${prevDay.day}-${prevDay.year}?fromLeft`;
+    prevDayUrl = `/${data.username}/daily/${prevDay.month}-${prevDay.day}-${prevDay.year}?fromLeft`;
 
 </script>
 

@@ -1,10 +1,11 @@
 <script lang="ts">
     import { DateTime } from 'luxon'
-    import { firebaseProjects, user, userData } from '$lib/stores/firebaseStore'
+    import { firebaseProjects, user } from '$lib/stores/firebaseStore'
     import { fetchDailyTimeEntries } from '$lib/functions/togglFunctions.js';
     import { refreshProjects } from '$lib/functions/firebaseFunctions.js';
     import { fetchTodoistTasks } from '$lib/functions/todoistFunctions.js';
     import { onMount } from "svelte"
+    import DateNavigator from '$lib/components/DateNavigator.svelte';
     
     export let data;
   
@@ -69,7 +70,7 @@
             <div class="w-1/6 h-full"></div>
             <div class="w-5/6 h-full flex flex-col border-b border-slate-400">
                 <div class="h-1/3 w-full"></div>
-                <div class="h-2/3 w-full flex flex-row">
+                <div class="h-2/3 w-full -ml-[2px] flex flex-row">
                     {#key $firebaseProjects}
                     {#each habits as habit}
                         <div class="-rotate-45 h-full w-9 border-l mr-8 -ml-8 border-slate-400 " >
@@ -99,3 +100,8 @@
         </div>
     </div>
 </div>
+
+<div class="w-full h-0 absolute bottom-8">
+    <DateNavigator {data}/>
+  </div>
+

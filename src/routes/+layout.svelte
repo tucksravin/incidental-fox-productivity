@@ -4,11 +4,14 @@
    import { browser } from '$app/environment';
    import { auth, user, userData } from "$lib/stores/firebaseStore";
    import { page } from "$app/stores";
+   import { DateTime } from "luxon"
+   import { getUrlStringFromDate, getFortnightNumber } from "$lib/functions/navigationFunctions";
    import NavStepper from "$lib/components/NavStepper.svelte"
    import AnimatedCard from "$lib/components/AnimatedCard.svelte";
 
    $user;
    $userData;
+   $page;
 
     const navLinksLogin = [
         {
@@ -26,17 +29,30 @@
     const navLinksDash = [
         {
             name:"dash",
-            href: "",
+            href: `/${$page.url.pathname.slice(1,$page.url.pathname.indexOf('/',1))}/`,
+            direction:"?fromTop"
+        },
+        {
+            name:"daily",
+            href:`/${$userData?.username}/daily${getUrlStringFromDate(DateTime.now())}`,
             direction:"?fromLeft"
         },
         {
-            name:"first time",
-            href:"/login/first-time",
-            direction:"?fromRight"
+            name:"fortnightly",
+            href:`/${$userData?.username}/fortnightly/${getFortnightNumber(DateTime.now())}-${DateTime.now().year}`,
+            direction:"?fromBottom"
         },
     ]
 
-    
+    let navLinks;
+
+    if($page.url.pathname.includes("login")){
+        navLinks = navLinksLogin;
+    }   else if($page.url.pathname==""){
+        navLinks = [];
+    } else{
+        navLinks = navLinksDash;
+    }
    
 </script>
 
@@ -65,7 +81,7 @@
 
 <!--dynamic nav-->
 <div class="absolute top-0 left-0 w-full flex align-middle pt-8">
-    <NavStepper />
+    <NavStepper {navLinks}/>
 </div>
 
 <!--main content on card-->

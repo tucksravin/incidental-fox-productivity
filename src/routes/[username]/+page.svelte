@@ -2,8 +2,10 @@
 
     import AuthCheck from "$lib/components/AuthCheck.svelte";
     import DelayContent from "$lib/components/DelayContent.svelte";
+    import { DateTime } from "luxon"
     import type { PageData } from "./$types";
     import { refreshProjects } from "$lib/functions/firebaseFunctions";
+    import { getFortnightNumber } from "$lib/functions/navigationFunctions";
     import { user, firebaseProjects } from "$lib/stores/firebaseStore";
     import { onMount } from 'svelte'
   
@@ -20,11 +22,13 @@
 
     
     export let data: PageData;
-    let today:Date;
+    let today = DateTime.now();
     let todaysUrl = "";
+    let currentFortnightUrl = "";
     
-      today = new Date();
-      todaysUrl = `${data.username}/daily/${today.getMonth()+1}-${(today.getDate())}-${today.getFullYear()}`
+
+      todaysUrl = `${data.username}/daily/${today.month}-${(today.day)}-${today.year}`
+      currentFortnightUrl = `${data.username}/fortnightly/${getFortnightNumber(today)}-${today.year}`;
     
     
   
@@ -41,5 +45,6 @@
       </h1>
 
       <a href={todaysUrl} class="link mt-8 hover:opacity-70">go to today's date</a>
+      <a href={currentFortnightUrl} class="link mt-8 hover:opacity-70">go to today's fortnight</a>
     </AuthCheck>
   </DelayContent>

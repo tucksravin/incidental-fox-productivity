@@ -16,3 +16,15 @@ export const getCurrentPageDate = ():DateTime => {
     //console.log(date.toString());
     return date;
 };
+
+export const getUrlStringFromDate = (date:DateTime) => `/${date.month}-${date.day}-${date.year}`;
+
+
+
+export const getFortnightNumber = (date:DateTime) => {
+    for(let i = 26 ; i>-1 ; i--){
+        if(date.minus({weeks:i*2}).year==date.year)
+            return i+1;
+    }
+    return -1;
+}

@@ -18,15 +18,16 @@
     let projectLabelBgColorCSS = `background-color:${project?.color}`
 
 
-    let start;
-    let end;
+    let start:DateTime;
+    let end:DateTime;
 
 
     if(task.due){
         //console.log(task.due.datetime)
         start = DateTime.fromISO(task.due.datetime);
+        console.log(start)
+
         if(task.duration){
-            //console.log(start)
             //console.log(task.due.datetime)
             //console.log(task.duration)
             switch(task.duration.unit){
@@ -77,12 +78,15 @@
 </script>
 
 <div class:hidden={isHidden}>
-<div class="w-full h-20 my-4 flex-col rounded-lg flex justify-between" style={boxBgColorCSS}>
+<div class="w-11/12 h-20 my-4 flex-col rounded-lg flex justify-between transition-all" class:ml-6={start.c} style={boxBgColorCSS}>
     <div class="w-full h-8 p-2 px-4 flex flex-row justify-between">
         <h3 class="text-left text-md font-semibold text-slate-700">{task?.content}</h3>
         <div class="h-full flex flex-row">
             <button  class="ml-2 cursor-pointer hover:opacity-80 hover:text-red-700 transition-all" on:click={()=>{deleteTask($userData.todotoken, task.id); hideTask();}}>
                 <Icon icon="tabler:trash" />
+            </button>
+            <button  class="ml-2 cursor-pointer hover:opacity-80 hover:text-yellow-500 transition-all" on:click={()=>editDate()}>
+                <Icon icon="tabler:pencil" />
             </button>
             <button  class="ml-2 cursor-pointer hover:opacity-80 hover:text-yellow-500 transition-all" on:click={()=>editDate()}>
                 <Icon icon="tabler:calendar" />

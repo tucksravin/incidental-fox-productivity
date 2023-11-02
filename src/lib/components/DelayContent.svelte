@@ -3,7 +3,7 @@
 
  let showContent = false;
 
- export let delay = 200;
+ export let delay = 300;
 
  onMount(()=>{
     setTimeout(()=>{

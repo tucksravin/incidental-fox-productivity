@@ -18,31 +18,6 @@
 
 
 
-    function directionAssigner(){
-
-        //allows the url to change before running
-        setTimeout(()=> {
-
-            let curr= false;
-
-            navLinks.forEach((link)=>{
-                if($page.route.id?.includes(link.href))
-                 curr = true;
-            
-                if(curr)
-                    link.direction = "?fromRight";
-                else
-                    link.direction = "?fromLeft";
-            });
-
-            if(!curr)
-                navLinks.forEach((link)=>{link.direction="?fromBottom"});
-                    
-            curr=false;
-        },50)
-    }
-
-    directionAssigner();
 </script>
 {#key navLinks}
 <ul class="steps mx-auto">
@@ -50,8 +25,8 @@
     <a 
         href={link.href+link.direction}
         class="step"
-        class:step-primary={$page.route.id?.includes(link.href)}
-        on:click={directionAssigner}>
+        class:step-primary={$page.url.pathname == link.href+link.direction}
+>
         {link.name}
         
     </a>

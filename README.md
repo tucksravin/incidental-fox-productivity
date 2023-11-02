@@ -21,7 +21,7 @@ npm run build:functions
 
 ### mvp
 
-scaffold and implement all database functions in function folder
+make a task archive in firebase to hold onto completed tasks
 set up the journal page / dashboard [no data]
 add the theme / schedule / journal links to nav with relevant animations (break into daily, fortnightly, quarterly, and yearly pages)
 build the journal, theme, habit data structure for firebase
@@ -48,6 +48,7 @@ fix lag on update for times and all other methods, can probably manually update 
 dynamically limit what times you can set
 fetch console error
 clean up habit tracker layout
+fix navigation urls
 
 ### features for later
 

@@ -1,7 +1,6 @@
 import { collection, getDocs, limit, query, where } from "firebase/firestore";
 import type { PageLoad } from "./$types";
-import { user, db, auth } from "$lib/stores/firebaseStore";
-import { beforeUpdate } from "svelte";
+import { db } from "$lib/stores/firebaseStore";
 import { error } from "@sveltejs/kit";
 
 

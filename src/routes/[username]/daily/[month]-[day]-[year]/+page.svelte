@@ -1,8 +1,6 @@
 <script lang="ts">
 
-  import AuthCheck from "$lib/components/AuthCheck.svelte";
   import DateNavigator from "$lib/components/DateNavigator.svelte";
-  import DelayContent from "$lib/components/DelayContent.svelte";
   import TimeBar from "$lib/components/TimeBar.svelte";
   import TimelineLabels from "$lib/components/TimelineLabels.svelte"
   import TaskBox from "$lib/components/TaskBox.svelte";
@@ -17,6 +15,7 @@
   import { refreshProjects} from "$lib/functions/firebaseFunctions";
   import { onMount} from "svelte";
   import { DateTime } from "luxon"
+  import Icon from "@iconify/svelte";
 
   
   
@@ -48,11 +47,13 @@
   </svelte:head>
 
       <h1 class="text-lg font-semibold">{months[data.month-1]} {data.day}, {data.year}, a {DateTime.local(data.year,data.month,data.day).weekdayLong}</h1>
+      <button  class="h-8 w-8 absolute top-2 right-2 cursor-pointer hover:opacity-80 hover:text-slate-500 transition-all" on:click={()=> null}>
+        <Icon icon="ri:quill-pen-line" class="w-full h-full"/>
+      </button>
       <div class="w-full h-full flex justify-between">
         <div class="w-2/5 relative overflow-scroll">
             {#if $todoistLoading}
               <div class="loading loading-spinner loading-m text-warning"></div>
-            
             {:else }
             {#key $firebaseProjects}
             {#each $todoistTasks as task, id (task.id)}

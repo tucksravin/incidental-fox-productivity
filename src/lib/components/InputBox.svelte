@@ -39,7 +39,7 @@
         }
         let date = DateTime.fromISO(task.due.date)
         
-        fetchTodoistTasks($userData.todotoken, date.month, date.day, date.year);
+        fetchTodoistTasks($userData.todotoken, date);
     }
     
     let parseInputTime = ():DateTime =>  

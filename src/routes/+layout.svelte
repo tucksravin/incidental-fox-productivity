@@ -13,7 +13,7 @@
    $userData;
    $page;
 
-    const navLinksLogin = [
+  let navLinksLogin = [
         {
             name:"login",
             href:"/login/user-auth",
@@ -26,10 +26,11 @@
         },
     ]
 
-    const navLinksDash = [
+    let navLinksDash =
+        [
         {
             name:"dash",
-            href: `/${$page.url.pathname.slice(1,$page.url.pathname.indexOf('/',1))}/`,
+            href: `/${$userData?.username}/`,
             direction:"?fromTop"
         },
         {
@@ -43,6 +44,10 @@
             direction:"?fromBottom"
         },
     ]
+
+    
+    
+  
 
     let navLinks;
 
@@ -80,9 +85,11 @@
 {/if}
 
 <!--dynamic nav-->
+
 <div class="absolute top-0 left-0 w-full flex align-middle pt-8">
     <NavStepper {navLinks}/>
 </div>
+
 
 <!--main content on card-->
 <div class="sticky top-0 left-0 w-screen h-screen">

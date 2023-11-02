@@ -5,6 +5,7 @@
    import { auth, user, userData } from "$lib/stores/firebaseStore";
    import { page } from "$app/stores";
    import { DateTime } from "luxon"
+   import { fly } from "svelte/transition";
    import { getUrlStringFromDate, getFortnightNumber } from "$lib/functions/navigationFunctions";
    import NavStepper from "$lib/components/NavStepper.svelte"
    import AnimatedCard from "$lib/components/AnimatedCard.svelte";
@@ -12,6 +13,8 @@
    $user;
    $userData;
    $page;
+
+   let navLinks;
 
   let navLinksLogin = [
         {
@@ -26,7 +29,12 @@
         },
     ]
 
-    let navLinksDash =
+
+
+    let navLinksDash = [] 
+    
+    setTimeout(()=>{
+        navLinksDash =
         [
         {
             name:"dash",
@@ -45,11 +53,23 @@
         },
     ]
 
+    if($page.url.pathname.includes("login")){
+        navLinks = navLinksLogin;
+    }   else if($page.url.pathname==""){
+        navLinks = [];
+    } else{
+        navLinks = navLinksDash;
+    }
+   
+
+    }, 700)
+    
+
     
     
   
 
-    let navLinks;
+  
 
     if($page.url.pathname.includes("login")){
         navLinks = navLinksLogin;
@@ -86,8 +106,8 @@
 
 <!--dynamic nav-->
 
-<div class="absolute top-0 left-0 w-full flex align-middle pt-8">
-    <NavStepper {navLinks}/>
+<div class="absolute top-0 left-0 w-full flex align-middle pt-8" >
+    <NavStepper {navLinks} />
 </div>
 
 

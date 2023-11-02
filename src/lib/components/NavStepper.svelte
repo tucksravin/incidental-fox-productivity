@@ -1,5 +1,7 @@
 <script lang='ts'>
    import { page } from "$app/stores" 
+  import { userData } from "$lib/stores/firebaseStore";
+  import { fly } from "svelte/transition";
 
    //TODO: when more user-level pages are added add a different type of navLinkes
    
@@ -16,11 +18,17 @@
         },
     ]
 
+    let fadeIn = false;
+    setTimeout(()=>{
+        fadeIn = true;
+    },1500)
+
 
 
 </script>
-{#key navLinks}
-<ul class="steps mx-auto">
+
+{#key userData}
+<ul class="steps mx-auto opacity-0 transition-opacity transition-duration-500" class:opacity-100={fadeIn}>
     {#each navLinks as link}
     <a 
         href={link.href+link.direction}
@@ -34,4 +42,5 @@
     
 </ul>
 {/key}
+
 

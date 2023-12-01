@@ -14,20 +14,19 @@ compile ts changes to js in toggl server for netlify functions
 
 ```bash
 npm run build:functions
-
 ```
 
 ## Next To Dos
 
 ### mvp
 
-make a task archive in firebase to hold onto completed tasks
+make a task archive in firebase to hold onto completed tasks and make it so we're just updating from todoist, rather than pulling everything every time
+make habit tracker reactive
 set up the journal page / dashboard [no data]
 add the theme / schedule / journal links to nav with relevant animations (break into daily, fortnightly, quarterly, and yearly pages)
 build the journal, theme, habit data structure for firebase
 build stores and functions to access then tie into layout
 add a conditional today button
-add links to toggl and todoist in top corners
 reactive title
 
 ### fixes for later
@@ -49,12 +48,14 @@ dynamically limit what times you can set
 fetch console error
 clean up habit tracker layout
 fix navigation urls
+todoist request aborted error
 
 ### features for later
 
 method to add a task
 full edit box for tasks
 hide/customize scrollbars
+hide transition checkmarks
 add animations and transtions within pages
 have time input check if there's overlap
 set up the full width versions of the toggl v todoist view
@@ -65,7 +66,6 @@ animate the time bars
 logo design
 add more developed auth rules for firebase (fireship course)
 calendar view
-build a custom datepicker
 move todoist api to express server if it remains inconsistent
 add check if internet goes out while someone is browsing
 get completed todoist tasks for going back and include checkmarks (might need to convert to sync api)
@@ -73,6 +73,7 @@ get completed todoist tasks for going back and include checkmarks (might need to
 ### features for much later
 
 make my own time entering ui (or this? <https://codesandbox.io/s/condescending-colden-7gjkp?file=/App.svelte> or <https://fengyuanchen.github.io/pickerjs/> )
+build a custom datepicker
 turn the time bars into circles like the journal
 graphic design on tasks and time entries to float based on when they're on the schedule
 customize colors and projects

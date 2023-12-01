@@ -47,7 +47,7 @@
   </svelte:head>
 
       <h1 class="text-lg font-semibold">{months[data.month-1]} {data.day}, {data.year}, a {DateTime.local(data.year,data.month,data.day).weekdayLong}</h1>
-      <button  class="h-8 w-8 absolute top-2 right-2 cursor-pointer hover:opacity-80 hover:text-slate-500 transition-all" on:click={()=> null}>
+      <button  class="h-8 w-8 absolute top-5 right-8 cursor-pointer hover:opacity-80 hover:text-slate-500 transition-all" on:click={()=> null}>
         <Icon icon="ri:quill-pen-line" class="w-full h-full"/>
       </button>
       <div class="w-full h-full flex justify-between">

@@ -18,23 +18,16 @@ npm run build:functions
 
 ## Next To Dos
 
-### mvp
-
-make a task archive in firebase to hold onto completed tasks and make it so we're just updating from todoist, rather than pulling everything every time
-make habit tracker reactive
-set up the journal page / dashboard [no data]
-add the theme / schedule / journal links to nav with relevant animations (break into daily, fortnightly, quarterly, and yearly pages)
-build the journal, theme, habit data structure for firebase
-build stores and functions to access then tie into layout
-add a conditional today button
-reactive title
-
-### fixes for later
+### fixes for now
 
 sort task boxes
 sort entry boxes
+update ui without refreshing tasks
+
+### fixes for later
+
+move todoist api to express server if it remains inconsistent
 fix stacking of todoist time chunks
-find a real solution for having the projects refresh only after the user auth has loaded in instead of just a timeout
 make everything faster, fetch data only when needed everything else should be firebase/store based
 convert all dates to luxon datetimes
 see why todoist sometimes has cors problems and sometimes doesn't
@@ -45,13 +38,20 @@ maybe delay the slide in a touch so everything is generally already loaded in
 let chunks know if they're a todoist chunk or toggl chunk
 fix lag on update for times and all other methods, can probably manually update the store in the dom without pinging server if I give all the todoist methods access to the stores
 dynamically limit what times you can set
-fetch console error
 clean up habit tracker layout
 fix navigation urls
 todoist request aborted error
 
 ### features for later
 
+make a task archive in firebase to hold onto completed tasks and make it so we're just updating from todoist, rather than pulling everything every time
+make habit tracker reactive
+set up the journal page / dashboard [no data]
+add the theme / schedule / journal links to nav with relevant animations (break into daily, fortnightly, quarterly, and yearly pages)
+build the journal, theme, habit data structure for firebase
+build stores and functions to access then tie into layout
+reactive title
+add a conditional today button
 method to add a task
 full edit box for tasks
 hide/customize scrollbars
@@ -66,7 +66,7 @@ animate the time bars
 logo design
 add more developed auth rules for firebase (fireship course)
 calendar view
-move todoist api to express server if it remains inconsistent
+find a real solution for having the projects refresh only after the user auth has loaded in instead of just a timeout
 add check if internet goes out while someone is browsing
 get completed todoist tasks for going back and include checkmarks (might need to convert to sync api)
 

@@ -20,14 +20,11 @@ npm run build:functions
 
 ### fixes for now
 
-sort task boxes
-sort entry boxes
 update ui without refreshing tasks
 
 ### fixes for later
 
 move todoist api to express server if it remains inconsistent
-fix stacking of todoist time chunks
 make everything faster, fetch data only when needed everything else should be firebase/store based
 convert all dates to luxon datetimes
 see why todoist sometimes has cors problems and sometimes doesn't

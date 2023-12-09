@@ -6,9 +6,9 @@
   import TaskBox from "$lib/components/TaskBox.svelte";
   import TimeEntryBox from "$lib/components/TimeEntryBox.svelte";
   import type { PageData } from "./$types"
-  import { togglTimeEntries, togglLoading, togglTimeline } from '$lib/stores/togglStore';
+  import { sortedTogglTimeEntries, togglLoading, togglTimeline } from '$lib/stores/togglStore';
   import { fetchDailyTimeEntries } from "$lib/functions/togglFunctions";
-  import { todoistTasks, todoistLoading, todoistTimeline } from '$lib/stores/todoistStore'
+  import { sortedTodoistTasks, todoistTasks, todoistLoading, todoistTimeline } from '$lib/stores/todoistStore'
   import { fetchTodoistTasks } from "$lib/functions/todoistFunctions";
   import { user, firebaseProjects } from "$lib/stores/firebaseStore";
   import { redirect } from "@sveltejs/kit";
@@ -56,7 +56,7 @@
               <div class="loading loading-spinner loading-m text-warning"></div>
             {:else }
             {#key $firebaseProjects}
-            {#each $todoistTasks as task, id (task.id)}
+            {#each $sortedTodoistTasks as task, id (task.id)}
               <TaskBox {task}/>
             {/each}
             {/key}
@@ -73,7 +73,7 @@
             <div class="loading loading-spinner loading-m text-warning"></div>
           {:else }
           {#key $firebaseProjects}
-            {#each $togglTimeEntries as entry, id (entry.id)}
+            {#each $sortedTogglTimeEntries as entry, id (entry.id)}
               <TimeEntryBox {entry} />     
             {/each}
           {/key}

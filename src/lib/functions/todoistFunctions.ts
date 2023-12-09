@@ -1,4 +1,4 @@
-//TODO: fill in pseudocode scaffold
+
 import { todoistLoading, todoistProjects, todoistTasks, todoistTimeline } from "$lib/stores/todoistStore";
 import { getCurrentPageDate } from "./navigationFunctions";
 import { firebaseProjects } from "$lib/stores/firebaseStore";
@@ -7,9 +7,6 @@ import type { FirebaseProject } from "$lib/types/firebase_types";
 import type { TimeChunk } from "$lib/types/frontend_types";
 import { taskToTimeChunk } from "$lib/functions/timelineFunctions";
 import { DateTime } from "luxon"
-
-
-
 
 
 

@@ -21,6 +21,7 @@ npm run build:functions
 ### fixes for now
 
 update ui without refreshing tasks
+flip order for time entries; add highlight to currently running entry
 
 ### fixes for later
 

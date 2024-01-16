@@ -5,7 +5,6 @@
    import { auth, user, userData } from "$lib/stores/firebaseStore";
    import { page } from "$app/stores";
    import { DateTime } from "luxon"
-   import { fly } from "svelte/transition";
    import { getUrlStringFromDate, getFortnightNumber } from "$lib/functions/navigationFunctions";
    import NavStepper from "$lib/components/NavStepper.svelte"
    import AnimatedCard from "$lib/components/AnimatedCard.svelte";
@@ -32,13 +31,24 @@
 
 
     let navLinksDash = [] 
+
+    const setLinks = () =>{
+        if($page.url.pathname.includes("login")){
+        navLinks = navLinksLogin;
+            }   else if($page.url.pathname==""){
+        navLinks = [];
+            } else{
+        navLinks = navLinksDash;
+        }
+
+    }
+
     
-    setTimeout(()=>{
-        navLinksDash =
+    $: if ($userData) { navLinksDash =
         [
         {
             name:"dash",
-            href: `/${$userData?.username}/`,
+            href: `/${$userData?.username}`,
             direction:"?fromTop"
         },
         {
@@ -52,32 +62,15 @@
             direction:"?fromBottom"
         },
     ]
+        setLinks();
+        navLinks.forEach((link)=>{
+    console.log("link.href=" + link.href);
+    console.log("$page.url.pathname=" + $page.url.pathname);
+})  
+}
 
-    if($page.url.pathname.includes("login")){
-        navLinks = navLinksLogin;
-    }   else if($page.url.pathname==""){
-        navLinks = [];
-    } else{
-        navLinks = navLinksDash;
-    }
-   
+    setLinks();
 
-    }, 700)
-    
-
-    
-    
-  
-
-  
-
-    if($page.url.pathname.includes("login")){
-        navLinks = navLinksLogin;
-    }   else if($page.url.pathname==""){
-        navLinks = [];
-    } else{
-        navLinks = navLinksDash;
-    }
    
 </script>
 

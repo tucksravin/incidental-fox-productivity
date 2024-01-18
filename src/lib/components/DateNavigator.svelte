@@ -60,7 +60,7 @@
 
 </script>
 
-<div class="w-[120%] flex justify-between align-middle -ml-[10%]">
+<div class="w-[120%] flex justify-between align-middle -mt-3 -ml-[10%]">
     <a class="hover:opacity-80 cursor-pointer h-24 w-24 flex-col transition-opacity" href={prevUrl}>
         <Icon icon="tabler:arrow-badge-left" height="48" class="float-left -ml-2"/>
         <div class="float-left">{backButtonText}</div>     

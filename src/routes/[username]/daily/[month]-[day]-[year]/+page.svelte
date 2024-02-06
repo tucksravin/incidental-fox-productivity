@@ -52,6 +52,9 @@
       </button>
       <div class="w-full h-full flex justify-between">
         <div class="w-2/5 relative overflow-scroll">
+            <a href="https://app.todoist.com/" class="mb-8" target="_blank">
+                Go to Todoist
+            </a>
             {#if $todoistLoading}
               <div class="loading loading-spinner loading-m text-warning"></div>
             {:else }
@@ -68,6 +71,9 @@
           <div class="w-8 h-full mx-2 z-10"><TimeBar timeChunks={$togglTimeline}/></div>
         </div>
         <div class="w-2/5 relative overflow-scroll">
+          <a href="https://app.todoist.com/" class="mb-8" target="_blank">
+            Go to Toggl
+          </a>
 
           {#if $togglLoading}
             <div class="loading loading-spinner loading-m text-warning"></div>
